@@ -98,7 +98,7 @@ public class MiscTrackerApp extends Application {
     /**
      * This allows the user to enter a new tracker's name
      */
-    public static TextField customTrackerTextField = new TextField("Enter new tracker name");
+    public static TextField customTrackerTextField = new TextField();
 
 /************************************************ Vairables for file reading **********************************/
     /**
@@ -132,6 +132,8 @@ public class MiscTrackerApp extends Application {
     public void start(Stage stage) throws InterruptedException{
 
         initFromFile();
+
+        customTrackerTextField.setPromptText("Enter new tracker name");
 
         Label default_trackers_title = new Label(" Default Trackers: ");
         default_trackers_title.setFont(new Font("Times New Roman", 20)); // create title
