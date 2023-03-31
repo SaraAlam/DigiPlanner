@@ -1,4 +1,3 @@
-import java.text.NumberFormat;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -21,23 +20,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.GridPane;
-import java.lang.Math;
 import javafx.scene.control.ListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.util.ArrayList;
-import javafx.scene.layout.Pane;
-import javafx.geometry.Pos;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.FlowPane;
-
 import javafx.scene.layout.BorderPane;
-import javafx.scene.text.TextAlignment;
+
 import java.util.HashMap;
 import java.util.Calendar;
 import java.io.*;
@@ -180,7 +169,6 @@ public class MiscTrackerApp extends Application {
         stage.setScene(scene);
         stage.setTitle("MiscTrackers");
         stage.show(); 
-        
     }
 
 

@@ -1,50 +1,7 @@
-import java.text.NumberFormat;
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
-import javafx.scene.control.TextInputDialog;
-import javafx.scene.layout.GridPane;
-import java.lang.Math;
-import javafx.scene.control.ListView;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import java.util.ArrayList;
-import javafx.scene.layout.Pane;
-import javafx.geometry.Pos;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-
-import javafx.scene.layout.BorderPane;
-import javafx.scene.text.TextAlignment;
 import java.util.HashMap;
-import java.util.Calendar;
-import javafx.beans.property.SimpleStringProperty;
 /**
 * Class supplements the Summary class.
 * Creates an object storing the current week's tracking information
@@ -159,7 +116,8 @@ public class Tsum {
 
 
         int num_days = currTracker.get_num_days();
-        int currDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        int currDay = 16;
+        //Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
         int start = currDay-6;
         if (start < 0){
             if (tList.currMonth != 0){
