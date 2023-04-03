@@ -82,7 +82,6 @@ public class Summary {
         tsums = new ArrayList<Tsum>();
         for(String tListName: MiscTrackerApp.allTrackerNames){
             TrackerList tList = MiscTrackerApp.trackerLists.get(tListName);
-            Tracker currTracker = tList.monthly_trackers.get(tList.currMonth);
             Tsum tsum = new Tsum(tListName);
             tsums.add(tsum);
         }
@@ -152,6 +151,7 @@ public class Summary {
         table.setItems(obs_tsums);
         table.getColumns().addAll(tnameCol, tsumboxCol);
         table.setMouseTransparent(true);
+       // table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         Label header = new Label("This Week's Tracker Summary");
         header.setFont(new Font("Times New Roman", 25));
@@ -170,9 +170,10 @@ public class Summary {
                 @Override
                 protected void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
-                    if (item!=null){
+                    if ((item!=null) && !item.isEmpty()){
                         setText(item.substring(0,2));
                         setFont(new Font("Times New Roman", 20));
+                        
                         Color color = Color.web(item.substring(2,item.length()));
                         String colorString = "rgb(" + color.getRed() * 255 + "," + color.getGreen() * 255 + "," + color.getBlue() * 255 + ");";
                         setStyle("-fx-background-color: "+colorString);

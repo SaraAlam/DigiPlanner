@@ -62,6 +62,7 @@ public class Tsum {
      * Colors of the day labels to include in the summary for this tracker
      */
     public HashMap<String, Color> dayColors = new HashMap<String,Color>();
+   // public ArrayList<String> 
     /**
      * List of days of the current week
     */
@@ -101,13 +102,46 @@ public class Tsum {
     public Tsum(String name){
         tname = new SimpleStringProperty(name);
         make_tsumdays();
-        day1 = new SimpleStringProperty(days.get(0));
-        day2 = new SimpleStringProperty(days.get(1));
-        day3 = new SimpleStringProperty(days.get(2));
-        day4 = new SimpleStringProperty(days.get(3));
-        day5 = new SimpleStringProperty(days.get(4));
-        day6 = new SimpleStringProperty(days.get(5));
-        day7 = new SimpleStringProperty(days.get(6));
+        if (days.size()>=1){
+            day1 = new SimpleStringProperty(days.get(0));
+        }else{
+            day1 = new SimpleStringProperty("");
+        }
+        if (days.size()>=2){
+         day2 = new SimpleStringProperty(days.get(1));
+        }else{
+            day2 = new SimpleStringProperty("");
+        }
+
+        if (days.size()>=3){
+            day3 = new SimpleStringProperty(days.get(2));
+        }else{
+            day3 = new SimpleStringProperty("");
+        }
+
+        if (days.size()>=4){
+            day4 = new SimpleStringProperty(days.get(3));
+        }else{
+            day4 = new SimpleStringProperty("");
+        }
+
+        if (days.size()>=5){
+            day5 = new SimpleStringProperty(days.get(4));
+        }else{
+            day5 = new SimpleStringProperty("");
+        }
+
+        if (days.size()>=6){
+            day6 = new SimpleStringProperty(days.get(5));
+        }else{
+            day6 = new SimpleStringProperty("");
+        }
+
+        if (days.size()>=7){
+            day7 = new SimpleStringProperty(days.get(6));
+        }else{
+            day7 = new SimpleStringProperty("");
+        }
 
     }
 
@@ -161,16 +195,15 @@ public class Tsum {
         int num_days = currTracker.get_num_days();
         int currDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
         int start = currDay-6;
-        if (start < 0){
+        if (start <= 0){
             if (tList.currMonth != 0){
                 Tracker prevTracker = tList.monthly_trackers.get(tList.currMonth-1);
                 int prev_num_days = prevTracker.get_num_days();
                 int prev_start = prev_num_days + start;
+                System.out.println(prev_start);
                 for(int i = prev_start; i <= prev_num_days; i++){
-                    String day = ""+i;
-                    Color color = currTracker.dayColors.get(i);
-                    // day.setBorder(new Border(new BorderStroke(Color.BLACK,
-                    //     BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
+                    Color color = prevTracker.dayColors.get(i);
+                    String day = ""+i+color;
                     days.add(day);
                     dayColors.put(day, color);
                 }
@@ -180,9 +213,11 @@ public class Tsum {
         for(int i = start; i <= currDay; i++){
             Color color = currTracker.dayColors.get(i);
             String day = "";
+            //dayColors.put((""+i), color);
+            if(i<= 9){day = day + "0";}
             day = day+i+color;
             days.add(day);
-            dayColors.put(day, color);
+            dayColors.put((""+i), color);
         }
     }
 }
