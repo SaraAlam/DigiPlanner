@@ -121,3 +121,9 @@ For example, a possible images for the Water tracker would be:
 6. [22 Tooltip (Release 8) (oracle.com)](https://docs.oracle.com/javase/8/javafx/user-interface-tutorial/tooltip.htm#BABBIJBJ) (adding tooltips to help user navigate)
 7. [java - Creating a Calendar using javafx - Stack Overflow](https://stackoverflow.com/questions/33281588/creating-a-calendar-using-javafx) (date picker/ calendar)
 8. [Part II: Using JavaFX UI Controls (Release 8) (oracle.com)](https://docs.oracle.com/javase/8/javafx/user-interface-tutorial/ui_controls.htm) (general widgets that may be useful)
+9. [Resizing images to fit the parent node - Stack Overflow](https://stackoverflow.com/questions/12630296/resizing-images-to-fit-the-parent-node) (To bind the gif to the window and assist with resizing)
+10. [Resizing Font with main window in Java - Stack Overflow](https://stackoverflow.com/questions/51661941/resizing-font-with-main-window-in-javahttps://stackoverflow.com/questions/51661941/resizing-font-with-main-window-in-java) (For the journal entries as the book is resized)
+11. [How to add an image to a button (and position it) in JavaFX](https://edencoding.com/how-to-add-an-image-to-a-button/) (For delete button column in To-do)
+
+
+
