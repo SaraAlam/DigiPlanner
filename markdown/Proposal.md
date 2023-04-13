@@ -6,7 +6,7 @@ Course: COSC480E Intro to UI
 
 Instructor: E. Fourquet
 
-**Statement / Introduction**
+**Statement**
 
 The DigiPlanner app is a digital form of a store-bought planner, with different sections for different purposes like task-planning, habit-tracking, short notes etc. Benefits beyond a paper planner include: 
 
