@@ -10,12 +10,82 @@
 #container{
     -fx-border-width: 1;
     -fx-border-color: black;
-    -fx-background-image:url('dancingBbs.gif'); 
+    -fx-background:url('dancingBbs.gif') no-repeat center center fixed; 
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
     border-width: 1;
     border-color: black;
-    background-image:url('dancingBbs.gif'); 
-    background-repeat: no-repeat;
+    background:url('dancingBbs.gif') no-repeat center center fixed;
     background-size: cover;
+}
+
+
+/* For Tracker Sliders */ 
+.slider .track {
+    -fx-background-color: linear-gradient(to right, lightblue, darkblue);
+    background-color: linear-gradient(to right, lightblue, darkblue);
+}
+
+.slider .thumb {
+    -fx-background-color: white;
+    background-color: white;
+}
+
+/* Calendar selector */ 
+
+.date-picker-popup  {
+    -fx-border-color: #4f86f7;
+    -fx-background-color: #4f86f7;
+    background-color: #4f86f7;;
+    border-color: #4f86f7;
+}
+
+.date-picker-popup .spinner .button .left-arrow,
+.date-picker-popup .spinner .button .right-arrow {
+	-fx-background-color: white;
+    background-color: white;
+}
+
+.date-picker-popup .spinner .button,
+.date-picker-popup .spinner .button {
+	-fx-background-color: transparent;
+    background-color: transparent;
+}
+
+.calendar-grid {
+    -fx-background-color: #4f86f7;
+    background-color: #4f86f7;
+}
+
+.calendar-header {
+    -fx-background-color: #2257bf;
+    -fx-base: #2257bf;
+    background-color: #2257bf;
+}
+
+.date-picker-popup > .month-year-pane {
+    -fx-base: #2257bf;
+}
+
+.date-picker .cell{
+	-fx-background-color: #92b5fb;
+    background-color: #92b5fb;
+    -fx-border-color: #4f86f7;
+    border-color: #4f86f7;
+}
+
+.date-picker .cell:hover {
+    -fx-background-color: #4f86f7;
+    background-color: #4f86f7;
+}
+
+.date-picker .cell:focused {
+	-fx-background-color: #2257bf;
+    background-color: #2257bf;
+}
+
+.date-picker-popup > * > .previous-month,
+.date-picker-popup > * > .next-month {
+    -fx-background-color: #92b5fba2;
+    background-color: #92b5fba2;
 }

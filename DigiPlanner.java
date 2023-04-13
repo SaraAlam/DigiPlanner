@@ -22,10 +22,18 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.geometry.Insets;
+import java.util.Calendar;
+import java.util.HashMap;
+import javafx.scene.Node;
+import javafx.scene.control.skin.DatePickerSkin;
 
 public class DigiPlanner extends Application{
-    private int WIDTH = 800;
+    private int WIDTH = 500;
     private int HEIGHT = 600;
+    public int year = 2023;
+    public int currMonth = Calendar.getInstance().get(Calendar.MONTH);
+    String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    public HashMap<String,SpreadBundle> monthlyBundles = new HashMap<String,SpreadBundle>();
     
     public void start(Stage stage){
     
@@ -47,9 +55,6 @@ public class DigiPlanner extends Application{
 
         scene.getStylesheets().add(getClass().getResource("planner.css").toExternalForm());
 
-
-
-
         stage.setScene(scene);
         stage.setTitle("DigiPlanner");
         stage.show(); 
@@ -62,8 +67,12 @@ public class DigiPlanner extends Application{
         col1.setPercentWidth(30);
         ColumnConstraints col2 = new ColumnConstraints();
         col2.setPercentWidth(70);
-
         g.getColumnConstraints().addAll(col1,col2);
+
+        create_spread_bundles();
+        TabPane currTabPane = monthlyBundles.get(months[currMonth]).displayPane;
+        GridPane.setConstraints(currTabPane, 1, 0);
+        g.getChildren().add(currTabPane);
         return g;
     }
 
@@ -83,8 +92,12 @@ public class DigiPlanner extends Application{
 
         //create the calendar view
         DatePicker dp = new DatePicker();
-        GridPane.setConstraints(dp, 0,1);
-        g.getChildren().add(dp);
+
+        DatePickerSkin test = new DatePickerSkin(dp);
+        Node newdp = test.getPopupContent();
+
+        GridPane.setConstraints(newdp, 0,1);
+        g.getChildren().add(newdp);
         //imageview of blueberry
 
         //save button
@@ -96,8 +109,48 @@ public class DigiPlanner extends Application{
         return g;
     }
 
-    /*public TabPane create_right_tabpane(){
-        TabPane tabpane = new TabPane();
+    public void create_spread_bundles(){
+        for(String month:months){
+            //make spread bundle objects
+            int num_days = get_num_days(month);
+            monthlyBundles.put(month,new SpreadBundle(month, num_days));
+        }
+    }
 
-    }*/
+    /**
+     * Method to check if the current year is leap or not
+     * @return boolean
+     */
+    public boolean is_leap(){
+        if (year % 400 == 0) {
+            return true;
+        } 
+        else if (year % 100 == 0) {
+            return false;
+        } 
+        else if (year % 4 == 0) {
+            return true;
+        } 
+        
+        return false;
+    }
+
+    /**
+     * Get the number of days in the month for this tracker
+     * @return int
+     */
+    public int get_num_days(String month){
+        String[] monthsWith31Days = {"January", "March", "May", "July", "August", "October","December"};
+        for(String m: monthsWith31Days){
+            if (month.equals(m)){
+                return 31;
+            }
+        }
+        if (month.equals("February")){
+            if (is_leap()){ return 29; }
+            return 28;
+        }
+
+        return 30;
+    }
 }
