@@ -28,7 +28,7 @@ import javafx.scene.Node;
 import javafx.scene.control.skin.DatePickerSkin;
 
 public class DigiPlanner extends Application{
-    private int WIDTH = 500;
+    private int WIDTH = 800;
     private int HEIGHT = 600;
     public int year = 2023;
     public int currMonth = Calendar.getInstance().get(Calendar.MONTH);

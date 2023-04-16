@@ -1,9 +1,7 @@
 #navigator{
     -fx-border-width: 1;
-    -fx-border-color: black;
     -fx-background-color: lightblue;
     border-width: 1;
-    border-color: black;
     background-color: lightblue;
 }
 
