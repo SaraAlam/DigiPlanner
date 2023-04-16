@@ -39,16 +39,9 @@ public class DigiPlanner extends Application{
     
         GridPane root = create_root();
         GridPane left_nav = create_left_nav();
-        BorderPane container = new BorderPane(); // It will be a function, just to visualize rn
-
-        container.setPadding(new Insets(5));
-        container.setId("container");
 
         GridPane.setConstraints(left_nav, 0, 0);
         root.getChildren().add(left_nav);
-
-        GridPane.setConstraints(container, 1, 0);
-        root.getChildren().add(container);
 
         // create the scene
         Scene scene = new Scene(root, WIDTH, HEIGHT);
