@@ -34,10 +34,9 @@ public class SpreadBundle {
                 tab.setContent(new Rectangle(200,200, Color.LIGHTSTEELBLUE));
             }
             tab.setText(tabName);
-            //tab.setOnSelectionChanged(e -> );
             tabpane.getTabs().add(tab);
         }
-
+        tabpane.getSelectionModel().select(2);
         return tabpane;
     }
 }
