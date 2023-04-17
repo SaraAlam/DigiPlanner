@@ -26,12 +26,21 @@ import java.util.Calendar;
 import java.util.HashMap;
 import javafx.scene.Node;
 import javafx.scene.control.skin.DatePickerSkin;
+import javafx.geometry.Pos;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 
 public class DigiPlanner extends Application{
     private int WIDTH = 800;
     private int HEIGHT = 600;
     public int year = 2023;
     public int currMonth = Calendar.getInstance().get(Calendar.MONTH);
+    public BorderPane rightDisplay = new BorderPane();
+    public GridPane root;
     String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     public HashMap<String,SpreadBundle> monthlyBundles = new HashMap<String,SpreadBundle>();
     
@@ -64,8 +73,13 @@ public class DigiPlanner extends Application{
 
         create_spread_bundles();
         TabPane currTabPane = monthlyBundles.get(months[currMonth]).displayPane;
-        GridPane.setConstraints(currTabPane, 1, 0);
-        g.getChildren().add(currTabPane);
+        BorderPane.setAlignment(currTabPane, Pos.TOP_LEFT);
+        BorderPane.setMargin(currTabPane, new Insets(20,20,20,20));
+        rightDisplay.setPrefSize(200, 200);
+        rightDisplay.setCenter(currTabPane);
+        rightDisplay.setBackground(new Background(new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY)));
+        GridPane.setConstraints(rightDisplay, 1, 0);
+        g.getChildren().add(rightDisplay);
         return g;
     }
 
