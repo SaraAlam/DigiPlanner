@@ -31,7 +31,7 @@ public class SpreadBundle {
             Tab tab = new Tab();
             //System.out.println(trackerList.currTracker.calendar);
             if (tabName.equals("Trackers")){
-                tab.setContent(trackerList.currTracker.calendar);
+                tab.setContent(trackerList.currTracker.calendar_holder);
             } else if (tabName.equals("Todo")){
                 //tab.setContent(aToDoList.toDoGridPane);
             }
@@ -42,7 +42,7 @@ public class SpreadBundle {
             tabpane.getTabs().add(tab);
         }
         tabpane.getSelectionModel().select(2);
-        tabpane.setPrefSize(200, 200);
+        tabpane.setPrefSize(200, 400);
         return tabpane;
     }
 }

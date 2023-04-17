@@ -75,7 +75,6 @@ public class DigiPlanner extends Application{
         TabPane currTabPane = monthlyBundles.get(months[currMonth]).displayPane;
         BorderPane.setAlignment(currTabPane, Pos.TOP_LEFT);
         BorderPane.setMargin(currTabPane, new Insets(20,20,20,20));
-        rightDisplay.setPrefSize(200, 200);
         rightDisplay.setCenter(currTabPane);
         rightDisplay.setBackground(new Background(new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY)));
         GridPane.setConstraints(rightDisplay, 1, 0);

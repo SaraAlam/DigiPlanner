@@ -2,6 +2,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.FlowPane;
 import javafx.geometry.Insets;
@@ -23,6 +24,7 @@ public class Tracker {
     HashMap<Integer, Label> dayLabels = new HashMap<Integer, Label>();
     int selectedDay = 0;
     FlowPane calendar = new FlowPane();
+    VBox calendar_holder = new VBox(300);
 
     public Tracker(String m, int nDays){
         month = m;
@@ -45,6 +47,8 @@ public class Tracker {
             calendar.getChildren().add(dayLabel);
             calendar.setPrefWrapLength(6);
         }
+        calendar_holder.getChildren().add(calendar);
+        calendar_holder.setStyle("-fx-border-color: blue;");
     }
 
     /**
