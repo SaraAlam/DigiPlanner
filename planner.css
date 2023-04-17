@@ -5,18 +5,23 @@
     background-color: lightblue;
 }
 
-#container{
+#rightDisplay{
     -fx-border-width: 1;
     -fx-border-color: black;
-    -fx-background:url('dancingBbs.gif') no-repeat center center fixed; 
+    -fx-background-image:url('dancingBbs.gif'); 
     -fx-background-repeat: no-repeat;
-    -fx-background-size: cover;
+    -fx-background-size: 100% 100%;
     border-width: 1;
     border-color: black;
-    background:url('dancingBbs.gif') no-repeat center center fixed;
-    background-size: cover;
+    background-image:url('dancingBbs.gif');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 
+#holder{
+    -fx-background-color: #fc5dffa0;
+    background-color: #fc5dffa0;
+}
 
 /* For Tracker Sliders */ 
 .slider .track {

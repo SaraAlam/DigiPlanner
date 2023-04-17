@@ -33,6 +33,7 @@ public class Tracker {
     }
 
     public void create_calendar(){
+        calendar_holder.setId("holder");
         for (int i=0; i<numDays; i++){
             Label dayLabel = new Label(""+(i+1));
             make_day((i+1), dayLabel);
@@ -48,7 +49,7 @@ public class Tracker {
             calendar.setPrefWrapLength(6);
         }
         calendar_holder.getChildren().add(calendar);
-        calendar_holder.setStyle("-fx-border-color: blue;");
+        //calendar_holder.setStyle("-fx-border-color: blue;");
     }
 
     /**

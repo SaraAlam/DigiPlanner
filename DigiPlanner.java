@@ -76,7 +76,8 @@ public class DigiPlanner extends Application{
         BorderPane.setAlignment(currTabPane, Pos.TOP_LEFT);
         BorderPane.setMargin(currTabPane, new Insets(20,20,20,20));
         rightDisplay.setCenter(currTabPane);
-        rightDisplay.setBackground(new Background(new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY)));
+        rightDisplay.setId("rightDisplay");
+        //rightDisplay.setBackground(new Background(new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY)));
         GridPane.setConstraints(rightDisplay, 1, 0);
         g.getChildren().add(rightDisplay);
         return g;
