@@ -43,4 +43,6 @@ public class ToDoTask{
     public void setClear(final java.lang.Boolean clear) {
         this.clearProperty().set(clear);
     }
+
+    ///okokokokokokokokok
 }
