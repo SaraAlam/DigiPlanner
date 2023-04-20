@@ -70,25 +70,21 @@
     -fx-base: #2257bf;
 }
 
-.date-picker .cell{
-	-fx-background-color: #92b5fb;
-    background-color: #92b5fb;
-    -fx-border-color: #4f86f7;
-    border-color: #4f86f7;
-}
-
-.date-picker .cell:hover {
+.date-picker-popup .cell:hover {
     -fx-background-color: #4f86f7;
     background-color: #4f86f7;
 }
 
-.date-picker .cell:focused {
-	-fx-background-color: #2257bf;
-    background-color: #2257bf;
+.date-picker-popup .selected{
+    -fx-background-color:rgb(254, 190, 80);
+    background-color:rgb(254, 190, 80);
 }
+
+
+    
 
 .date-picker-popup > * > .previous-month,
 .date-picker-popup > * > .next-month {
-    -fx-background-color: #92b5fba2;
-    background-color: #92b5fba2;
+    -fx-background-color: #fae4a4a2;
+    background-color: #fae4a4a2;
 }

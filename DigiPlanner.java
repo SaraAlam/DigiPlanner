@@ -34,23 +34,57 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 
+import java.util.Locale;
+import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+
 public class DigiPlanner extends Application{
     private int WIDTH = 800;
     private int HEIGHT = 600;
-    public int year = 2023;
-    public int currMonth = Calendar.getInstance().get(Calendar.MONTH);
+    
+    //create the calendar view
+    DatePicker dp = new DatePicker();
+    Calendar selectedDate = Calendar.getInstance();
+    Date selDate;
+    public int year = Calendar.getInstance().get(Calendar.YEAR); // Only works for 2023 for now
+    public String currMonth = Calendar.getInstance().getDisplayName(Calendar.MONTH,Calendar.LONG, Locale.getDefault());
+    public int currDayNum = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+    public String currDayName = Calendar.getInstance().getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG, Locale.getDefault());
+
+    // For navigator label
+    Label viewing_label = new Label();
+    String[] numEnd = {"th", "st", "nd", "rd", "th"};
+
     public BorderPane rightDisplay = new BorderPane();
     public GridPane root;
     String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     public HashMap<String,SpreadBundle> monthlyBundles = new HashMap<String,SpreadBundle>();
     
     public void start(Stage stage){
-    
+        System.out.println(year);
         GridPane root = create_root();
         GridPane left_nav = create_left_nav();
 
         GridPane.setConstraints(left_nav, 0, 0);
         root.getChildren().add(left_nav);
+
+        dp.setOnAction(e ->{
+            Instant instant = Instant.from(dp.getValue().atStartOfDay(ZoneId.systemDefault()));
+            Date date = Date.from(instant);
+            System.out.println(date);
+            selectedDate.setTime(date);
+            year = selectedDate.get(Calendar.YEAR); // Only works for 2023 for now
+            currMonth = selectedDate.getDisplayName(Calendar.MONTH,Calendar.LONG, Locale.getDefault());
+            currDayNum = selectedDate.get(Calendar.DAY_OF_MONTH);
+            currDayName = selectedDate.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG, Locale.getDefault());
+        
+            int dayDigit = currDayNum % 10;
+            if(dayDigit > 4){
+                dayDigit = 4;
+            }
+            viewing_label.setText("Viewing: " + currDayName + " " + currDayNum + numEnd[dayDigit] + ", " +  currMonth + ", " + + year);
+        });
 
         // create the scene
         Scene scene = new Scene(root, WIDTH, HEIGHT);
@@ -72,7 +106,7 @@ public class DigiPlanner extends Application{
         g.getColumnConstraints().addAll(col1,col2);
 
         create_spread_bundles();
-        TabPane currTabPane = monthlyBundles.get(months[currMonth]).displayPane;
+        TabPane currTabPane = monthlyBundles.get(currMonth).displayPane;
         BorderPane.setAlignment(currTabPane, Pos.TOP_LEFT);
         BorderPane.setMargin(currTabPane, new Insets(20,20,20,20));
         rightDisplay.setCenter(currTabPane);
@@ -86,7 +120,11 @@ public class DigiPlanner extends Application{
     public GridPane create_left_nav(){
         GridPane g = new GridPane();
         g.setPrefHeight(Integer.MAX_VALUE);
-        Label viewing_label = new Label("Viewing: ");
+        int dayDigit = currDayNum % 10;
+        if(dayDigit > 4){
+            dayDigit = 4;
+        }
+        viewing_label.setText("Viewing: " + currDayName + " " + currDayNum + numEnd[dayDigit] + ", " +  currMonth + ", " + + year);
         viewing_label.setFont(new Font("Times New Roman", 20));
 
         
@@ -94,17 +132,15 @@ public class DigiPlanner extends Application{
         g.setId("navigator");
         g.setVgap(10);
 
-        GridPane.setConstraints(viewing_label, 0,0);
+        GridPane.setConstraints(viewing_label, 0,0, 2, 1);
         g.getChildren().add(viewing_label);
-
-        //create the calendar view
-        DatePicker dp = new DatePicker();
 
         DatePickerSkin test = new DatePickerSkin(dp);
         Node newdp = test.getPopupContent();
 
-        GridPane.setConstraints(newdp, 0,1);
+        GridPane.setConstraints(newdp, 0,1, 1, 1);
         g.getChildren().add(newdp);
+
         //imageview of blueberry
 
         //save button

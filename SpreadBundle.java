@@ -1,5 +1,6 @@
 import java.util.Calendar;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.Tab;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
@@ -26,6 +27,7 @@ public class SpreadBundle {
     
     public TabPane create_tab_pane(){
         TabPane tabpane = new TabPane();
+        tabpane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
         String[] tabNames = {"Home", "Todo", "Trackers", "Journal"};
         for(String tabName: tabNames){
             Tab tab = new Tab();
@@ -34,6 +36,9 @@ public class SpreadBundle {
                 tab.setContent(trackerList.currTracker.calendar_holder);
             } else if (tabName.equals("Todo")){
                 //tab.setContent(aToDoList.toDoGridPane);
+            }
+            else if (tabName.equals("Journal")){
+                tab.setContent(Journal.test());
             }
             else{
                 tab.setContent(new Rectangle(200,200, Color.LIGHTSTEELBLUE));
