@@ -15,14 +15,27 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.control.TextArea;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Journal {
     ArrayList<JournalEntry> entries;
+    GridPane container = new GridPane();
+    JournalEntry curEntry;
+    TextArea page = new TextArea();
     
     public Journal(){
         entries = new ArrayList<JournalEntry>();
+
+        page.setEditable(false);
+        page.getStyleClass().add("book-page");
+
+        TextField addField = toAdd();
+        container.add(page, 0, 2);
+        container.add(addField, 0,3);
+        container.setId("journal-background");
     }
 
     public void addEntries(JournalEntry[] entriesToAdd){
@@ -40,22 +53,18 @@ public class Journal {
         return entries.size();
     }
 
-    public static TextField test(){
+    public TextField toAdd(){
         TextField cont = new TextField();
         cont.setPromptText("Add a new entry!");
-        Journal temp = new Journal();
         cont.setOnAction(e -> {
             if(!cont.getText().isEmpty()){
                 JournalEntry[] cur = new JournalEntry[1];
                 JournalEntry entry = new JournalEntry(cont.getText());
                 cur[0] = entry;
-                temp.addEntries(cur);
+                this.addEntries(cur);  
                 cont.setText("");
-                int k = temp.getJournalSize();
-                for(int i = 0; i<k; i++){
-                    System.out.println(temp.getEntry(i).getTime());
-                }
-                
+                page = entry.container;
+                container.add(page, 0, 2);
             }
         });
         return cont;

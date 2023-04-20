@@ -62,7 +62,6 @@ public class DigiPlanner extends Application{
     public HashMap<String,SpreadBundle> monthlyBundles = new HashMap<String,SpreadBundle>();
     
     public void start(Stage stage){
-        System.out.println(year);
         GridPane root = create_root();
         GridPane left_nav = create_left_nav();
 

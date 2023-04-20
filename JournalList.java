@@ -22,6 +22,7 @@ import java.util.HashMap;
 public class JournalList {
     HashMap<Integer, Journal> journals = new HashMap<Integer, Journal>();
     int numDays;
+    Journal currJournal;
 
     public JournalList(int nDays){
         numDays = nDays;
@@ -29,5 +30,6 @@ public class JournalList {
             Journal j = new Journal();
             journals.put(i, j);
         }
+        currJournal = new Journal();
     }
 }
