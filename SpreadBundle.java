@@ -12,7 +12,7 @@ public class SpreadBundle {
     public String month = "January";
     public int numDays = 31;
     public int currDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-    //public ToDoList aToDoList;// new ToDoDays();
+    public ToDoMonth aToDoMonth = new ToDoMonth(month, numDays);// new ToDoDays();
     public TrackerList trackerList;
     //public JournalList journalList =// new JournalList();
     public TabPane displayPane;
@@ -21,7 +21,6 @@ public class SpreadBundle {
         month = m;
         numDays = nDays;
         trackerList = new TrackerList(month,numDays);
-        //aToDoList = new ToDoList();
         displayPane = create_tab_pane();
     }
     
@@ -36,6 +35,7 @@ public class SpreadBundle {
                 tab.setContent(trackerList.currTracker.calendar_holder);
             } else if (tabName.equals("Todo")){
                 //tab.setContent(aToDoList.toDoGridPane);
+                tab.setContent(aToDoMonth.toDoMonthGridPane);
             }
             else if (tabName.equals("Journal")){
                 tab.setContent(Journal.test());

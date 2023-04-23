@@ -1,0 +1,55 @@
+import javafx.scene.layout.GridPane;
+import javafx.scene.control.TableView;
+import javafx.collections.ObservableList;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.TableColumn;
+import javafx.geometry.Insets;
+import javafx.collections.FXCollections;
+import java.util.ArrayList;
+import javafx.scene.control.cell.CheckBoxTableCell;
+
+
+public class ToDoMonth {
+
+    public GridPane toDoMonthGridPane;
+    public TableView<ToDoTask> toDoTable;
+    public ArrayList<ToDoList> allToDoLists;
+
+    public ToDoMonth(String name, int numDays){
+        toDoMonthGridPane = new GridPane();
+        toDoMonthGridPane.setPadding(new Insets(10));
+
+        toDoTable = new TableView<ToDoTask>();
+        allToDoLists = new ArrayList<ToDoList>();
+        //ObservableList<ToDoTask> allTasks = FXCollections.observableArrayList();
+        //replace with file init later
+        for (int i=0; i<numDays; i++){
+            ToDoList aList = new ToDoList();
+            aList.listTasks.add(new ToDoTask("Finish To Do List " + i));
+            allToDoLists.add(aList);
+        }
+        //ToDoTask example1 = new ToDoTask("Finish To Do List");
+        //allTasks.add(example1);
+
+        TableColumn<ToDoTask,Boolean> completeCol = new TableColumn<ToDoTask,Boolean>("Complete");
+        completeCol.setCellValueFactory(new PropertyValueFactory<ToDoTask, Boolean>("done"));
+        completeCol.setCellFactory(e -> new CheckBoxTableCell<>());
+        completeCol.prefWidthProperty().bind(toDoTable.widthProperty().divide(3));
+
+        TableColumn<ToDoTask,String> detailsCol = new TableColumn<ToDoTask,String>("To Do");
+        detailsCol.setCellValueFactory(new PropertyValueFactory<ToDoTask, String>("taskDetails"));
+        detailsCol.prefWidthProperty().bind(toDoTable.widthProperty().divide(3));
+
+        TableColumn<ToDoTask,Boolean> clearCol = new TableColumn<ToDoTask,Boolean>("Clear");
+        clearCol.setCellValueFactory(new PropertyValueFactory<ToDoTask, Boolean>("clear"));
+        clearCol.setCellFactory(e -> new CheckBoxTableCell<>());
+        clearCol.prefWidthProperty().bind(toDoTable.widthProperty().divide(3));
+
+        toDoTable.getColumns().addAll(completeCol, detailsCol, clearCol);
+        toDoTable.setItems(allToDoLists.get(0).listTasks);
+        toDoTable.setEditable(true);
+
+
+        toDoMonthGridPane.add(toDoTable, 0, 0);
+    }
+}
