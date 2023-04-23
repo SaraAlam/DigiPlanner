@@ -40,16 +40,54 @@ public class ToDoMonth {
         detailsCol.setCellValueFactory(new PropertyValueFactory<ToDoTask, String>("taskDetails"));
         detailsCol.prefWidthProperty().bind(toDoTable.widthProperty().divide(3));
 
-        TableColumn<ToDoTask,Boolean> clearCol = new TableColumn<ToDoTask,Boolean>("Clear");
-        clearCol.setCellValueFactory(new PropertyValueFactory<ToDoTask, Boolean>("clear"));
-        clearCol.setCellFactory(e -> new CheckBoxTableCell<>());
-        clearCol.prefWidthProperty().bind(toDoTable.widthProperty().divide(3));
+        // TableColumn<ToDoTask,Boolean> clearCol = new TableColumn<ToDoTask,Boolean>("Clear");
+        // clearCol.setCellValueFactory(new PropertyValueFactory<ToDoTask, Boolean>("clear"));
+        // clearCol.setCellFactory(e -> new CheckBoxTableCell<>());
+        // clearCol.prefWidthProperty().bind(toDoTable.widthProperty().divide(3));
 
-        toDoTable.getColumns().addAll(completeCol, detailsCol, clearCol);
+        toDoTable.getColumns().addAll(completeCol, detailsCol);//, clearCol);
+        addButtonToTable(); 
         toDoTable.setItems(allToDoLists.get(0).listTasks);
         toDoTable.setEditable(true);
 
 
         toDoMonthGridPane.add(toDoTable, 0, 0);
+    }
+
+    private void addButtonToTable() {
+        TableColumn<ToDoTask, Void> clearCol = new TableColumn("Clear");
+
+        Callback<TableColumn<ToDoTask, Void>, TableCell<ToDoTask, Void>> cellFactory = new Callback<TableColumn<ToDoTask, Void>, TableCell<ToDoTask, Void>>() {
+            @Override
+            public TableCell<ToDoTask, Void> call(final TableColumn<ToDoTask, Void> param) {
+                final TableCell<ToDoTask, Void> cell = new TableCell<ToDoTask, Void>() {
+
+                    private final Button btn = new Button("Trash");
+                    /* 
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            Data data = getTableView().getItems().get(getIndex());
+                            System.out.println("selectedData: " + data);
+                        });
+                    }
+                    */
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        clearCol.setCellFactory(cellFactory);
+
+        toDoTable.getColumns().add(clearCol);
+
     }
 }
