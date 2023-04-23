@@ -89,18 +89,17 @@ public class ToDoMonth {
                     */ 
 
                     Image image = new Image(getClass().getResourceAsStream("trashCan.jpg"));
-
                     btn.setGraphic(new ImageView(image));
 
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(btn);
-                        }
-                    }
+                    // @Override
+                    // public void updateItem(Void item, boolean empty) {
+                    //     super.updateItem(item, empty);
+                    //     if (empty) {
+                    //         setGraphic(null);
+                    //     } else {
+                    //         setGraphic(btn);
+                    //     }
+                    // }
                 };
                 return cell;
             }
