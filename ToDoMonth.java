@@ -18,6 +18,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 
 public class ToDoMonth {
@@ -82,6 +87,11 @@ public class ToDoMonth {
                         });
                     }
                     */ 
+
+                    Image image = new Image(getClass().getResourceAsStream("trashCan.jpg"));
+
+                    btn.setGraphic(new ImageView(image));
+
                     @Override
                     public void updateItem(Void item, boolean empty) {
                         super.updateItem(item, empty);
