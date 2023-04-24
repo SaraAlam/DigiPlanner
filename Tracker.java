@@ -21,19 +21,23 @@ import javafx.scene.text.Font;
 public class Tracker {    
     String month;
     int numDays;
+    int first_weekly_day_of_the_month = 0;
     HashMap<Integer, Label> dayLabels = new HashMap<Integer, Label>();
     int selectedDay = 0;
-    FlowPane calendar = new FlowPane();
+    GridPane calendar = new GridPane();
     VBox calendar_holder = new VBox(300);
 
-    public Tracker(String m, int nDays){
+    public Tracker(String m, int nDays, int first_day){
         month = m;
         numDays = nDays;
+        first_weekly_day_of_the_month = first_day;
         create_calendar();
     }
 
     public void create_calendar(){
         calendar_holder.setId("holder");
+        int row = 0;
+        int col = 0;
         for (int i=0; i<numDays; i++){
             Label dayLabel = new Label(""+(i+1));
             make_day((i+1), dayLabel);
@@ -45,11 +49,16 @@ public class Tracker {
                 selectedDay = Integer.parseInt(dayLabel.getText());
                 dayLabel.setStyle("-fx-border-color: black;");
             });
+            GridPane.setConstraints(dayLabel, col, row);
             calendar.getChildren().add(dayLabel);
-            calendar.setPrefWrapLength(6);
+            col++;
+            if (col>7){
+                row++;
+                col=0;
+            }
+
         }
         calendar_holder.getChildren().add(calendar);
-        //calendar_holder.setStyle("-fx-border-color: blue;");
     }
 
     /**

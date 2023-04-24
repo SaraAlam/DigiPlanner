@@ -9,40 +9,43 @@ import javafx.scene.layout.HBox;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.collections.ObservableList;
-import java.util.ArrayList;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
+// import javafx.scene.control.TableView;
+// import javafx.collections.ObservableList;
+// import java.util.ArrayList;
+// import javafx.scene.control.ListView;
+// import javafx.scene.control.TextField;
+// import javafx.scene.control.Button;
 import javafx.scene.text.Font;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.DatePicker;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
+// import javafx.scene.layout.Priority;
+// import javafx.scene.layout.RowConstraints;
 import javafx.geometry.Insets;
 import java.util.Calendar;
 import java.util.HashMap;
 import javafx.scene.Node;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.geometry.Pos;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
+// import javafx.scene.layout.Background;
+// import javafx.scene.layout.BackgroundFill;
+// import javafx.scene.layout.Border;
+// import javafx.scene.layout.BorderStroke;
+// import javafx.scene.layout.CornerRadii;
+// import javafx.scene.paint.Color;
+//import java.util.Date;
 
 public class DigiPlanner extends Application{
     private int WIDTH = 800;
     private int HEIGHT = 600;
-    public int year = 2023;
+    public static int year = 2023;
     public int currMonth = Calendar.getInstance().get(Calendar.MONTH);
     public BorderPane rightDisplay = new BorderPane();
     public GridPane root;
     String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     public HashMap<String,SpreadBundle> monthlyBundles = new HashMap<String,SpreadBundle>();
+
+    public DatePicker dp = new DatePicker();
     
     public void start(Stage stage){
     
@@ -98,8 +101,6 @@ public class DigiPlanner extends Application{
         g.getChildren().add(viewing_label);
 
         //create the calendar view
-        DatePicker dp = new DatePicker();
-
         DatePickerSkin test = new DatePickerSkin(dp);
         Node newdp = test.getPopupContent();
 
@@ -160,4 +161,6 @@ public class DigiPlanner extends Application{
 
         return 30;
     }
+
+
 }
