@@ -3,14 +3,12 @@ import javafx.beans.property.SimpleBooleanProperty;
 
 public class ToDoTask{
     //private final StringProperty taskDetails = new SimpleStringProperty();
-    private final SimpleBooleanProperty done;
+    private final SimpleBooleanProperty done = new SimpleBooleanProperty();
     private String taskDetails;
-    private final SimpleBooleanProperty clear;
+    private final SimpleBooleanProperty clear = new SimpleBooleanProperty();
     
     public ToDoTask(String details){
-        done = new SimpleBooleanProperty();
         taskDetails = details;
-        clear = new SimpleBooleanProperty();
     }
     
     // get tasks details
@@ -43,4 +41,5 @@ public class ToDoTask{
     public void setClear(final java.lang.Boolean clear) {
         this.clearProperty().set(clear);
     }
+
 }
