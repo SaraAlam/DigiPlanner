@@ -18,16 +18,18 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class Tracker {    
+public class Tracker {  
+    String name;  
     String month;
     int numDays;
     int first_weekly_day_of_the_month = 0;
     HashMap<Integer, Label> dayLabels = new HashMap<Integer, Label>();
     int selectedDay = 0;
     GridPane calendar = new GridPane();
-    VBox calendar_holder = new VBox(300);
+    public VBox calendar_holder = new VBox(300);
 
-    public Tracker(String m, int nDays, int first_day){
+    public Tracker(String n, String m, int nDays, int first_day){
+        name = n;
         month = m;
         numDays = nDays;
         first_weekly_day_of_the_month = first_day;
@@ -52,7 +54,7 @@ public class Tracker {
             GridPane.setConstraints(dayLabel, col, row);
             calendar.getChildren().add(dayLabel);
             col++;
-            if (col>7){
+            if (col>=7){
                 row++;
                 col=0;
             }
@@ -99,12 +101,3 @@ public class Tracker {
     }
 
 }
-
-// Mood tracker slider
-    /*Slider slider = new Slider(0, 1, 0.5);
-    slider.setShowTickMarks(true);
-    slider.setShowTickLabels(true);
-    slider.setMajorTickUnit(0.25f);
-    slider.setMinorTickCount(1);
-    slider.setBlockIncrement(0.125f);
-    slider.setSnapToTicks(true);*/

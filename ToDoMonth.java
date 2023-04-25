@@ -89,7 +89,8 @@ public class ToDoMonth {
                     */ 
 
                     Image image = new Image(getClass().getResourceAsStream("trashCan.jpg"));
-                    btn.setGraphic(new ImageView(image));
+                    ImageView imv = new ImageView(image);
+                    //btn.setGraphic(imv);
 
                     // @Override
                     // public void updateItem(Void item, boolean empty) {

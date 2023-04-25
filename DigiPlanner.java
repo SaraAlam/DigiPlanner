@@ -43,28 +43,25 @@ import java.time.ZoneId;
 public class DigiPlanner extends Application{
     private int WIDTH = 800;
     private int HEIGHT = 600;
-    public static int year = 2023;
+    public static int year = Calendar.getInstance().get(Calendar.YEAR);;
     public int currMonth = Calendar.getInstance().get(Calendar.MONTH);
+
+    public BorderPane rightDisplay = new BorderPane();
+    public GridPane root;
+    String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    public HashMap<String,SpreadBundle> monthlyBundles = new HashMap<String,SpreadBundle>();
     
     //create the calendar view
     DatePicker dp = new DatePicker();
     Calendar selectedDate = Calendar.getInstance();
     Date selDate;
-    public int year = Calendar.getInstance().get(Calendar.YEAR); // Only works for 2023 for now
-    public String currMonth = Calendar.getInstance().getDisplayName(Calendar.MONTH,Calendar.LONG, Locale.getDefault());
+    public String currMonthStr = months[currMonth]; //Calendar.getInstance().getDisplayName(Calendar.MONTH,Calendar.LONG, Locale.getDefault());
     public int currDayNum = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
     public String currDayName = Calendar.getInstance().getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG, Locale.getDefault());
 
     // For navigator label
     Label viewing_label = new Label();
     String[] numEnd = {"th", "st", "nd", "rd", "th"};
-
-    public BorderPane rightDisplay = new BorderPane();
-    public GridPane root;
-    String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    public HashMap<String,SpreadBundle> monthlyBundles = new HashMap<String,SpreadBundle>();
-
-    public DatePicker dp = new DatePicker();
     
     public void start(Stage stage){
         GridPane root = create_root();
@@ -79,7 +76,7 @@ public class DigiPlanner extends Application{
             System.out.println(date);
             selectedDate.setTime(date);
             year = selectedDate.get(Calendar.YEAR); // Only works for 2023 for now
-            currMonth = selectedDate.getDisplayName(Calendar.MONTH,Calendar.LONG, Locale.getDefault());
+            currMonthStr = selectedDate.getDisplayName(Calendar.MONTH,Calendar.LONG, Locale.getDefault());
             currDayNum = selectedDate.get(Calendar.DAY_OF_MONTH);
             currDayName = selectedDate.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG, Locale.getDefault());
         
@@ -87,7 +84,7 @@ public class DigiPlanner extends Application{
             if(dayDigit > 4){
                 dayDigit = 4;
             }
-            viewing_label.setText("Viewing: " + currDayName + " " + currDayNum + numEnd[dayDigit] + ", " +  currMonth + ", " + + year);
+            viewing_label.setText("Viewing: " + currDayName + " " + currDayNum + numEnd[dayDigit] + ", " +  currMonthStr + ", " + + year);
         });
 
         // create the scene
@@ -110,7 +107,7 @@ public class DigiPlanner extends Application{
         g.getColumnConstraints().addAll(col1,col2);
 
         create_spread_bundles();
-        TabPane currTabPane = monthlyBundles.get(currMonth).displayPane;
+        TabPane currTabPane = monthlyBundles.get(currMonthStr).displayPane;
         BorderPane.setAlignment(currTabPane, Pos.TOP_LEFT);
         BorderPane.setMargin(currTabPane, new Insets(20,20,20,20));
         rightDisplay.setCenter(currTabPane);
@@ -128,7 +125,7 @@ public class DigiPlanner extends Application{
         if(dayDigit > 4){
             dayDigit = 4;
         }
-        viewing_label.setText("Viewing: " + currDayName + " " + currDayNum + numEnd[dayDigit] + ", " +  currMonth + ", " + + year);
+        viewing_label.setText("Viewing: " + currDayName + " " + currDayNum + numEnd[dayDigit] + ", " +  currMonthStr + ", " + + year);
         viewing_label.setFont(new Font("Times New Roman", 20));
 
         
