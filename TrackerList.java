@@ -38,9 +38,10 @@ public class TrackerList {
         }
         currTracker = trackers.get("Water");
         trackerSpreadPane = new GridPane();
+        trackerSpreadPane.setVgap(10);
         create_header();
         create_drop_down();
-        GridPane.setConstraints(currTracker.calendar_holder, 0, 4, 7, 8);
+        GridPane.setConstraints(currTracker.calendar_holder, 0, 3, 7, 8);
         trackerSpreadPane.getChildren().add(currTracker.calendar_holder);
         create_color_holder();
     }
@@ -107,7 +108,7 @@ public class TrackerList {
 
         color_holder = new HBox();
         color_holder.getChildren().addAll(slider, currSelectedColorLabel);
-        GridPane.setConstraints(color_holder, 0, 9, 7, 3);
+        GridPane.setConstraints(color_holder, 0, 12, 7, 3);
         trackerSpreadPane.getChildren().add(color_holder);
     }
 }
