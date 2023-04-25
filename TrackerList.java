@@ -13,6 +13,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.geometry.Insets;
 
 public class TrackerList {
     String month;
@@ -21,6 +31,8 @@ public class TrackerList {
     String[] trackerNames = {"Water", "Workout","Stress","Study","Sleep"};
     HashMap<String,Tracker> trackers = new HashMap<String,Tracker>();
     public Tracker currTracker;
+    public String[] colors = {"#F8F8FF","#CCCCFF","#C4C3D0", "#92A1CF", "#8C92AC",
+    "#0000FF", "#2A52BE","#002FA7","#003399", "#00009C"};
 
     public ComboBox<String> trackerMenu;
     public HBox color_holder;
@@ -39,13 +51,17 @@ public class TrackerList {
         currTracker = trackers.get("Water");
         trackerSpreadPane = new GridPane();
         trackerSpreadPane.setVgap(10);
+
+        set_up_view();
+    }
+
+    public void set_up_view(){
         create_header();
         create_drop_down();
         GridPane.setConstraints(currTracker.calendar_holder, 0, 3, 7, 8);
         trackerSpreadPane.getChildren().add(currTracker.calendar_holder);
         create_color_holder();
     }
-
     public void create_header(){
         Label year_and_month_label = new Label(""+DigiPlanner.year+",  "+month);
         Label spread_title = new Label("Trackers");
@@ -55,17 +71,17 @@ public class TrackerList {
     }
 
     public void create_drop_down(){
-        ObservableList<String> trackerNamesObs = FXCollections.observableArrayList();
-        trackerMenu = new ComboBox<String>(trackerNamesObs);
+        ObservableList<String> trackerNamesObs = FXCollections.observableArrayList(trackerNames);
+        trackerMenu = new ComboBox<String>();
+        trackerMenu.setItems(trackerNamesObs);
         trackerMenu.setValue(currTracker.name);
         trackerMenu.valueProperty().addListener(
             new ChangeListener<String>() {
                 @Override
                 public void changed(ObservableValue observable, String oldValue, String newValue) {
+                    trackerSpreadPane.getChildren().remove(currTracker.calendar_holder);
                     currTracker = trackers.get(newValue);
-                    trackerSpreadPane.getChildren().remove(0, 2);
-                    GridPane.setConstraints(currTracker.calendar_holder, 0, 2);
-                    trackerSpreadPane.getChildren().add(currTracker.calendar_holder);
+                    set_up_view();
                 }
         });
         GridPane.setConstraints(trackerMenu, 0, 2);
@@ -102,9 +118,23 @@ public class TrackerList {
         slider.setSnapToTicks(true);
 
         //slider listener and handler
-
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue <?extends Number>observable, Number oldValue, Number newValue){
+                int i = 1;
+               while (i <= colors.length){
+                    if (newValue.doubleValue() <= (0.1*i)){
+                        currSelectedColor = Color.web(colors[i-1]);
+                        i += colors.length;
+                        currSelectedColorLabel.setBackground(new Background(new BackgroundFill(currSelectedColor, new CornerRadii(0), new Insets(0))));
+                    }
+                    i++;
+               }
+            }
+         });
+         
         // current selected color label
         currSelectedColorLabel = new Label("Current Color");
+        currSelectedColorLabel.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0), new Insets(0))));
 
         color_holder = new HBox();
         color_holder.getChildren().addAll(slider, currSelectedColorLabel);
