@@ -32,7 +32,8 @@ public class Journal {
     JournalEntry curEntry;
     TextArea page = new TextArea();
     GridPane book = new GridPane();
-    int curIdx = 1;
+    int curIdx = 0;
+    Label pageNum = new Label();
     
     public Journal(){
         entries = new ArrayList<JournalEntry>();
@@ -52,16 +53,19 @@ public class Journal {
 
         arrRight.setOnAction(e -> {
             if(curIdx < this.getJournalSize()-1){
+                pageNum.setText(Integer.toString(curIdx+1));
                 curIdx += 1;
                 page.setVisible(false);
                 System.out.println(curIdx);
                 page = entries.get(curIdx).container;
                 page.setVisible(true);
+                
             }
         });
 
         arrLeft.setOnAction(e -> {
             if(curIdx > 0){
+                pageNum.setText(Integer.toString(curIdx+1));
                 curIdx -= 1;
                 page.setVisible(false);
                 page = entries.get(curIdx).container;
@@ -69,7 +73,7 @@ public class Journal {
             }
         });
 
-        HBox right = new HBox(arrLeft, arrRight);
+        HBox right = new HBox(arrLeft, pageNum, arrRight);
         right.setSpacing(20);
         
         //right.setPrefHeight(Integer.MAX_VALUE);
@@ -136,6 +140,8 @@ public class Journal {
                 page.setVisible(false);
                 page = entry.container;
                 book.add(page, 1, 0);
+                pageNum.setText(Integer.toString(curIdx+1));
+                curIdx += 1;
                 //container.add(page, 0, 2);
             }
         });
