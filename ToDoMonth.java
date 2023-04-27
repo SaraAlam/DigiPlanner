@@ -25,6 +25,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
+
 public class ToDoMonth {
 
     public GridPane toDoMonthGridPane;
@@ -43,6 +44,8 @@ public class ToDoMonth {
         for (int i=0; i<numDays; i++){
             ToDoList aList = new ToDoList();
             aList.listTasks.add(new ToDoTask("Finish To Do List " + i));
+            aList.listTasks.add(new ToDoTask("Check second index"));
+            aList.listTasks.add(new ToDoTask("Third thing I guess"));
             allToDoLists.add(aList);
         }
         //ToDoTask example1 = new ToDoTask("Finish To Do List");
@@ -73,14 +76,21 @@ public class ToDoMonth {
 
     private void addButtonToTable() {
         TableColumn<ToDoTask, Void> clearCol = new TableColumn("Clear");
+        Button btn = new Button();
+        btn.setPrefSize(10,10);
+        Image image = new Image("trashCan.jpg");
+        ImageView imv = new ImageView(image);
+
+
+        btn.setGraphic(imv);
+        
+     
 
         Callback<TableColumn<ToDoTask, Void>, TableCell<ToDoTask, Void>> cellFactory = new Callback<TableColumn<ToDoTask, Void>, TableCell<ToDoTask, Void>>() {
             @Override
             public TableCell<ToDoTask, Void> call(final TableColumn<ToDoTask, Void> param) {
                 final TableCell<ToDoTask, Void> cell = new TableCell<ToDoTask, Void>() {
 
-                    Button btn = new Button("Trash");
-                    
                     {
                         btn.setOnAction((ActionEvent event) -> {
                             ToDoTask taskToDelete = getTableView().getItems().get(getIndex());
@@ -100,10 +110,15 @@ public class ToDoMonth {
                     // button.setTranslateY(25);
                     // button.setPrefSize(80, 80);
                     // button.setGraphic(view);
-                    Image image = new Image(getClass().getResourceAsStream("trashCan.jpg"));
-                    ImageView imv = new ImageView(image);
+                    // Image image = new Image(getClass().getResourceAsStream("trashCan.jpg"));
+                    // Image image = new Image("trashCan.jpg");
+                    // ImageView imv = new ImageView(image);
+                    // btn.setGraphic(imv);
+                    // imv.setImage(image);
                     //btn.setGraphic(imv);
 
+                    //btn.setGraphic(new ImageView(new Image(trashCan.png)));
+                    
                     @Override
                     public void updateItem(Void item, boolean empty) {
                         super.updateItem(item, empty);
