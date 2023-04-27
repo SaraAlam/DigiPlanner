@@ -22,7 +22,13 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.*;
 
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -34,9 +40,17 @@ public class Journal {
     GridPane book = new GridPane();
     int curIdx = -1;
     Label pageNum = new Label();
+    private final TableView<JournalEntry> entryS = new TableView<>();
+    private final ObservableList<JournalEntry> entriesT = 
+        FXCollections.observableArrayList();
     
     public Journal(){
         entries = new ArrayList<JournalEntry>();
+
+        TableColumn<JournalEntry, Integer> initCol = new TableColumn<JournalEntry, Integer>("Time of Entry");
+        initCol.setCellValueFactory(new PropertyValueFactory<JournalEntry, Integer>("entryTime"));
+        //initCol.setPrefWidth(50);
+        initCol.setSortable(false);
 
         page.setEditable(false);
         page.getStyleClass().add("book-page");
