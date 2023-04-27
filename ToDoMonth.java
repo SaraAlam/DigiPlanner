@@ -78,7 +78,7 @@ public class ToDoMonth {
             public TableCell<ToDoTask, Void> call(final TableColumn<ToDoTask, Void> param) {
                 final TableCell<ToDoTask, Void> cell = new TableCell<ToDoTask, Void>() {
 
-                    private final Button btn = new Button("Trash");
+                    Button btn = new Button("Trash");
                     /* 
                     {
                         btn.setOnAction((ActionEvent event) -> {
@@ -88,18 +88,26 @@ public class ToDoMonth {
                     }
                     */ 
 
-                    Image image = new Image(getClass().getResourceAsStream("trashCan.jpg"));
-                    btn.setGraphic(new ImageView(image));
+                    //Creating a graphic (image)
+                    // Image img = new Image("trashCan.png");
+                    // ImageView view = new ImageView(img);
+                    // view.setFitHeight(80);
+                    // view.setPreserveRatio(true);
+                    // Button button = new Button();
+                    // button.setTranslateX(200);
+                    // button.setTranslateY(25);
+                    // button.setPrefSize(80, 80);
+                    // button.setGraphic(view);
 
-                    // @Override
-                    // public void updateItem(Void item, boolean empty) {
-                    //     super.updateItem(item, empty);
-                    //     if (empty) {
-                    //         setGraphic(null);
-                    //     } else {
-                    //         setGraphic(btn);
-                    //     }
-                    // }
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
                 }; 
                 return cell;
             }
