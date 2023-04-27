@@ -32,13 +32,14 @@ public class TrackerList {
     String[] trackerNames = {"Water", "Workout","Stress","Study","Sleep"};
     HashMap<String,Tracker> trackers = new HashMap<String,Tracker>();
     public Tracker currTracker;
-    public String[] colors = {"#CCCCFF","#C4C3D0", "#92A1CF", "#8C92AC",
-    "#0000FF", "#2A52BE","#002FA7","#003399", "#00009C", "#120A8F"};
+    public String[] colors = {"#CCCCFF","#C4C3D0", "#8C92AC", "#92A1CF",
+     "#2A52BE", "#0000FF","#002FA7","#003399", "#00009C", "#120A8F"};
 
     public ComboBox<String> trackerMenu;
     public HBox color_holder;
     public Label currSelectedColorLabel;
     public Color currSelectedColor;
+    public int currSelectedColorIdx;
     public GridPane trackerSpreadPane;
 
     public TrackerList(String m, int nDays){
@@ -127,6 +128,7 @@ public class TrackerList {
                while (i <= colors.length){
                     if (newValue.doubleValue() <= (i)){
                         currSelectedColor = Color.web(colors[i-1]);
+                        currSelectedColorIdx = i-1;
                         i += colors.length;
                         currSelectedColorLabel.setBackground(new Background(new BackgroundFill(currSelectedColor, new CornerRadii(0), new Insets(0))));
                     }
@@ -139,9 +141,7 @@ public class TrackerList {
          
         // current selected color label
         currSelectedColorLabel = new Label("        ");
-        currSelectedColorLabel.setFont(new Font("Times New Roman", 20));
         Label colorLabelDesc = new Label("Current color:");
-        colorLabelDesc.setFont(new Font("Times New Roman", 20));
         currSelectedColorLabel.setBackground(new Background(new BackgroundFill(currSelectedColor, new CornerRadii(0), new Insets(0))));
         currSelectedColorLabel.setBorder(new Border(new BorderStroke(Color.BLACK,
                     BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));

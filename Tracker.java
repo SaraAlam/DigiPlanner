@@ -89,7 +89,6 @@ public class Tracker {
         for(int i = 0; i < weekly_days.length; i++){
             Label wdl = new Label(weekly_days[i]);
             wdl.setAlignment(Pos.CENTER);
-            wdl.setFont(new Font("Times New Roman",20));
             wdl.setPrefWidth(calendar_col_width);
             wdl.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0), new Insets(0))));
             wdl.setBorder(new Border(new BorderStroke(Color.BLACK,
@@ -106,7 +105,6 @@ public class Tracker {
      * @param day: Label containing the string form of i
      */
     public void make_day(int i, Label day){
-        day.setFont(new Font("Times New Roman",20));
         day.setMinWidth(calendar_col_width);
         day.setMinHeight(calendar_col_width);
         day.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0), new Insets(0))));
@@ -126,6 +124,11 @@ public class Tracker {
                 currSelectedDayLabel.setBackground(new Background(new BackgroundFill(parentList.currSelectedColor, new CornerRadii(0), new Insets(0))));
                 currSelectedDayLabel.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
+                if (parentList.currSelectedColorIdx >= (0.5*parentList.colors.length)){
+                    currSelectedDayLabel.setTextFill(Color.WHITE);
+                }else{
+                    currSelectedDayLabel.setTextFill(Color.BLACK);
+                }
             });
 
             
