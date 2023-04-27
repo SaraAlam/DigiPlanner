@@ -10,8 +10,10 @@ public class JournalEntry {
 
     public JournalEntry(String entry){
         container.setEditable(false);
+        container.setWrapText(true);
         container.getStyleClass().add("book-page");
         content = entry;
+        
         int end = Math.min(6, entry.length());
         desc = content.substring(0, end);
         entryTime = new Date();
