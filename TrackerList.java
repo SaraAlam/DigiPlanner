@@ -23,6 +23,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.geometry.Insets;
+import javafx.scene.layout.Region;
 
 public class TrackerList {
     String month;
@@ -31,8 +32,8 @@ public class TrackerList {
     String[] trackerNames = {"Water", "Workout","Stress","Study","Sleep"};
     HashMap<String,Tracker> trackers = new HashMap<String,Tracker>();
     public Tracker currTracker;
-    public String[] colors = {"#F8F8FF","#CCCCFF","#C4C3D0", "#92A1CF", "#8C92AC",
-    "#0000FF", "#2A52BE","#002FA7","#003399", "#00009C"};
+    public String[] colors = {"#CCCCFF","#C4C3D0", "#92A1CF", "#8C92AC",
+    "#0000FF", "#2A52BE","#002FA7","#003399", "#00009C", "#120A8F"};
 
     public ComboBox<String> trackerMenu;
     public HBox color_holder;
@@ -45,7 +46,7 @@ public class TrackerList {
         numDays = nDays;
         first_day = get_month_first_day();
         for(int i = 0; i < trackerNames.length; i++){
-            Tracker t = new Tracker(trackerNames[i], month, numDays, first_day);
+            Tracker t = new Tracker(trackerNames[i], month, numDays, first_day, this);
             trackers.put(trackerNames[i], t);
         }
         currTracker = trackers.get("Water");
@@ -109,20 +110,22 @@ public class TrackerList {
 
     public void create_color_holder(){
         // create slider
-        Slider slider = new Slider(0, 1, 0.5);
+        Slider slider = new Slider(0, 10, 1);
         slider.setShowTickMarks(true);
         slider.setShowTickLabels(true);
-        slider.setMajorTickUnit(0.25f);
-        slider.setMinorTickCount(1);
-        slider.setBlockIncrement(0.125f);
+        //slider.setMajorTickUnit(0.25f);
+        slider.setMajorTickUnit(1);
+        //slider.setBlockIncrement(0.125f);
+        slider.setBlockIncrement(1);
         slider.setSnapToTicks(true);
+        slider.resize(20, 15);
 
         //slider listener and handler
         slider.valueProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue <?extends Number>observable, Number oldValue, Number newValue){
                 int i = 1;
                while (i <= colors.length){
-                    if (newValue.doubleValue() <= (0.1*i)){
+                    if (newValue.doubleValue() <= (i)){
                         currSelectedColor = Color.web(colors[i-1]);
                         i += colors.length;
                         currSelectedColorLabel.setBackground(new Background(new BackgroundFill(currSelectedColor, new CornerRadii(0), new Insets(0))));
@@ -131,13 +134,20 @@ public class TrackerList {
                }
             }
          });
+
+         currSelectedColor = Color.web(colors[1]);
          
         // current selected color label
-        currSelectedColorLabel = new Label("Current Color");
-        currSelectedColorLabel.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0), new Insets(0))));
+        currSelectedColorLabel = new Label("        ");
+        currSelectedColorLabel.setFont(new Font("Times New Roman", 20));
+        Label colorLabelDesc = new Label("Current color:");
+        colorLabelDesc.setFont(new Font("Times New Roman", 20));
+        currSelectedColorLabel.setBackground(new Background(new BackgroundFill(currSelectedColor, new CornerRadii(0), new Insets(0))));
+        currSelectedColorLabel.setBorder(new Border(new BorderStroke(Color.BLACK,
+                    BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
 
         color_holder = new HBox();
-        color_holder.getChildren().addAll(slider, currSelectedColorLabel);
+        color_holder.getChildren().addAll(slider, colorLabelDesc, currSelectedColorLabel);
         GridPane.setConstraints(color_holder, 0, 12, 7, 3);
         trackerSpreadPane.getChildren().add(color_holder);
     }
