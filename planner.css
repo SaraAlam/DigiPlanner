@@ -41,11 +41,13 @@
 
 .book-page .scroll-pane .viewport{
     -fx-background-color: transparent;
+    background-color: transparent;
 }
 
 
-.book-page.scroll-pane .content{
+.book-page .scroll-pane .content{
     -fx-background-color: transparent;
+    background-color: transparent;
 }
 
 #journal-background{
@@ -53,10 +55,12 @@
     background-color: rgba(240, 103, 255, 0.539);
 }
 
-.text-area .scroll-pane {
-    -fx-background-color: transparent;
+#journal-book{
+    -fx-size: 100% 100%;
+    -fx-background-image: url("book.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
 }
-
 
 
 /* For Tracker Sliders */ 

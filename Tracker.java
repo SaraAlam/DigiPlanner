@@ -18,22 +18,40 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class Tracker {    
+public class Tracker {  
+    String name;  
     String month;
     int numDays;
+    int first_weekly_day_of_the_month = 0;
     HashMap<Integer, Label> dayLabels = new HashMap<Integer, Label>();
     int selectedDay = 0;
-    FlowPane calendar = new FlowPane();
-    VBox calendar_holder = new VBox(300);
+    GridPane calendar = new GridPane();
+    public VBox calendar_holder = new VBox();
+    public int calendar_col_width = 60;
 
-    public Tracker(String m, int nDays){
+    public Tracker(String n, String m, int nDays, int first_day){
+        name = n;
         month = m;
         numDays = nDays;
+        first_weekly_day_of_the_month = first_day;
         create_calendar();
     }
 
     public void create_calendar(){
         calendar_holder.setId("holder");
+        int row = 0;
+        int col = 0;
+        for (int j=1; j<first_weekly_day_of_the_month; j++){
+            Label dayLabel = new Label("");
+            make_day((-1), dayLabel);
+            GridPane.setConstraints(dayLabel, col, row);
+            calendar.getChildren().add(dayLabel);
+            col++;
+            if (col>=7){
+                row++;
+                col=0;
+            }
+        }
         for (int i=0; i<numDays; i++){
             Label dayLabel = new Label(""+(i+1));
             make_day((i+1), dayLabel);
@@ -45,11 +63,35 @@ public class Tracker {
                 selectedDay = Integer.parseInt(dayLabel.getText());
                 dayLabel.setStyle("-fx-border-color: black;");
             });
+            GridPane.setConstraints(dayLabel, col, row);
             calendar.getChildren().add(dayLabel);
-            calendar.setPrefWrapLength(6);
+            col++;
+            if (col>=7){
+                row++;
+                col=0;
+            }
+
         }
-        calendar_holder.getChildren().add(calendar);
-        //calendar_holder.setStyle("-fx-border-color: blue;");
+        GridPane weekly_day_row = create_weekly_days_row();
+        calendar_holder.getChildren().addAll(weekly_day_row, calendar);
+    }
+
+    public GridPane create_weekly_days_row(){
+        GridPane weekly_day_row = new GridPane();
+
+        String[] weekly_days = {"Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"};
+        for(int i = 0; i < weekly_days.length; i++){
+            Label wdl = new Label(weekly_days[i]);
+            wdl.setAlignment(Pos.CENTER);
+            wdl.setFont(new Font("Times New Roman",20));
+            wdl.setPrefWidth(calendar_col_width);
+            wdl.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0), new Insets(0))));
+            wdl.setBorder(new Border(new BorderStroke(Color.BLACK,
+            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
+            GridPane.setConstraints(wdl,i, 0);
+            weekly_day_row.getChildren().add(wdl);
+        }
+        return weekly_day_row;
     }
 
     /**
@@ -59,43 +101,35 @@ public class Tracker {
      */
     public void make_day(int i, Label day){
         day.setFont(new Font("Times New Roman",20));
-        day.setMinWidth(40);
-        day.setMinHeight(40);
+        day.setMinWidth(calendar_col_width);
+        day.setMinHeight(calendar_col_width);
         day.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0), new Insets(0))));
+        day.setBorder(new Border(new BorderStroke(Color.BLACK,
+        BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
         day.setAlignment(Pos.CENTER);
-        day.setOnMousePressed( e -> {
-            Label currSelectedDayLabel;
-            if (selectedDay != 0){
+        if (i!=-1){
+            day.setOnMousePressed( e -> {
+                Label currSelectedDayLabel;
+                if (selectedDay != 0){
+                    currSelectedDayLabel = dayLabels.get(selectedDay);
+                    currSelectedDayLabel.setBorder(new Border(new BorderStroke(Color.BLACK,
+                    BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
+                }
+                selectedDay = i;
                 currSelectedDayLabel = dayLabels.get(selectedDay);
                 currSelectedDayLabel.setBorder(new Border(new BorderStroke(Color.BLACK,
-                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
-            }
-            selectedDay = i;
-            currSelectedDayLabel = dayLabels.get(selectedDay);
-            currSelectedDayLabel.setBorder(new Border(new BorderStroke(Color.BLACK,
-            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
-        });
-
-        day.setBorder(new Border(new BorderStroke(Color.BLACK,
-                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
-
-        
-        if (selectedDay != 0){
-            if (selectedDay==i){
-                Label currSelectedDayLabel = day;
-                currSelectedDayLabel.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
+            });
+
+            
+            if (selectedDay != 0){
+                if (selectedDay==i){
+                    Label currSelectedDayLabel = day;
+                    currSelectedDayLabel.setBorder(new Border(new BorderStroke(Color.BLACK,
+                    BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
+                }
             }
         }
     }
 
 }
-
-// Mood tracker slider
-    /*Slider slider = new Slider(0, 1, 0.5);
-    slider.setShowTickMarks(true);
-    slider.setShowTickLabels(true);
-    slider.setMajorTickUnit(0.25f);
-    slider.setMinorTickCount(1);
-    slider.setBlockIncrement(0.125f);
-    slider.setSnapToTicks(true);*/

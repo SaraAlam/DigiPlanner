@@ -30,6 +30,7 @@ public class ToDoMonth {
     public GridPane toDoMonthGridPane;
     public TableView<ToDoTask> toDoTable;
     public ArrayList<ToDoList> allToDoLists;
+    public int currMonth = 0;
 
     public ToDoMonth(String name, int numDays){
         toDoMonthGridPane = new GridPane();
@@ -63,7 +64,7 @@ public class ToDoMonth {
 
         toDoTable.getColumns().addAll(completeCol, detailsCol);//, clearCol);
         addButtonToTable(); 
-        toDoTable.setItems(allToDoLists.get(0).listTasks);
+        toDoTable.setItems(allToDoLists.get(currMonth).listTasks);
         toDoTable.setEditable(true);
 
 
@@ -79,14 +80,15 @@ public class ToDoMonth {
                 final TableCell<ToDoTask, Void> cell = new TableCell<ToDoTask, Void>() {
 
                     Button btn = new Button("Trash");
-                    /* 
+                    
                     {
                         btn.setOnAction((ActionEvent event) -> {
-                            Data data = getTableView().getItems().get(getIndex());
-                            System.out.println("selectedData: " + data);
+                            ToDoTask taskToDelete = getTableView().getItems().get(getIndex());
+                            allToDoLists.get(currMonth).listTasks.remove(taskToDelete);
+                            toDoTable.setItems(allToDoLists.get(currMonth).listTasks);
                         });
                     }
-                    */ 
+                    
 
                     //Creating a graphic (image)
                     // Image img = new Image("trashCan.png");
@@ -98,6 +100,9 @@ public class ToDoMonth {
                     // button.setTranslateY(25);
                     // button.setPrefSize(80, 80);
                     // button.setGraphic(view);
+                    Image image = new Image(getClass().getResourceAsStream("trashCan.jpg"));
+                    ImageView imv = new ImageView(image);
+                    //btn.setGraphic(imv);
 
                     @Override
                     public void updateItem(Void item, boolean empty) {

@@ -32,7 +32,7 @@ public class SpreadBundle {
             Tab tab = new Tab();
             //System.out.println(trackerList.currTracker.calendar);
             if (tabName.equals("Trackers")){
-                tab.setContent(trackerList.currTracker.calendar_holder);
+                tab.setContent(trackerList.trackerSpreadPane);
             } else if (tabName.equals("Todo")){
                 //tab.setContent(aToDoList.toDoGridPane);
                 tab.setContent(aToDoMonth.toDoMonthGridPane);
