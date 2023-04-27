@@ -125,3 +125,17 @@
     -fx-background-color: #fae4a4a2;
     background-color: #fae4a4a2;
 }
+
+
+.trash{
+    -fx-border-width: 1;
+    -fx-border-color: black;
+    -fx-background-image:url('trashCan.jpg'); 
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+    border-width: 1;
+    border-color: black;
+    background-image:url("trashCan.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}

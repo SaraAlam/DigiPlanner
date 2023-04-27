@@ -14,7 +14,7 @@ public class SpreadBundle {
     public int currDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
     public ToDoMonth aToDoMonth = new ToDoMonth(month, numDays);// new ToDoDays();
     public TrackerList trackerList;
-    public JournalList journalList = new JournalList(numDays);// new JournalList();
+    // public JournalList journalList = new JournalList(numDays);// new JournalList();
     public TabPane displayPane;
 
     public SpreadBundle(String m, int nDays){
@@ -37,9 +37,9 @@ public class SpreadBundle {
                 //tab.setContent(aToDoList.toDoGridPane);
                 tab.setContent(aToDoMonth.toDoMonthGridPane);
             }
-            else if (tabName.equals("Journal")){
-                tab.setContent(journalList.currJournal.bigCont);
-            }
+            // else if (tabName.equals("Journal")){
+            //     tab.setContent(journalList.currJournal.bigCont);
+            // }
             else{
                 tab.setContent(new Rectangle(200,200, Color.LIGHTSTEELBLUE));
             }
