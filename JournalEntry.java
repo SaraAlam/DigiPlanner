@@ -2,10 +2,14 @@ import java.util.Date;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 
+import java.text.DateFormat;  
+import java.util.Calendar;  
+import java.text.SimpleDateFormat;  
+
 public class JournalEntry {
-    final Date entryTime;
-    String desc;
-    String content;
+    private String entryTime;
+    private String desc;
+    private String content;
     TextArea container = new TextArea();
 
     public JournalEntry(String entry){
@@ -16,7 +20,10 @@ public class JournalEntry {
         
         int end = Math.min(6, entry.length());
         desc = content.substring(0, end);
-        entryTime = new Date();
+        Date timeOfEntry = new Date();
+        Calendar 
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd hh:mm:ss");  
+        entryTime = dateFormat.format(timeOfEntry);
         container.setText(content);
     }
 
@@ -24,7 +31,11 @@ public class JournalEntry {
         return content;
     }
 
-    public Date getTime(){
+    public String getDesc(){
+        return content;
+    }
+
+    public String getEntryTime(){
         return entryTime;
     }
 
