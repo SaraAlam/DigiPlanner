@@ -43,14 +43,28 @@ public class Journal {
     private final TableView<JournalEntry> entryS = new TableView<>();
     private final ObservableList<JournalEntry> entriesT = 
         FXCollections.observableArrayList();
+        ScrollPane bigCont = new ScrollPane();
     
     public Journal(){
+
         entries = new ArrayList<JournalEntry>();
 
-        TableColumn<JournalEntry, Integer> initCol = new TableColumn<JournalEntry, Integer>("Time of Entry");
-        initCol.setCellValueFactory(new PropertyValueFactory<JournalEntry, Integer>("entryTime"));
+        entryS.setItems(entriesT);
+
+        TableColumn timeCol = new TableColumn<>("Time of Entry");
+        timeCol.setCellValueFactory(new PropertyValueFactory<>("entryTime"));
+        timeCol.setCellFactory(TextFieldTableCell.forTableColumn());
         //initCol.setPrefWidth(50);
-        initCol.setSortable(false);
+        timeCol.setSortable(false);
+
+        TableColumn descCol = new TableColumn<>("Text");
+        descCol.setCellValueFactory(new PropertyValueFactory<>("desc"));
+        descCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        //initCol.setPrefWidth(50);
+        descCol.setSortable(false);
+
+        entryS.getColumns().addAll(timeCol,descCol);
+        entryS.setColumnResizePolicy( TableView.CONSTRAINED_RESIZE_POLICY);
 
         page.setEditable(false);
         page.getStyleClass().add("book-page");
@@ -108,7 +122,7 @@ public class Journal {
         ColumnConstraints col2 = new ColumnConstraints();
         col2.setPercentWidth(80);
         book.getColumnConstraints().addAll(col1,col2);
-        book.setPrefSize(Integer.MAX_VALUE,Integer.MAX_VALUE);
+       // book.setPrefSize(Integer.MAX_VALUE,Integer.MAX_VALUE);
 
 
         RowConstraints row1 = new RowConstraints();
@@ -116,13 +130,18 @@ public class Journal {
         row1.setVgrow(Priority.ALWAYS);
         RowConstraints row2 = new RowConstraints();
         row2.setPercentHeight(20);
-        container.getRowConstraints().addAll(row1, row2);
+        //container.getRowConstraints().addAll(row1, row2);
         book.getRowConstraints().addAll(row1, row2);
 
 
-        container.add(book, 0, 0);
-        container.add(addField, 0,1);
+        container.add(entryS, 0, 0);
+        container.add(book, 0, 1);
+        container.add(addField, 0,2);
         container.setId("journal-background");
+
+        //bigCont.setFitToHeight(true);
+        bigCont.setFitToWidth(true);
+        bigCont.setContent(container);
     }
 
     public void addEntries(JournalEntry[] entriesToAdd){
@@ -155,6 +174,7 @@ public class Journal {
                 page.setVisible(false);
                 page = entry.container;
                 book.add(page, 1, 0);
+                entriesT.add(this.getJournalSize()-1, entry);
                 if(curIdx == -1){
                     curIdx += 1;
                 }

@@ -38,7 +38,7 @@ public class SpreadBundle {
                 tab.setContent(aToDoMonth.toDoMonthGridPane);
             }
             else if (tabName.equals("Journal")){
-                tab.setContent(journalList.currJournal.container);
+                tab.setContent(journalList.currJournal.bigCont);
             }
             else{
                 tab.setContent(new Rectangle(200,200, Color.LIGHTSTEELBLUE));
