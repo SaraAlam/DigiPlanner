@@ -64,9 +64,17 @@ public class DigiPlanner extends Application{
 
         scene.getStylesheets().add(getClass().getResource("planner.css").toExternalForm());
 
+        stage.setMinWidth(WIDTH);
+        stage.setMinHeight(HEIGHT);
+
         stage.setScene(scene);
         stage.setTitle("DigiPlanner");
         stage.show(); 
+        
+        stage.setScene(scene);
+        stage.setTitle("DigiPlanner");
+        stage.show(); 
+
         
     }
 
@@ -89,21 +97,7 @@ public class DigiPlanner extends Application{
             viewing_label.setText(currDayName + " " + currDayNum + numEnd[dayDigit] + ", " +  currMonthStr + ", " + + year);
         });
 
-        // create the scene
-        Scene scene = new Scene(root, WIDTH, HEIGHT);
-
-        scene.getStylesheets().add(getClass().getResource("planner.css").toExternalForm());
-
-        stage.setMinWidth(WIDTH);
-        stage.setMinHeight(HEIGHT);
-
-        stage.setScene(scene);
-        stage.setTitle("DigiPlanner");
-        stage.show(); 
-        
-
     }
-
     public GridPane create_root(){
         GridPane g = new GridPane();
         ColumnConstraints col1 = new ColumnConstraints();

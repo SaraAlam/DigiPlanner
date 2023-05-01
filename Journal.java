@@ -28,7 +28,7 @@ import javafx.beans.binding.Bindings;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Journal {
+public class Journal{
     ArrayList<JournalEntry> entries;
     GridPane container = new GridPane();
     JournalEntry curEntry;
@@ -40,11 +40,6 @@ public class Journal {
     private final ObservableList<JournalEntry> entriesT = 
         FXCollections.observableArrayList();
     ScrollPane bigCont = new ScrollPane(container);
-
-    public Journal(){
-
-        // Entry selector
-        entries = new ArrayList<JournalEntry>();
     
     public Journal(){
 
