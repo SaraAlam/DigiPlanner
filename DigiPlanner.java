@@ -13,13 +13,16 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.DatePicker;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.geometry.Insets;
-import java.util.Calendar;
-import java.util.HashMap;
 import javafx.scene.Node;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.geometry.Pos;
 
+
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.HexFormat;
 import java.util.Locale;
+
 import java.util.Date;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -74,6 +77,7 @@ public class DigiPlanner extends Application{
             System.out.println(date);
             selectedDate.setTime(date);
             year = selectedDate.get(Calendar.YEAR); // Only works for 2023 for now
+            currMonth = selectedDate.get(Calendar.MONTH);
             currMonthStr = selectedDate.getDisplayName(Calendar.MONTH,Calendar.LONG, Locale.getDefault());
             currDayNum = selectedDate.get(Calendar.DAY_OF_MONTH);
             currDayName = selectedDate.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG, Locale.getDefault());
@@ -84,6 +88,19 @@ public class DigiPlanner extends Application{
             }
             viewing_label.setText(currDayName + " " + currDayNum + numEnd[dayDigit] + ", " +  currMonthStr + ", " + + year);
         });
+
+        // create the scene
+        Scene scene = new Scene(root, WIDTH, HEIGHT);
+
+        scene.getStylesheets().add(getClass().getResource("planner.css").toExternalForm());
+
+        stage.setMinWidth(WIDTH);
+        stage.setMinHeight(HEIGHT);
+
+        stage.setScene(scene);
+        stage.setTitle("DigiPlanner");
+        stage.show(); 
+        
 
     }
 
@@ -133,8 +150,15 @@ public class DigiPlanner extends Application{
         DatePickerSkin test = new DatePickerSkin(dp);
         Node newdp = test.getPopupContent();
 
-        GridPane.setConstraints(newdp, 0,4, 1, 1);
+
+        GridPane.setConstraints(newdp, 0,1, 2, 1);
         g.getChildren().add(newdp);
+
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setPercentWidth(90);
+        g.getColumnConstraints().addAll(col1);
+
+
 
         //imageview of blueberry
 
