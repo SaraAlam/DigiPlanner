@@ -5,7 +5,7 @@ public class ToDoTask{
     //private final StringProperty taskDetails = new SimpleStringProperty();
     private final SimpleBooleanProperty done = new SimpleBooleanProperty();
     private String taskDetails;
-    private final SimpleBooleanProperty clear = new SimpleBooleanProperty();
+    //private final SimpleBooleanProperty clear = new SimpleBooleanProperty();
     
     public ToDoTask(String details){
         taskDetails = details;
@@ -29,17 +29,17 @@ public class ToDoTask{
         this.doneProperty().set(done);
     }
 
-    //clear binding
-    public SimpleBooleanProperty clearProperty(){
-        return this.clear;
-    }
+    // //clear binding
+    // public SimpleBooleanProperty clearProperty(){
+    //     return this.clear;
+    // }
 
-    public java.lang.Boolean getClear() {
-        return this.clearProperty().get();
-    }
+    // public java.lang.Boolean getClear() {
+    //     return this.clearProperty().get();
+    // }
 
-    public void setClear(final java.lang.Boolean clear) {
-        this.clearProperty().set(clear);
-    }
+    // public void setClear(final java.lang.Boolean clear) {
+    //     this.clearProperty().set(clear);
+    // }
 
 }

@@ -128,14 +128,14 @@
 
 
 .trash{
-    -fx-border-width: 1;
-    -fx-border-color: black;
-    -fx-background-image:url('trashCan.jpg'); 
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+    -fx-background-image:url('trashCan.png'); 
     -fx-background-repeat: no-repeat;
     -fx-background-size: 100% 100%;
-    border-width: 1;
-    border-color: black;
-    background-image:url("trashCan.jpg");
+    border-width: 0;
+    border-color: transparent;
+    background-image:url("trashCan.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
