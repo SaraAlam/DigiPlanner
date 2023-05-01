@@ -115,6 +115,13 @@
     background-color: #4f86f7;
 }
 
+
+.date-picker-popup .today{
+    -fx-background-color:rgba(103, 254, 80, 0.275);
+    background-color:rgba(103, 254, 80, 0.275);;
+}    
+
+
 .date-picker-popup .selected{
     -fx-background-color:rgb(254, 190, 80);
     background-color:rgb(254, 190, 80);
