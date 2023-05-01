@@ -59,9 +59,8 @@ public class Journal{
         //initCol.setPrefWidth(50);
         descCol.setSortable(false);
 
-
-        timeCol.prefWidthProperty().bind(entryS.widthProperty().multiply(0.3));
-        descCol.prefWidthProperty().bind(entryS.widthProperty().multiply(0.65));
+        timeCol.prefWidthProperty().bind(entryS.widthProperty().multiply(0.34));
+        descCol.prefWidthProperty().bind(entryS.widthProperty().multiply(0.61));
 
         timeCol.setResizable(false);
         descCol.setResizable(false);
@@ -83,10 +82,7 @@ public class Journal{
         entryS.setFixedCellSize(30);
         entryS.prefHeightProperty().bind(Bindings.size(entryS.getItems()).multiply(30).add(30));
 
-        // Book functionality and styling
 
-        entryS.getColumns().addAll(timeCol,descCol);
-        entryS.setColumnResizePolicy( TableView.CONSTRAINED_RESIZE_POLICY);
 
         page.setEditable(false);
         page.getStyleClass().add("book-page");
@@ -157,6 +153,7 @@ public class Journal{
 
         container.add(book, 0, 0);
         container.add(addField, 0,1);
+        container.add(entryS, 0,2);
        
         container.setId("journal-background");
 

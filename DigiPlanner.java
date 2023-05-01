@@ -145,7 +145,7 @@ public class DigiPlanner extends Application{
         Node newdp = test.getPopupContent();
 
 
-        GridPane.setConstraints(newdp, 0,1, 2, 1);
+        GridPane.setConstraints(newdp, 0, 1, 2, 1);
         g.getChildren().add(newdp);
 
         ColumnConstraints col1 = new ColumnConstraints();

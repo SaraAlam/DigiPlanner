@@ -76,13 +76,12 @@ public class ToDoMonth {
 
     private void addButtonToTable() {
         TableColumn<ToDoTask, Void> clearCol = new TableColumn("Clear");
-        Button btn = new Button();
-        btn.setPrefSize(10,10);
-        Image image = new Image("trashCan.jpg");
-        ImageView imv = new ImageView(image);
+        // Button btn2 = new Button();
+        // Image image = new Image("trashCan.png");
+        // ImageView imv = new ImageView(image);
 
-
-        btn.setGraphic(imv);
+        // btn.setGraphic(imv);
+        // btn.getStyleClass().add("trash");
         
      
 
@@ -90,8 +89,9 @@ public class ToDoMonth {
             @Override
             public TableCell<ToDoTask, Void> call(final TableColumn<ToDoTask, Void> param) {
                 final TableCell<ToDoTask, Void> cell = new TableCell<ToDoTask, Void>() {
-
+                    Button btn = new Button();
                     {
+                        btn.getStyleClass().add("trash");
                         btn.setOnAction((ActionEvent event) -> {
                             ToDoTask taskToDelete = getTableView().getItems().get(getIndex());
                             allToDoLists.get(currMonth).listTasks.remove(taskToDelete);

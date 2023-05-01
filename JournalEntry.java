@@ -7,7 +7,8 @@ import java.util.Calendar;
 
 import java.util.Calendar;
 import java.time.Instant;  
-import java.text.SimpleDateFormat;  
+import java.text.DateFormat; 
+import java.text.SimpleDateFormat; 
 
 public class JournalEntry {
     private String entryTime;
@@ -20,13 +21,12 @@ public class JournalEntry {
         container.getStyleClass().add("book-page");
         content = entry;
         Date timeOfEntry = new Date();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(timeOfEntry);
-        cal.add(Calendar.MONTH, 8);
         DateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd hh:mm:ss");  
-        entryTime = dateFormat.format(cal);
+        entryTime = dateFormat.format(timeOfEntry);
+        
 
         container.setText(content);
+
     }
 
     public String getContent(){
