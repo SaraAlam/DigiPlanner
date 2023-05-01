@@ -23,17 +23,20 @@ public class Tracker {
     String month;
     int numDays;
     int first_weekly_day_of_the_month = 0;
+    TrackerList parentList;
     HashMap<Integer, Label> dayLabels = new HashMap<Integer, Label>();
+    HashMap<Integer, Color> dayLabelColors = new HashMap<Integer, Color>();
     int selectedDay = 0;
     GridPane calendar = new GridPane();
     public VBox calendar_holder = new VBox();
     public int calendar_col_width = 60;
 
-    public Tracker(String n, String m, int nDays, int first_day){
+    public Tracker(String n, String m, int nDays, int first_day, TrackerList pList){
         name = n;
         month = m;
         numDays = nDays;
         first_weekly_day_of_the_month = first_day;
+        parentList = pList;
         create_calendar();
     }
 
@@ -58,11 +61,14 @@ public class Tracker {
             dayLabel.setOnMouseClicked( e -> {
                 if (selectedDay!=0){
                     Label currSelectedDay = dayLabels.get(selectedDay);
-                    //currSelectedDay.setStyle("-fx-border-color: white;");
+                    currSelectedDay.setBorder(new Border(new BorderStroke(Color.BLACK,
+                    BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
                 }
                 selectedDay = Integer.parseInt(dayLabel.getText());
-                dayLabel.setStyle("-fx-border-color: black;");
+                dayLabel.setBorder(new Border(new BorderStroke(Color.BLACK,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
             });
+            dayLabels.put(i+1, dayLabel);
             GridPane.setConstraints(dayLabel, col, row);
             calendar.getChildren().add(dayLabel);
             col++;
@@ -83,7 +89,6 @@ public class Tracker {
         for(int i = 0; i < weekly_days.length; i++){
             Label wdl = new Label(weekly_days[i]);
             wdl.setAlignment(Pos.CENTER);
-            wdl.setFont(new Font("Times New Roman",20));
             wdl.setPrefWidth(calendar_col_width);
             wdl.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0), new Insets(0))));
             wdl.setBorder(new Border(new BorderStroke(Color.BLACK,
@@ -100,7 +105,6 @@ public class Tracker {
      * @param day: Label containing the string form of i
      */
     public void make_day(int i, Label day){
-        day.setFont(new Font("Times New Roman",20));
         day.setMinWidth(calendar_col_width);
         day.setMinHeight(calendar_col_width);
         day.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0), new Insets(0))));
@@ -117,8 +121,14 @@ public class Tracker {
                 }
                 selectedDay = i;
                 currSelectedDayLabel = dayLabels.get(selectedDay);
+                currSelectedDayLabel.setBackground(new Background(new BackgroundFill(parentList.currSelectedColor, new CornerRadii(0), new Insets(0))));
                 currSelectedDayLabel.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
+                if (parentList.currSelectedColorIdx >= (0.5*parentList.colors.length)){
+                    currSelectedDayLabel.setTextFill(Color.WHITE);
+                }else{
+                    currSelectedDayLabel.setTextFill(Color.BLACK);
+                }
             });
 
             

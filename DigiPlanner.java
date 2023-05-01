@@ -9,29 +9,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
-// import javafx.scene.control.TableView;
-// import javafx.collections.ObservableList;
-// import java.util.ArrayList;
-// import javafx.scene.control.ListView;
-// import javafx.scene.control.TextField;
-// import javafx.scene.control.Button;
-import javafx.scene.text.Font;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.DatePicker;
 import javafx.scene.layout.ColumnConstraints;
-// import javafx.scene.layout.Priority;
-// import javafx.scene.layout.RowConstraints;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.geometry.Pos;
-// import javafx.scene.layout.Background;
-// import javafx.scene.layout.BackgroundFill;
-// import javafx.scene.layout.Border;
-// import javafx.scene.layout.BorderStroke;
-// import javafx.scene.layout.CornerRadii;
-// import javafx.scene.paint.Color;
-//import java.util.Date;
 
 
 import java.util.Calendar;
@@ -45,11 +29,12 @@ import java.time.ZoneId;
 
 public class DigiPlanner extends Application{
     private int WIDTH = 800;
-    private int HEIGHT = 600;
+    private int HEIGHT = 700;
     public static int year = Calendar.getInstance().get(Calendar.YEAR);;
     public int currMonth = Calendar.getInstance().get(Calendar.MONTH);
 
     public BorderPane rightDisplay = new BorderPane();
+    public GridPane left_nav;
     public GridPane root;
     String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     public HashMap<String,SpreadBundle> monthlyBundles = new HashMap<String,SpreadBundle>();
@@ -68,11 +53,24 @@ public class DigiPlanner extends Application{
     
     public void start(Stage stage){
         GridPane root = create_root();
-        GridPane left_nav = create_left_nav();
+        left_nav = create_left_nav();
+        create_dp_handler();
 
         GridPane.setConstraints(left_nav, 0, 0);
         root.getChildren().add(left_nav);
 
+        // create the scene
+        Scene scene = new Scene(root, WIDTH, HEIGHT);
+
+        scene.getStylesheets().add(getClass().getResource("planner.css").toExternalForm());
+
+        stage.setScene(scene);
+        stage.setTitle("DigiPlanner");
+        stage.show(); 
+        
+    }
+
+    public void create_dp_handler(){
         dp.setOnAction(e ->{
             Instant instant = Instant.from(dp.getValue().atStartOfDay(ZoneId.systemDefault()));
             Date date = Date.from(instant);
@@ -88,7 +86,7 @@ public class DigiPlanner extends Application{
             if(dayDigit > 4){
                 dayDigit = 4;
             }
-            viewing_label.setText("Viewing: " + currDayName + " " + currDayNum + numEnd[dayDigit] + ", " +  currMonthStr + ", " + + year);
+            viewing_label.setText(currDayName + " " + currDayNum + numEnd[dayDigit] + ", " +  currMonthStr + ", " + + year);
         });
 
         // create the scene
@@ -103,6 +101,7 @@ public class DigiPlanner extends Application{
         stage.setTitle("DigiPlanner");
         stage.show(); 
         
+
     }
 
     public GridPane create_root(){
@@ -132,20 +131,25 @@ public class DigiPlanner extends Application{
         if(dayDigit > 4){
             dayDigit = 4;
         }
-        viewing_label.setText("Viewing: " + currDayName + " " + currDayNum + numEnd[dayDigit] + ", " +  currMonthStr + ", " + + year);
-        viewing_label.setFont(new Font("Times New Roman", 20));
+        Label l = new Label("Viewing: ");
+        l.getStyleClass().add("labels");
+        viewing_label.setText(currDayName + " " + currDayNum + numEnd[dayDigit] + ", " +  currMonthStr + ", " + + year);
+        viewing_label.getStyleClass().add("labels");
 
         
         g.setPadding(new Insets(5));
         g.setId("navigator");
         g.setVgap(10);
 
-        GridPane.setConstraints(viewing_label, 0,0, 2, 1);
+        GridPane.setConstraints(l, 0,0, 2, 1);
+        g.getChildren().add(l);
+        GridPane.setConstraints(viewing_label, 0,2, 2, 1);
         g.getChildren().add(viewing_label);
 
         //create the calendar view
         DatePickerSkin test = new DatePickerSkin(dp);
         Node newdp = test.getPopupContent();
+
 
         GridPane.setConstraints(newdp, 0,1, 2, 1);
         g.getChildren().add(newdp);

@@ -25,7 +25,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.*;
 import javafx.beans.binding.Bindings;
 
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -46,6 +45,10 @@ public class Journal {
 
         // Entry selector
         entries = new ArrayList<JournalEntry>();
+    
+    public Journal(){
+
+        entries = new ArrayList<JournalEntry>();
 
         entryS.setItems(entriesT);
 
@@ -60,6 +63,7 @@ public class Journal {
         descCol.setCellFactory(TextFieldTableCell.forTableColumn());
         //initCol.setPrefWidth(50);
         descCol.setSortable(false);
+
 
         timeCol.prefWidthProperty().bind(entryS.widthProperty().multiply(0.3));
         descCol.prefWidthProperty().bind(entryS.widthProperty().multiply(0.65));
@@ -85,6 +89,9 @@ public class Journal {
         entryS.prefHeightProperty().bind(Bindings.size(entryS.getItems()).multiply(30).add(30));
 
         // Book functionality and styling
+
+        entryS.getColumns().addAll(timeCol,descCol);
+        entryS.setColumnResizePolicy( TableView.CONSTRAINED_RESIZE_POLICY);
 
         page.setEditable(false);
         page.getStyleClass().add("book-page");
@@ -155,7 +162,7 @@ public class Journal {
 
         container.add(book, 0, 0);
         container.add(addField, 0,1);
-        container.add(entryS, 0, 2);
+       
         container.setId("journal-background");
 
         //bigCont.setFitToHeight(true);

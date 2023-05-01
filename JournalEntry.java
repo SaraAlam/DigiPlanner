@@ -4,6 +4,7 @@ import javafx.scene.text.Text;
 
 import java.text.DateFormat;  
 import java.util.Calendar;  
+
 import java.util.Calendar;
 import java.time.Instant;  
 import java.text.SimpleDateFormat;  
@@ -24,13 +25,14 @@ public class JournalEntry {
         cal.add(Calendar.MONTH, 8);
         DateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd hh:mm:ss");  
         entryTime = dateFormat.format(cal);
+
         container.setText(content);
     }
 
     public String getContent(){
         return content;
     }
-
+    
     public String getEntryTime(){
         return entryTime;
     }

@@ -5,6 +5,12 @@
     background-color: lightblue;
 }
 
+.labels{
+    -fx-font-size:15px;
+    font-size: 15;
+    -fx-font-family: "Lucida Sans Unicode";
+}
+
 #rightDisplay{
     -fx-border-width: 1;
     -fx-border-color: black;
@@ -16,7 +22,15 @@
     background-image:url('dancingBbs.gif');
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    -fx-font-size: 15;
+    -fx-font-family: "Lucida Sans Unicode";
 }
+
+.left_nav{
+    -fx-font-size: 12;
+    -fx-font-family: "Lucida Sans Unicode";
+}
+
 
 #holder{
     -fx-background-color: #fc5dffa0;
