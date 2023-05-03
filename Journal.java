@@ -158,6 +158,7 @@ public class Journal{
         container.setId("journal-background");
 
         //bigCont.setFitToHeight(true);
+        bigCont.setId("journal-background2");
         bigCont.setFitToWidth(true);
         bigCont.setContent(container);
     }
