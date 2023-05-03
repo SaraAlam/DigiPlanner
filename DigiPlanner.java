@@ -48,7 +48,7 @@ public class DigiPlanner extends Application{
     Label viewing_label = new Label();
     String[] numEnd = {"th", "st", "nd", "rd", "th"};
     
-    public void start(Stage stage){
+    public void start(Stage stage) throws Exception{
         GridPane root = create_root();
         left_nav = create_left_nav();
         create_dp_handler();
@@ -87,7 +87,7 @@ public class DigiPlanner extends Application{
 
     }
 
-    public GridPane create_root(){
+    public GridPane create_root() throws Exception{
         GridPane g = new GridPane();
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(30);
@@ -147,7 +147,7 @@ public class DigiPlanner extends Application{
         return g;
     }
 
-    public void create_spread_bundles(){
+    public void create_spread_bundles() throws Exception{
         for(String month:months){
             //make spread bundle objects
             int num_days = get_num_days(month);
