@@ -24,7 +24,6 @@ public class JournalEntry {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd hh:mm:ss");  
         entryTime = dateFormat.format(timeOfEntry);
         
-
         container.setText(content);
 
     }
