@@ -116,6 +116,7 @@ public class TrackerList {
         slider.setShowTickLabels(true);
         //slider.setMajorTickUnit(0.25f);
         slider.setMajorTickUnit(1);
+        slider.setMinorTickCount(0);
         //slider.setBlockIncrement(0.125f);
         slider.setBlockIncrement(1);
         slider.setSnapToTicks(true);
@@ -137,11 +138,13 @@ public class TrackerList {
             }
          });
 
-         currSelectedColor = Color.web(colors[1]);
+        currSelectedColor = Color.web(colors[1]);
+
+        slider.setPrefWidth(400);
          
         // current selected color label
         currSelectedColorLabel = new Label("        ");
-        Label colorLabelDesc = new Label("Current color:");
+        Label colorLabelDesc = new Label("Current color: ");
         currSelectedColorLabel.setBackground(new Background(new BackgroundFill(currSelectedColor, new CornerRadii(0), new Insets(0))));
         currSelectedColorLabel.setBorder(new Border(new BorderStroke(Color.BLACK,
                     BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
