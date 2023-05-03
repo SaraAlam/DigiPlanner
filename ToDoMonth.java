@@ -99,7 +99,7 @@ public class ToDoMonth {
 
         
 
-        toDoMonthGridPane.add(toDoTable, 0, 0);
+        //toDoMonthGridPane.add(toDoTable, 0, 0);
 
         hardCodeCompletionRates();
     }
