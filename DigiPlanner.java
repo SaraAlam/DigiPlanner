@@ -54,7 +54,6 @@ public class DigiPlanner extends Application{
     public void start(Stage stage){
         GridPane root = create_root();
         left_nav = create_left_nav();
-        create_dp_handler();
 
         GridPane.setConstraints(left_nav, 0, 0);
         root.getChildren().add(left_nav);
@@ -63,6 +62,71 @@ public class DigiPlanner extends Application{
         Scene scene = new Scene(root, WIDTH, HEIGHT);
 
         scene.getStylesheets().add(getClass().getResource("planner.css").toExternalForm());
+        switch(currMonth){
+            case 11:
+            case 0:
+            case 1:
+                scene.getStylesheets().add(getClass().getResource("snow.css").toExternalForm());
+                break;
+            case 2:
+            case 3:
+            case 4:
+                scene.getStylesheets().add(getClass().getResource("pink.css").toExternalForm());
+                break;
+            case 5:
+            case 6:
+            case 7:
+                System.out.println("Green");
+                break;
+            case 8:
+            case 9:
+            case 10:
+                System.out.println("Burnt");
+                break;
+        }
+
+        dp.setOnAction(e ->{
+            Instant instant = Instant.from(dp.getValue().atStartOfDay(ZoneId.systemDefault()));
+            Date date = Date.from(instant);
+            System.out.println(date);
+            selectedDate.setTime(date);
+            year = selectedDate.get(Calendar.YEAR); // Only works for 2023 for now
+            currMonth = selectedDate.get(Calendar.MONTH);
+            currMonthStr = selectedDate.getDisplayName(Calendar.MONTH,Calendar.LONG, Locale.getDefault());
+            currDayNum = selectedDate.get(Calendar.DAY_OF_MONTH);
+            currDayName = selectedDate.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG, Locale.getDefault());
+        
+            scene.getStylesheets().clear();
+            scene.getStylesheets().add(getClass().getResource("planner.css").toExternalForm());
+            switch(currMonth){
+                case 11:
+                case 0:
+                case 1:
+                    scene.getStylesheets().add(getClass().getResource("snow.css").toExternalForm());
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                    scene.getStylesheets().add(getClass().getResource("pink.css").toExternalForm());
+                    break;
+                case 5:
+                case 6:
+                case 7:
+                    scene.getStylesheets().add(getClass().getResource("green.css").toExternalForm());
+                    break;
+                case 8:
+                case 9:
+                case 10:
+                    scene.getStylesheets().add(getClass().getResource("burnt.css").toExternalForm());
+                    break;
+            }
+
+            int dayDigit = currDayNum % 10;
+            if(dayDigit > 4){
+                dayDigit = 4;
+            }
+            viewing_label.setText("Viewing: \n" + currDayName + " " + currDayNum + numEnd[dayDigit] + ", " +  currMonthStr + ", " + + year);
+        });
 
         stage.setMinWidth(WIDTH);
         stage.setMinHeight(HEIGHT);
@@ -78,26 +142,6 @@ public class DigiPlanner extends Application{
         
     }
 
-    public void create_dp_handler(){
-        dp.setOnAction(e ->{
-            Instant instant = Instant.from(dp.getValue().atStartOfDay(ZoneId.systemDefault()));
-            Date date = Date.from(instant);
-            System.out.println(date);
-            selectedDate.setTime(date);
-            year = selectedDate.get(Calendar.YEAR); // Only works for 2023 for now
-            currMonth = selectedDate.get(Calendar.MONTH);
-            currMonthStr = selectedDate.getDisplayName(Calendar.MONTH,Calendar.LONG, Locale.getDefault());
-            currDayNum = selectedDate.get(Calendar.DAY_OF_MONTH);
-            currDayName = selectedDate.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG, Locale.getDefault());
-        
-            int dayDigit = currDayNum % 10;
-            if(dayDigit > 4){
-                dayDigit = 4;
-            }
-            viewing_label.setText(currDayName + " " + currDayNum + numEnd[dayDigit] + ", " +  currMonthStr + ", " + + year);
-        });
-
-    }
     public GridPane create_root(){
         GridPane g = new GridPane();
         ColumnConstraints col1 = new ColumnConstraints();
@@ -125,9 +169,8 @@ public class DigiPlanner extends Application{
         if(dayDigit > 4){
             dayDigit = 4;
         }
-        Label l = new Label("Viewing: ");
-        l.getStyleClass().add("labels");
-        viewing_label.setText(currDayName + " " + currDayNum + numEnd[dayDigit] + ", " +  currMonthStr + ", " + + year);
+        viewing_label.getStyleClass().add("labels");
+        viewing_label.setText("Viewing: \n" + currDayName + " " + currDayNum + numEnd[dayDigit] + ", " +  currMonthStr + ", " + + year);
         viewing_label.getStyleClass().add("labels");
 
         
@@ -135,9 +178,7 @@ public class DigiPlanner extends Application{
         g.setId("navigator");
         g.setVgap(10);
 
-        GridPane.setConstraints(l, 0,0, 2, 1);
-        g.getChildren().add(l);
-        GridPane.setConstraints(viewing_label, 0,2, 2, 1);
+        GridPane.setConstraints(viewing_label, 0,0, 2, 1);
         g.getChildren().add(viewing_label);
 
         //create the calendar view
