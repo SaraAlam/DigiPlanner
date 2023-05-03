@@ -15,12 +15,14 @@ public class SpreadBundle {
     public ToDoMonth aToDoMonth = new ToDoMonth(month, numDays);// new ToDoDays();
     public TrackerList trackerList;
     public JournalList journalList = new JournalList(numDays);// new JournalList();
+    public MonthlyHome monthlyHome;
     public TabPane displayPane;
 
-    public SpreadBundle(String m, int nDays){
+    public SpreadBundle(String m, int nDays) throws Exception{
         month = m;
         numDays = nDays;
         trackerList = new TrackerList(month,numDays);
+        monthlyHome = new MonthlyHome(month, numDays, this);
         displayPane = create_tab_pane();
     }
     
@@ -39,6 +41,9 @@ public class SpreadBundle {
             }
             else if (tabName.equals("Journal")){
                 tab.setContent(journalList.currJournal.bigCont);
+            }
+            else if (tabName.equals("Home")){
+                tab.setContent(monthlyHome.disp);
             }
             else{
                 tab.setContent(new Rectangle(200,200, Color.LIGHTSTEELBLUE));
