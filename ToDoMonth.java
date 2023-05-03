@@ -36,6 +36,7 @@ public class ToDoMonth {
 
     public ToDoMonth(String name, int numDays){
         toDoMonthGridPane = new GridPane();
+        // toDoMonthGridPane.setPrefWidth(400);
         toDoMonthGridPane.setPadding(new Insets(10));
         // toDoMonthGridPane.setMinWidth(150);
         // input new task
@@ -128,7 +129,7 @@ public class ToDoMonth {
 
         clearCol.setCellFactory(cellFactory);
         // clearCol.prefWidthProperty().bind(toDoTable.widthProperty().divide(3));
-        clearCol.setPrefWidth(40);
+        clearCol.setPrefWidth(50 );
         clearCol.setResizable(false);
         toDoTable.getColumns().add(clearCol);
 
