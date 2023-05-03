@@ -1,5 +1,3 @@
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.GridPane;
@@ -8,7 +6,6 @@ import javafx.geometry.VPos;
 import javafx.scene.layout.FlowPane;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -17,16 +14,21 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.*;
+import javafx.beans.binding.Bindings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Journal {
+public class Journal{
     ArrayList<JournalEntry> entries;
     GridPane container = new GridPane();
     JournalEntry curEntry;
@@ -34,9 +36,53 @@ public class Journal {
     GridPane book = new GridPane();
     int curIdx = -1;
     Label pageNum = new Label();
+    private final TableView<JournalEntry> entryS = new TableView<>();
+    private final ObservableList<JournalEntry> entriesT = 
+        FXCollections.observableArrayList();
+    ScrollPane bigCont = new ScrollPane(container);
     
     public Journal(){
+
         entries = new ArrayList<JournalEntry>();
+
+        entryS.setItems(entriesT);
+
+        TableColumn timeCol = new TableColumn<>("Time of Entry");
+        timeCol.setCellValueFactory(new PropertyValueFactory<>("entryTime"));
+        timeCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        //initCol.setPrefWidth(50);
+        timeCol.setSortable(false);
+
+        TableColumn descCol = new TableColumn<>("Text");
+        descCol.setCellValueFactory(new PropertyValueFactory<>("content"));
+        descCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        //initCol.setPrefWidth(50);
+        descCol.setSortable(false);
+
+        timeCol.prefWidthProperty().bind(entryS.widthProperty().multiply(0.34));
+        descCol.prefWidthProperty().bind(entryS.widthProperty().multiply(0.61));
+
+        timeCol.setResizable(false);
+        descCol.setResizable(false);
+
+        entryS.getColumns().addAll(timeCol,descCol);
+        entryS.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        entryS.setOnMouseClicked(e -> {
+            int cur = entryS.getSelectionModel().getSelectedIndex();
+            if(cur != -1){
+                curIdx = cur;
+                pageNum.setText(Integer.toString(curIdx+1));
+                page.setVisible(false);
+                page = entries.get(curIdx).container;
+                page.setVisible(true);
+            }
+        });
+
+        entryS.setFixedCellSize(30);
+        entryS.prefHeightProperty().bind(Bindings.size(entryS.getItems()).multiply(30).add(30));
+
+
 
         page.setEditable(false);
         page.getStyleClass().add("book-page");
@@ -56,7 +102,6 @@ public class Journal {
                 curIdx += 1;
                 pageNum.setText(Integer.toString(curIdx+1));
                 page.setVisible(false);
-                System.out.println(curIdx);
                 page = entries.get(curIdx).container;
                 page.setVisible(true);
                 
@@ -68,7 +113,6 @@ public class Journal {
                 curIdx -= 1;
                 pageNum.setText(Integer.toString(curIdx+1));
                 page.setVisible(false);
-                System.out.println(curIdx);
                 page = entries.get(curIdx).container;
                 page.setVisible(true);
             }
@@ -85,7 +129,8 @@ public class Journal {
 
         book.setAlignment(Pos.CENTER);
         book.setPadding(new Insets(8, 20, 8, 0));
-        //book.setPrefHeight(Integer.MAX_VALUE);
+        book.setPrefWidth(Integer.MAX_VALUE);
+        book.prefHeightProperty().bind(book.widthProperty());
 
         book.setId("journal-book");
         
@@ -94,7 +139,7 @@ public class Journal {
         ColumnConstraints col2 = new ColumnConstraints();
         col2.setPercentWidth(80);
         book.getColumnConstraints().addAll(col1,col2);
-        book.setPrefSize(Integer.MAX_VALUE,Integer.MAX_VALUE);
+       // book.setPrefSize(Integer.MAX_VALUE,Integer.MAX_VALUE);
 
 
         RowConstraints row1 = new RowConstraints();
@@ -102,13 +147,20 @@ public class Journal {
         row1.setVgrow(Priority.ALWAYS);
         RowConstraints row2 = new RowConstraints();
         row2.setPercentHeight(20);
-        container.getRowConstraints().addAll(row1, row2);
+        //container.getRowConstraints().addAll(row1, row2);
         book.getRowConstraints().addAll(row1, row2);
 
 
         container.add(book, 0, 0);
         container.add(addField, 0,1);
+        container.add(entryS, 0,2);
+       
         container.setId("journal-background");
+
+        //bigCont.setFitToHeight(true);
+        bigCont.setId("journal-background2");
+        bigCont.setFitToWidth(true);
+        bigCont.setContent(container);
     }
 
     public void addEntries(JournalEntry[] entriesToAdd){
@@ -141,6 +193,7 @@ public class Journal {
                 page.setVisible(false);
                 page = entry.container;
                 book.add(page, 1, 0);
+                entriesT.add(this.getJournalSize()-1, entry);
                 if(curIdx == -1){
                     curIdx += 1;
                 }
