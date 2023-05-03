@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
+import java.util.HashMap;
 
 public class ToDoMonth {
 
@@ -31,6 +31,8 @@ public class ToDoMonth {
     public TableView<ToDoTask> toDoTable;
     public ArrayList<ToDoList> allToDoLists;
     public int currMonth = 0;
+
+    public HashMap<Integer, Double> dailyTaskCompletionRate = new HashMap<Integer, Double>();
 
     public ToDoMonth(String name, int numDays){
         toDoMonthGridPane = new GridPane();
@@ -69,6 +71,8 @@ public class ToDoMonth {
 
 
         toDoMonthGridPane.add(toDoTable, 0, 0);
+        
+        hardCodeCompletionRates();
     }
 
     private void addButtonToTable() {
@@ -122,5 +126,15 @@ public class ToDoMonth {
 
         toDoTable.getColumns().add(clearCol);
 
+    }
+
+    public void hardCodeCompletionRates(){
+        double[] random_rates = {0.75, 0.7, 0.8, 0.6, 0.5, 1.0, 0.25, 0.3, 0.2, 0.1, 0.15, 0.3};
+        for (int i = 0; i < SpreadBundle.numDays; i++){
+            if (i%3==0){
+                dailyTaskCompletionRate.put(i,random_rates[i]);
+            }
+
+        }
     }
 }
