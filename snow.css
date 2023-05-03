@@ -1,0 +1,22 @@
+
+#rightDisplay{
+    -fx-border-width: 1;
+    -fx-background-color: #b6c2e8;
+    /*-fx-background-image:url('snowyLeaf.png'); 
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+    border-width: 1;
+    border-color: black;
+    background-image:url('snowLeaf.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;*/
+    -fx-font-size: 15;
+    -fx-font-family: "Lucida Sans Unicode";
+}
+
+#navigator{
+    -fx-border-width: 1;
+    -fx-background-color: #b6e2e8;
+    border-width: 1;
+    background-color: #b6e2e8;
+}

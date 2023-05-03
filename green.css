@@ -1,0 +1,22 @@
+
+#rightDisplay{
+    -fx-border-width: 1;
+    -fx-background-color: #aeebda;
+    /*-fx-background-image:url('redLeaf.png'); 
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+    border-width: 1;
+    border-color: black;
+    background-image:url('redLeaf.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;*/
+    -fx-font-size: 15;
+    -fx-font-family: "Lucida Sans Unicode";
+}
+
+#navigator{
+    -fx-border-width: 1;
+    -fx-background-color: #cce88b;
+    border-width: 1;
+    background-color: #cce88b;
+}

@@ -1,28 +1,6 @@
-#navigator{
-    -fx-border-width: 1;
-    -fx-background-color: lightblue;
-    border-width: 1;
-    background-color: lightblue;
-}
-
 .labels{
-    -fx-font-size:15px;
-    font-size: 15;
-    -fx-font-family: "Lucida Sans Unicode";
-}
-
-#rightDisplay{
-    -fx-border-width: 1;
-    -fx-border-color: black;
-    -fx-background-image:url('dancingBbs.gif'); 
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: 100% 100%;
-    border-width: 1;
-    border-color: black;
-    background-image:url('dancingBbs.gif');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    -fx-font-size: 15;
+    -fx-font-size: 14;
+    -fx-text-fill: black;
     -fx-font-family: "Lucida Sans Unicode";
 }
 
@@ -32,10 +10,10 @@
 }
 
 
-#holder{
+/*#holder{
     -fx-background-color: #fc5dffa0;
     background-color: #fc5dffa0;
-}
+}*/
 
 /* For Journal book*/
 .book-page{
@@ -65,9 +43,21 @@
 }
 
 #journal-background{
-    -fx-background-color: rgba(240, 103, 255, 0.539);
-    background-color: rgba(240, 103, 255, 0.539);
+    -fx-background-color: transparent;
+    background-color: transparent;
 }
+
+#journal-background2 > .viewport{
+    -fx-background-color: transparent;
+    background-color: transparent;
+}
+
+#journal-background2{
+    -fx-background-color: transparent;
+    background-color: transparent;
+}
+
+
 
 #journal-book{
     -fx-size: 100% 100%;
@@ -129,6 +119,13 @@
     background-color: #4f86f7;
 }
 
+
+.date-picker-popup .today{
+    -fx-background-color:rgba(103, 254, 80, 0.275);
+    background-color:rgba(103, 254, 80, 0.275);;
+}    
+
+
 .date-picker-popup .selected{
     -fx-background-color:rgb(254, 190, 80);
     background-color:rgb(254, 190, 80);
@@ -138,4 +135,18 @@
 .date-picker-popup > * > .next-month {
     -fx-background-color: #fae4a4a2;
     background-color: #fae4a4a2;
+}
+
+.trash{
+    -fx-border-width: 1;
+    -fx-border-color: transparent;
+    -fx-background-image:url('trashCan.png'); 
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+    -fx-background-color: transparent;
+    border-width: 1;
+    border-color: black;
+    background-image:url("trashCan.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
