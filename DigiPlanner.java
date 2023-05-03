@@ -95,6 +95,11 @@ public class DigiPlanner extends Application{
             currMonthStr = selectedDate.getDisplayName(Calendar.MONTH,Calendar.LONG, Locale.getDefault());
             currDayNum = selectedDate.get(Calendar.DAY_OF_MONTH);
             currDayName = selectedDate.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG, Locale.getDefault());
+            
+            TabPane currTabPane = monthlyBundles.get(currMonthStr).displayPane;
+            BorderPane.setAlignment(currTabPane, Pos.TOP_LEFT);
+            BorderPane.setMargin(currTabPane, new Insets(20,20,20,20));
+            rightDisplay.setCenter(currTabPane);
         
             scene.getStylesheets().clear();
             scene.getStylesheets().add(getClass().getResource("planner.css").toExternalForm());

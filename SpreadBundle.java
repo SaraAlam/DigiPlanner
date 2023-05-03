@@ -51,7 +51,7 @@ public class SpreadBundle {
             tab.setText(tabName);
             tabpane.getTabs().add(tab);
         }
-        tabpane.getSelectionModel().select(1);
+        tabpane.getSelectionModel().select(0);
         tabpane.setPrefSize(200, 400);
         return tabpane;
     }
