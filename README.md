@@ -82,7 +82,7 @@ burnt.css - Fall (September-November)
 
 The colors for each season are designed to match the mascot (yet to be implemented).
 
-3. **Colors chosen based on color theory**
+2. **Colors chosen based on color theory**
 Two color theory methods were employed to choose aestheticaly pleasing colors: Analagous and split complementary. Analagous chooses colors in a similar color region, while split complementary chooses colors complementary (on the opposite side of the color wheel). Based off of the mascot colors (Proposal Objectives Pending sections 6), two colors were chosen for each mascot iteration. 
 
 3. **Gifs**
@@ -107,14 +107,16 @@ The goal for making it look like a page is flipped was ommitted due to difficult
    
 3. Have a **tab called tracker**, with the calendar view of labels that the user can recolor to rate their day based on 5 different metrics: water, workout, sleep, stress, and study.
 
+4. Have a **tab called ``ToDo``** which allows the user to have a to do list running for each day. This list allows the user to check off certain tasks as well as be deleted with a trash can shaped button.
+
 5. **Make the color picker a gradient** formed using different hues of the same color. Allow the user to pick from many different hues.
 This was done using a slider.
 
 
-5. **Have a tab called home**, which allows the user to view a summary of a certain month’s status in the form of a graph.
+6. **Have a tab called home**, which allows the user to view a summary of a certain month’s status in the form of a graph.
 The goal to add buttons for the other tabs was omitted since we use a tabpane. The tabpane sufficiently achieves the goal for navigating between views of the journal, tracker and todolist sections of the month.
    
-6. **Make images of a mascot corresponding to each of the five trackers** water, workout, stress, study and sleep. 
+7. **Make images of a mascot corresponding to each of the five trackers** water, workout, stress, study and sleep. 
 This task is still incomplete but we have made considerable progress on it. Four distinct leaves were created for the mascot, each representing a season. The background colors for these mascots were picked using color theory (see Aesthetic Elements section 2). The following are the four base mascots for Winter, Spring, Summer, and Fall respectively as well as their hand picked background colors.
 
 ![snowyAndBack](https://user-images.githubusercontent.com/123586903/236309158-85cd4d6a-4219-4c48-aa3e-6e1a7a67bb88.png)
@@ -123,16 +125,16 @@ This task is still incomplete but we have made considerable progress on it. Four
 ![redAndback](https://user-images.githubusercontent.com/123586903/236309223-6b3a55e7-97a4-456f-8ae0-f7926b47c1ff.png)
 
 
-7. **Make images of a mascot to display for each end of the tracker color slider.** Also create images of the mascot speaking, for display when the program displays text to the user like errors, response to checking off tasks on the todo-list etc. 
+8. **Make images of a mascot to display for each end of the tracker color slider.** Also create images of the mascot speaking, for display when the program displays text to the user like errors, response to checking off tasks on the todo-list etc. 
 This task is still incomplete but we have made considerable progress on it. See previous section
 
-8. Make 12 **background gifs** that are displayed based on which month it is. The TabPane for each month will sit on top of this gif background.
+9. Make 12 **background gifs** that are displayed based on which month it is. The TabPane for each month will sit on top of this gif background.
 We reduced the number of background gifs we used from 12 to 4, 1 for each season.
    
-9.  **Create a file IO hierarchy** of all text files to read and write to. The largest folder will be that for each year (due to the scope of this project, we plan to only create this for the current year for the current version of the application). It will contain a folder for each month. Each month’s folder will contain text files to store journal entries, tracker information and daily todo-lists for the month.Each of these files will be created using specific naming conventions and formats, to aid the process of retrieving the information when the application is started in the future.
+10.  **Create a file IO hierarchy** of all text files to read and write to. The largest folder will be that for each year (due to the scope of this project, we plan to only create this for the current year for the current version of the application). It will contain a folder for each month. Each month’s folder will contain text files to store journal entries, tracker information and daily todo-lists for the month.Each of these files will be created using specific naming conventions and formats, to aid the process of retrieving the information when the application is started in the future.
 This task is yet to be completed.
     
-10. **Implement delete and save button handlers to different keypress events like Ctrl+S and Delete**, so that the user can perform those actions in multiple ways, regardless of the tab of the tabpane that is being displayed currently.
+11. **Implement delete and save button handlers to different keypress events like Ctrl+S and Delete**, so that the user can perform those actions in multiple ways, regardless of the tab of the tabpane that is being displayed currently.
 This task is yet to be completed.
 
 
