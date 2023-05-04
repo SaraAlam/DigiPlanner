@@ -24,7 +24,7 @@ Note: In all of the layout images below, the spots where the joyful leaf appears
 
 1. `SpreadBundle.java`
 
-This class creates an object that bundles the aforementioned objects together for a specific month. This does not hold any significant event-generating component. A `Spread` is a layout used to plan and organize certain aspects of one's life in a journal. The following class files `ToDoMonth.java`, `Tracker.java`, `Journal.java`, and `MonthlyHome.java` contain the code for displaying the relevant spread.
+This class creates an object that bundles the aforementioned objects together for a specific month. This does not hold any significant event-generating component. A Spread is a layout used to plan and organize certain aspects of one's life in a journal. The following class files `ToDoMonth.java`, `Tracker.java`, `Journal.java`, and `MonthlyHome.java` contain the code for displaying the relevant spread.
 
 2. `ToDoMonth.java`
 
