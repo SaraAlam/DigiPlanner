@@ -117,12 +117,10 @@ The goal to add buttons for the other tabs was omitted since we use a tabpane. T
 6. **Make images of a mascot corresponding to each of the five trackers** water, workout, stress, study and sleep. 
 This task is still incomplete but we have made considerable progress on it. Four distinct leaves were created for the mascot, each representing a season. The background colors for these mascots were picked using color theory (see Aesthetic Elements section 2). The following are the four base mascots for Winter, Spring, Summer, and Fall respectively as well as their hand picked background colors.
 
-
-![snowyLeaf](https://user-images.githubusercontent.com/123586903/236308827-983bbe9a-3f0d-414f-8a7a-8edfb5ce2cbf.png)
-
-![Spring](https://s3.hedgedoc.org/demo/uploads/b181357a-82a5-4015-918f-bf7b1854fae0.png)
-![Summer](https://s3.hedgedoc.org/demo/uploads/aabb82fb-dc90-4eca-b31a-9a537bd935a6.png)
-![Fall](https://s3.hedgedoc.org/demo/uploads/84d8d07b-46a0-4932-8d40-6beba717d3b9.png)
+![snowyAndBack](https://user-images.githubusercontent.com/123586903/236309158-85cd4d6a-4219-4c48-aa3e-6e1a7a67bb88.png)
+![yellowAndBack](https://user-images.githubusercontent.com/123586903/236309197-7e65a541-dc65-404a-af78-3deba7a212e3.png)
+![greenAndBack](https://user-images.githubusercontent.com/123586903/236309210-561935bf-4902-45aa-82b3-f1908a3e4317.png)
+![redAndback](https://user-images.githubusercontent.com/123586903/236309223-6b3a55e7-97a4-456f-8ae0-f7926b47c1ff.png)
 
 
 7. **Make images of a mascot to display for each end of the tracker color slider.** Also create images of the mascot speaking, for display when the program displays text to the user like errors, response to checking off tasks on the todo-list etc. 
