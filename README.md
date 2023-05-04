@@ -1,4 +1,4 @@
-**Project Title: DigiPlanner**
+****Project Title: DigiPlanner****
 
 Authors: Diego Abanto Ibarguen, Brian Dion, Sara Alam 
 
