@@ -18,11 +18,9 @@ The user interface has been built using javafx components and the backend has be
 
 **Technical Outline**
 
-The app consists of 9 java classes, 4 of which are be objects designed to store the information. Each of these 4 objects correspond to a display in the app. They create and maintain instances of their own javafx components.These 4 classes collectively have 4 additional helper classes. One class integrates the 4 objects. The main App class contains 12 instances of this integrating class/object, one for each month of the current year. File i/o code is written separately from these 9 classes. The following paragraphs describe the parts of these 9 classes that directly affect user experience:
+The app consists of multiple java classes, 4 of which are **Spreads**. A Spread is a layout used to plan and organize certain aspects of one's life in a journal. Each of these 4 objects correspond to a display in the app. They create and maintain instances of their own javafx components. These 4 classes have additional helper classes. One class integrates each of their own java classes to help them maintain their data. The main `DigiPlanner.java` class contains 12 instances of `SpreadBundle.java` which packages 4 distinct instances of these spreads. File i/o code is written separately for all classes. The following describes each java class in more detail.
 
-Note: In all of the layout images below, the spots where the joyful leaf appears are reserved for images of our leaf mascot with different expressions on its face. Currently, we are in the process of designing different versions of our leaf mascot to customize the look of different tracker, todolist and journals in the App.
-
-1. `SpreadBundle.java`: This class creates an object that bundles the aforementioned objects together for a specific month. This does not hold any significant event-generating component. A Spread is a layout used to plan and organize certain aspects of one's life in a journal. The following class files `ToDoMonth.java`, `Tracker.java`, `Journal.java`, and `MonthlyHome.java` contain the code for displaying the relevant spread.
+1. `SpreadBundle.java`: This class creates an object that bundles the aforementioned objects together for a specific month. This does not hold any significant event-generating component. The following class files `ToDoMonth.java`, `Tracker.java`, `Journal.java`, and `MonthlyHome.java` contain the code for displaying the relevant spread.
 
 2. `ToDoMonth.java`: This class creates and maintains the TableView of tasks added to the user. It also contains the Textfield for adding new tasks.
 
@@ -47,9 +45,6 @@ Part of the remaining tasks for the project include adding a save button to the 
 
 
 **Aesthetic Elements**
-
-
-The decorations referred to in the layouts above (regions 1, 2 and leaf mascot markers) include the following:
 
 1. **CSS**
 The program uses one main css file that affects every different spread within the planner. Specific widgets or sections are given a unique style to fulfill the aesthetic and practical needs (e.g. transparent text-area for journal pages, gradient for tracker slider, trash can image for to-do list buttons).
