@@ -82,7 +82,7 @@ Line charts for the task completion rate obtained from the todolists of the mont
    
 3. Have a **tab called tracker**, with the calendar view of labels that the user can recolor to rate their day based on 5 different metrics: water, workout, sleep, stress, and study.
 
-4. Have a **tab called ``ToDo``** which allows the user to have a to do list running for each day. This list allows the user to check off certain tasks as well as be deleted with a trash can shaped button.
+4. Have a **tab called toDo** which allows the user to have a to do list running for each day. This list allows the user to check off certain tasks as well as be deleted with a trash can shaped button.
 
 5. **Make the color picker a gradient** formed using different hues of the same color. Allow the user to pick from many different hues.
 This was done using a slider.
