@@ -1,4 +1,4 @@
-****Project Title: DigiPlanner****
+# Project Title: DigiPlanner
 
 Authors: Diego Abanto Ibarguen, Brian Dion, Sara Alam 
 
@@ -6,7 +6,7 @@ Course: COSC480E Intro to UI
 
 Instructor: E. Fourquet
 
-**Statement**
+## Statement
 
 The DigiPlanner app is a digital form of a store-bought planner, with different sections for different purposes like task-planning, habit-tracking, short notes etc. Benefits beyond a paper planner include: 
 
@@ -16,7 +16,7 @@ The DigiPlanner app is a digital form of a store-bought planner, with different 
 
 The user interface has been built using javafx components and the backend has been written in java.
 
-**Technical Outline**
+## Technical Outline
 
 The app consists of multiple java classes, 4 of which are **Spreads**. A Spread is a layout used to plan and organize certain aspects of one's life in a journal. Each of these 4 objects correspond to a display in the app. They create and maintain instances of their own javafx components. These 4 classes have additional helper classes. One class integrates each of their own java classes to help them maintain their data. The main `DigiPlanner.java` class contains 12 instances of `SpreadBundle.java` which packages 4 distinct instances of these spreads. File i/o code is written separately for all classes. The following describes each java class in more detail.
 
@@ -44,7 +44,7 @@ The app consists of multiple java classes, 4 of which are **Spreads**. A Spread 
 Part of the remaining tasks for the project include adding a save button to the GUI through this class.
 
 
-**Aesthetic Elements**
+## Aesthetic Elements
 
 1. **CSS**
 The program uses one main css file that affects every different spread within the planner. Specific widgets or sections are given a unique style to fulfill the aesthetic and practical needs (e.g. transparent text-area for journal pages, gradient for tracker slider, trash can image for to-do list buttons).
@@ -112,7 +112,7 @@ We reduced the number of background gifs we used from 12 to 4, 1 for each season
 
 
 
-**Bibliography**
+## Bibliography
 
 1. <https://stackoverflow.com/questions/42350145/date-picker-selected-cell-css> (for changing date at top of screen)
 2. <https://stackoverflow.com/questions/15189851/javafx-vertical-slider> (can be used for objective, in trackers)
