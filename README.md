@@ -100,17 +100,16 @@ The goal to add buttons for the other tabs was omitted since we use a tabpane. T
 ![redAndback](https://user-images.githubusercontent.com/123586903/236309223-6b3a55e7-97a4-456f-8ae0-f7926b47c1ff.png)
 
 
-8. **Make images of a mascot to display for each end of the tracker color slider.** Also create images of the mascot speaking, for display when the program displays text to the user like errors, response to checking off tasks on the todo-list etc. 
-This task is still incomplete but we have made considerable progress on it. See previous section
+8. **Make images of a mascot to display for each end of the tracker color slider.** \
+   * Also create images of the mascot speaking, for display when the program displays text to the user like errors, response to checking off tasks on the todo-list etc. NB: This task is still incomplete but we have made considerable progress on it. See previous section
 
 9. Make 12 **background gifs** that are displayed based on which month it is. The TabPane for each month will sit on top of this gif background.
 We reduced the number of background gifs we used from 12 to 4, 1 for each season.
    
-10.  **Create a file IO hierarchy** of all text files to read and write to. The largest folder will be that for each year (due to the scope of this project, we plan to only create this for the current year for the current version of the application). It will contain a folder for each month. Each month’s folder will contain text files to store journal entries, tracker information and daily todo-lists for the month.Each of these files will be created using specific naming conventions and formats, to aid the process of retrieving the information when the application is started in the future.
-This task is yet to be completed.
+10.  **Create a file IO hierarchy** of all text files to read and write to. \
+   * The largest folder will be that for each year (due to the scope of this project, we plan to only create this for the current year for the current version of the application). It will contain a folder for each month. Each month’s folder will contain text files to store journal entries, tracker information and daily todo-lists for the month.Each of these files will be created using specific naming conventions and formats, to aid the process of retrieving the information when the application is started in the future. This task is yet to be completed.
     
-11. **Implement delete and save button handlers to different keypress events like Ctrl+S and Delete**, so that the user can perform those actions in multiple ways, regardless of the tab of the tabpane that is being displayed currently.
-This task is yet to be completed.
+11. **Implement delete and save button handlers to different keypress events like Ctrl+S and Delete**, so that the user can perform those actions in multiple ways, regardless of the tab of the tabpane that is being displayed currently. This task is yet to be completed.
 
 
 
