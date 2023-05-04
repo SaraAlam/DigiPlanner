@@ -56,7 +56,6 @@ pink.css - Spring (March-May)
 green.css - Summer (June-August)
 burnt.css - Fall (September-November)
 ```
-   * The colors for each season are designed to match the mascot (yet to be implemented).
 
 2. **Colors chosen based on color theory**
 Two color theory methods were employed to choose aestheticaly pleasing colors: Analagous and split complementary. Analagous chooses colors in a similar color region, while split complementary chooses colors complementary (on the opposite side of the color wheel). Based off of the mascot colors (Proposal Objectives Pending sections 6), two colors were chosen for each mascot iteration. 
