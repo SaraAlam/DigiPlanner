@@ -22,37 +22,26 @@ The app consists of 9 java classes, 4 of which are be objects designed to store 
 
 Note: In all of the layout images below, the spots where the joyful leaf appears are reserved for images of our leaf mascot with different expressions on its face. Currently, we are in the process of designing different versions of our leaf mascot to customize the look of different tracker, todolist and journals in the App.
 
-1. `SpreadBundle.java`
+1. `SpreadBundle.java`: This class creates an object that bundles the aforementioned objects together for a specific month. This does not hold any significant event-generating component. A Spread is a layout used to plan and organize certain aspects of one's life in a journal. The following class files `ToDoMonth.java`, `Tracker.java`, `Journal.java`, and `MonthlyHome.java` contain the code for displaying the relevant spread.
 
-This class creates an object that bundles the aforementioned objects together for a specific month. This does not hold any significant event-generating component. A Spread is a layout used to plan and organize certain aspects of one's life in a journal. The following class files `ToDoMonth.java`, `Tracker.java`, `Journal.java`, and `MonthlyHome.java` contain the code for displaying the relevant spread.
+2. `ToDoMonth.java`: This class creates and maintains the TableView of tasks added to the user. It also contains the Textfield for adding new tasks.
 
-2. `ToDoMonth.java`
+* `ToDoList.java`: This class contains an `ObservableList` that is used to display the tasks for a certain day.
 
-This class creates and maintains the TableView of tasks added to the user. It also contains the Textfield for adding new tasks.
+* `ToDoTask.java`: This class contains a `BooleanProperty` and a `String` that holds whether the task is completed and its details.
 
-- 2a `ToDoList.java`: This class contains an `ObservableList` that is used to display the tasks for a certain day.
-
-- 2b `ToDoTask.java`: This class contains a `BooleanProperty` and a `String` that holds whether the task is completed and its details.
-
-3. `Tracker.java`
-
-This class creates and maintains the colorable labels for each day of the month on a flowpane resembling a calendar.
+3. `Tracker.java`: This class creates and maintains the colorable labels for each day of the month on a flowpane resembling a calendar.
 
 - 3b. `TrackerList.java`: This holds the drop down menu that is the main way to navigate between trackers of the month. It also holds the color slider. This slider allows the user to pick a color based on how they performed a certain task, and color in a particular day's label on a tracker calendar.
 
-4. `Journal.java`
-
-This class will create and maintain a GridPane with: A smaller GridPane for journal entries and page flipping, a text area for adding new entries to the journal book in the previous GridPane.
+4. `Journal.java`: This class will create and maintain a GridPane with: A smaller GridPane for journal entries and page flipping, a text area for adding new entries to the journal book in the previous GridPane.
 
 - 4a. `JournalEntry.java`: A supporting class that contains the content of each journal entry from Journal.java. It creates a container (TextArea) with the text, and a property with the date and time an entry was created (using the Date data type).
 
 - 4b. `JournalList.java`: This class will create and maintain the journal objects for each day of the month and store them in a HashMap to link to specific dates. The dates will be selected from the calendar navigator.
 
-5. `MonthlyHome.java`
-
-This will be an introduction to the month, displaying graphs that summarize the tracker information and possibly the task-completion rate for the month.
-
-The calendar view would look as follows:
+5. `MonthlyHome.java`: This will be an introduction to the month, displaying graphs that summarize the tracker information and possibly the task-completion rate for the month.
+   The calendar view would look as follows:
 
 The "<<" and ">>" buttons navigate to the previous and following year's tabpanes respectively. The "<" and ">" buttons navigate to the previous and next month's tabpanes respectively.
 
