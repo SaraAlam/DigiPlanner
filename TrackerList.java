@@ -120,7 +120,8 @@ public class TrackerList {
         //slider.setBlockIncrement(0.125f);
         slider.setBlockIncrement(1);
         slider.setSnapToTicks(true);
-        slider.resize(20, 15);
+        slider.resize(60, 15);
+        slider.setPrefWidth(350);
 
         //slider listener and handler
         slider.valueProperty().addListener(new ChangeListener<Number>() {

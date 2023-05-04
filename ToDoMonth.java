@@ -23,19 +23,27 @@ import java.io.IOException;
 import java.io.InputStream;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import java.util.HashMap;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.application.Platform;
+
 
 public class ToDoMonth {
 
     public GridPane toDoMonthGridPane;
     public TableView<ToDoTask> toDoTable;
     public ArrayList<ToDoList> allToDoLists;
+    public int currMonth = 0;
+    public int numDays;
     public int currDay = 0;
 
-    public ToDoMonth(String name, int numDays){
+    public HashMap<Integer, Double> dailyTaskCompletionRate = new HashMap<Integer, Double>();
+
+    public ToDoMonth(String name, int nDays){
+        numDays = nDays;
         toDoMonthGridPane = new GridPane();
+        // toDoMonthGridPane.setPrefWidth(400);
         toDoMonthGridPane.setPadding(new Insets(10));
         // toDoMonthGridPane.setMinWidth(150);
         // input new task
@@ -91,6 +99,9 @@ public class ToDoMonth {
 
         
 
+        //toDoMonthGridPane.add(toDoTable, 0, 0);
+
+        hardCodeCompletionRates();
     }
 
     private void addButtonToTable() {
@@ -128,10 +139,22 @@ public class ToDoMonth {
 
         clearCol.setCellFactory(cellFactory);
         // clearCol.prefWidthProperty().bind(toDoTable.widthProperty().divide(3));
-        clearCol.setPrefWidth(40);
+        clearCol.setPrefWidth(50 );
         clearCol.setResizable(false);
         toDoTable.getColumns().add(clearCol);
 
+    }
+
+    public void hardCodeCompletionRates(){
+        double[] random_rates = {0.75, 0.7, 0.8, 0.6, 0.5, 1.0, 0.25, 0.3, 0.2, 0.1, 0.15, 0.3};
+        int j = 0;
+        for (int i = 0; i < numDays; i++){
+            if (i%3==0){
+                dailyTaskCompletionRate.put(i,random_rates[j]);
+                j++;
+            }
+
+        }
     }
 
     public void enterKeypressed(KeyCode keyCode, ToDoList thisList, TextField input){
