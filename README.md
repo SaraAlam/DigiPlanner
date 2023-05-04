@@ -28,29 +28,35 @@ This class creates an object that bundles the aforementioned objects together fo
 
 2. `ToDoMonth.java`
 
-This class creates and maintains the TableView of tasks added to the user. It also contains the Textfield for adding new tasks and the add button that adds the new task to the listview.
+This class creates and maintains the TableView of tasks added to the user. It also contains the Textfield for adding new tasks.
 
-2. `Tracker.java`
+- 2a `ToDoList.java`
+This class contains an `ObservableList` that is used to display the tasks for a certain day.
+
+- 2b `ToDoTask.java`
+This class contains a `BooleanProperty` and a `String` that holds whether the task is completed and its details.
+
+3. `Tracker.java`
 
 This class creates and maintains the colorable labels for each day of the month on a flowpane resembling a calendar.
 
-4. `TrackerList.java`
+- 3b. `TrackerList.java`
 
 This holds the drop down menu that is the main way to navigate between trackers of the month. It also holds the color slider. This slider allows the user to pick a color based on how they performed a certain task, and color in a particular day's label on a tracker calendar.
 
-5. `Journal.java`
+4. `Journal.java`
 
 This class will create and maintain a GridPane with: A smaller GridPane for journal entries and page flipping, a text area for adding new entries to the journal book in the previous GridPane.
 
-5.5 `JournalEntry.java`
+- 4a. `JournalEntry.java`
 
 A supporting class that contains the content of each journal entry from Journal.java. It creates a container (TextArea) with the text, and a property with the date and time an entry was created (using the Date data type).
 
-6. `JournalList.java`
+- 4b. `JournalList.java`
 
 This class will create and maintain the journal objects for each day of the month and store them in a HashMap to link to specific dates. The dates will be selected from the calendar navigator.
 
-7. `MonthlyHome.java`
+5. `MonthlyHome.java`
 
 This will be an introduction to the month, displaying graphs that summarize the tracker information and possibly the task-completion rate for the month.
 
@@ -59,7 +65,7 @@ The calendar view would look as follows:
 The "<<" and ">>" buttons navigate to the previous and following year's tabpanes respectively. The "<" and ">" buttons navigate to the previous and next month's tabpanes respectively.
 
 
-8. `DigiPlanner.java`
+6. `DigiPlanner.java`
 
 This class creates a SpreadBundle object for each month and the calendar view that allows the user to navigate between days of the year. 
 Part of the remaining tasks for the project include adding a save button to the GUI through this class.
