@@ -27,9 +27,6 @@ Note: In all of the layout images below, the spots where the joyful leaf appears
 
 This class creates and maintains the TableView of tasks added to the user. It also contains the Textfield for adding new tasks and the add button that adds the new task to the listview.
 
-
-![Example](Aspose.Words.0389e381-3f65-4263-8a5b-31437e634615.001.jpeg)
-
 2. `Tracker.java`
 
 This class creates and maintains the colorable labels for each day of the month on a flowpane resembling a calendar.
@@ -37,8 +34,6 @@ This class creates and maintains the colorable labels for each day of the month 
 3. `TrackerList.java`
 
 This holds the drop down menu that is the main way to navigate between trackers of the month. It also holds the color slider. This slider allows the user to pick a color based on how they performed a certain task, and color in a particular day's label on a tracker calendar.
-
-![Example2](Aspose.Words.0389e381-3f65-4263-8a5b-31437e634615.002.jpeg)
 
 4. `Journal.java`
 
@@ -52,17 +47,11 @@ A supporting class that contains the content of each journal entry from Journal.
 
 This class will create and maintain the journal objects for each day of the month and store them in a HashMap to link to specific dates. The dates will be selected from the calendar navigator.
 
-![Example3](Aspose.Words.0389e381-3f65-4263-8a5b-31437e634615.003.jpeg)
-
 6. `MonthlyHome.java`
 
 This will be an introduction to the month, displaying graphs that summarize the tracker information and possibly the task-completion rate for the month.
 
-![Example4](Aspose.Words.0389e381-3f65-4263-8a5b-31437e634615.004.jpeg)
-
 The calendar view would look as follows:
-
-![Example5](Aspose.Words.0389e381-3f65-4263-8a5b-31437e634615.005.jpeg)
 
 The "<<" and ">>" buttons navigate to the previous and following year's tabpanes respectively. The "<" and ">" buttons navigate to the previous and next month's tabpanes respectively.
 
