@@ -118,7 +118,8 @@ The goal to add buttons for the other tabs was omitted since we use a tabpane. T
 This task is still incomplete but we have made considerable progress on it. Four distinct leaves were created for the mascot, each representing a season. The background colors for these mascots were picked using color theory (see Aesthetic Elements section 2). The following are the four base mascots for Winter, Spring, Summer, and Fall respectively as well as their hand picked background colors.
 
 
-![alt text](https://s3.hedgedoc.org/demo/uploads/5aa01f89-589f-4394-aaa7-e9946da0cfab.png)
+![snowyLeaf](https://user-images.githubusercontent.com/123586903/236308827-983bbe9a-3f0d-414f-8a7a-8edfb5ce2cbf.png)
+
 ![Spring](https://s3.hedgedoc.org/demo/uploads/b181357a-82a5-4015-918f-bf7b1854fae0.png)
 ![Summer](https://s3.hedgedoc.org/demo/uploads/aabb82fb-dc90-4eca-b31a-9a537bd935a6.png)
 ![Fall](https://s3.hedgedoc.org/demo/uploads/84d8d07b-46a0-4932-8d40-6beba717d3b9.png)
