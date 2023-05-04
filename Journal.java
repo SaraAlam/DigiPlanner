@@ -24,9 +24,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.*;
 import javafx.beans.binding.Bindings;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.io.FileNotFoundException;
 
 public class Journal{
     ArrayList<JournalEntry> entries;
@@ -42,7 +45,6 @@ public class Journal{
     ScrollPane bigCont = new ScrollPane(container);
     
     public Journal(){
-
         entries = new ArrayList<JournalEntry>();
 
         entryS.setItems(entriesT);
@@ -82,12 +84,10 @@ public class Journal{
         entryS.setFixedCellSize(30);
         entryS.prefHeightProperty().bind(Bindings.size(entryS.getItems()).multiply(30).add(30));
 
-
-
         page.setEditable(false);
         page.getStyleClass().add("book-page");
         book.add(page, 1,0);
-
+        
         container.setVgap(10);
         container.setPadding(new Insets(15));
 
@@ -119,7 +119,7 @@ public class Journal{
         });
 
         HBox right = new HBox(arrLeft, pageNum, arrRight);
-        right.setSpacing(20);
+        right.setSpacing(10);
         
         //right.setPrefHeight(Integer.MAX_VALUE);
         right.setAlignment(Pos.BOTTOM_CENTER);
@@ -143,17 +143,17 @@ public class Journal{
 
 
         RowConstraints row1 = new RowConstraints();
-        row1.setPercentHeight(75);
+        row1.setPercentHeight(85);
         row1.setVgrow(Priority.ALWAYS);
         RowConstraints row2 = new RowConstraints();
-        row2.setPercentHeight(20);
+        row2.setPercentHeight(8);
         //container.getRowConstraints().addAll(row1, row2);
         book.getRowConstraints().addAll(row1, row2);
 
 
         container.add(book, 0, 0);
         container.add(addField, 0,1);
-        container.add(entryS, 0,2);
+        //container.add(entryS, 0,2);
        
         container.setId("journal-background");
 

@@ -16,8 +16,10 @@
 }*/
 
 /* For Journal book*/
+
 .book-page{
-	-fx-background-color: transparent;
+    -fx-background-color: transparent;
+    
     background-color: transparent;
 }
 

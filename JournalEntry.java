@@ -2,13 +2,14 @@ import java.util.Date;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 
-import java.text.DateFormat;  
-import java.util.Calendar;  
-
 import java.util.Calendar;
 import java.time.Instant;  
 import java.text.DateFormat; 
 import java.text.SimpleDateFormat; 
+
+
+import java.text.DateFormat;  
+import java.util.Calendar;  
 
 public class JournalEntry {
     private String entryTime;
@@ -24,7 +25,8 @@ public class JournalEntry {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd hh:mm:ss");  
         entryTime = dateFormat.format(timeOfEntry);
         
-        container.setText(content);
+        
+        container.setText(entryTime + "\n\n" + content);
 
     }
 
