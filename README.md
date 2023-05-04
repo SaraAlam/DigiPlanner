@@ -74,12 +74,12 @@ Line charts for the task completion rate obtained from the todolists of the mont
 
 1. **Create a global calendar view** to allow the user to navigate based on year, month, and day with a menu on the left hand side.
 
-The colors of the current calendar do not match the colors of the backgrounds. We are currently evaluating whether to make the color scheme for the calendar change in the same fashion, or to use a constant color palette regardless of the background.
+   * The colors of the current calendar do not match the colors of the backgrounds. We are currently evaluating whether to make the color scheme for the calendar change in the same fashion, or to use a constant color palette regardless of the background.
 
-\*Objectives 2-4 refer to tabs in the tabpane of every SpreadBundle object (there will be one per month).
+   * Objectives 2-4 refer to tabs in the tabpane of every SpreadBundle object (there will be one per month).
 
 2. Have a **tab called journal** that displays entries on the image of a book.
-The goal for making it look like a page is flipped was ommitted due to difficulty. Instead, a task we have yet to complete is to play an audio of a page flipping when the user moves between journal entries for a day. The entries will also be removable and editable for the final version. There has been challenges with loading a handwritten font for the journal pages, but it will be solved through the use of built-in javafx methods instead of css.
+   * The goal for making it look like a page is flipped was ommitted due to difficulty. Instead, a task we have yet to complete is to play an audio of a page flipping when the user moves between journal entries for a day. The entries will also be removable and editable for the final version. There has been challenges with loading a handwritten font for the journal pages, but it will be solved through the use of built-in javafx methods instead of css.
    
 3. Have a **tab called tracker**, with the calendar view of labels that the user can recolor to rate their day based on 5 different metrics: water, workout, sleep, stress, and study.
 
@@ -88,12 +88,11 @@ The goal for making it look like a page is flipped was ommitted due to difficult
 5. **Make the color picker a gradient** formed using different hues of the same color. Allow the user to pick from many different hues.
 This was done using a slider.
 
-
 6. **Have a tab called home**, which allows the user to view a summary of a certain month’s status in the form of a graph.
 The goal to add buttons for the other tabs was omitted since we use a tabpane. The tabpane sufficiently achieves the goal for navigating between views of the journal, tracker and todolist sections of the month.
    
 7. **Make images of a mascot corresponding to each of the five trackers** water, workout, stress, study and sleep. 
-This task is still incomplete but we have made considerable progress on it. Four distinct leaves were created for the mascot, each representing a season. The background colors for these mascots were picked using color theory (see Aesthetic Elements section 2). The following are the four base mascots for Winter, Spring, Summer, and Fall respectively as well as their hand picked background colors.
+   * This task is still incomplete but we have made considerable progress on it. Four distinct leaves were created for the mascot, each representing a season. The background colors for these mascots were picked using color theory (see Aesthetic Elements section 2). The following are the four base mascots for Winter, Spring, Summer, and Fall respectively as well as their hand picked background colors.
 
 ![snowyAndBack](https://user-images.githubusercontent.com/123586903/236309158-85cd4d6a-4219-4c48-aa3e-6e1a7a67bb88.png)
 ![yellowAndBack](https://user-images.githubusercontent.com/123586903/236309197-7e65a541-dc65-404a-af78-3deba7a212e3.png)
