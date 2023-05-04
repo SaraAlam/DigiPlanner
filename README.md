@@ -26,9 +26,9 @@ Note: In all of the layout images below, the spots where the joyful leaf appears
 
 2. `ToDoMonth.java`: This class creates and maintains the TableView of tasks added to the user. It also contains the Textfield for adding new tasks.
 
-* `ToDoList.java`: This class contains an `ObservableList` that is used to display the tasks for a certain day.
+   * `ToDoList.java`: This class contains an `ObservableList` that is used to display the tasks for a certain day.
 
-* `ToDoTask.java`: This class contains a `BooleanProperty` and a `String` that holds whether the task is completed and its details.
+   * `ToDoTask.java`: This class contains a `BooleanProperty` and a `String` that holds whether the task is completed and its details.
 
 3. `Tracker.java`: This class creates and maintains the colorable labels for each day of the month on a flowpane resembling a calendar.
 
