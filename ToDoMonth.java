@@ -48,6 +48,7 @@ public class ToDoMonth {
         // toDoMonthGridPane.setMinWidth(150);
         // input new task
         TextField input = new TextField();
+        input.setPrefWidth(Integer.MAX_VALUE);
         // input.setPadding(new Insets(10));
         toDoMonthGridPane.setMargin(input, new Insets(0,0,10,0));
         toDoMonthGridPane.add(input, 0, 0);
@@ -73,15 +74,22 @@ public class ToDoMonth {
         TableColumn<ToDoTask,Boolean> completeCol = new TableColumn<ToDoTask,Boolean>("Complete");
         completeCol.setCellValueFactory(new PropertyValueFactory<ToDoTask, Boolean>("done"));
         completeCol.setCellFactory(e -> new CheckBoxTableCell<>());
-        completeCol.setPrefWidth(80);
+        // completeCol.setPrefWidth(80);
         completeCol.setResizable(false);
 
         TableColumn<ToDoTask,String> detailsCol = new TableColumn<ToDoTask,String>("To Do");
         detailsCol.setCellValueFactory(new PropertyValueFactory<ToDoTask, String>("taskDetails"));
-        detailsCol.prefWidthProperty().bind(toDoTable.widthProperty().divide(3));
+        // detailsCol.prefWidthProperty().bind(toDoTable.widthProperty().divide(3));
+        detailsCol.setResizable(false);
+
+
 
         toDoTable.getColumns().addAll(completeCol, detailsCol);//, clearCol);
+        completeCol.prefWidthProperty().bind(toDoTable.widthProperty().multiply(0.18));
+        detailsCol.prefWidthProperty().bind(toDoTable.widthProperty().multiply(0.704));
         addButtonToTable();
+        toDoTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         toDoTable.setItems(allToDoLists.get(currDay).listTasks);
         toDoTable.setEditable(true);
 
@@ -139,7 +147,8 @@ public class ToDoMonth {
 
         clearCol.setCellFactory(cellFactory);
         // clearCol.prefWidthProperty().bind(toDoTable.widthProperty().divide(3));
-        clearCol.setPrefWidth(50 );
+        // clearCol.setPrefWidth(50 );
+        clearCol.prefWidthProperty().bind(toDoTable.widthProperty().multiply(0.111));
         clearCol.setResizable(false);
         toDoTable.getColumns().add(clearCol);
 
