@@ -31,7 +31,7 @@ public class JournalList {
             Journal j = new Journal();
             journals.put(i, j);
         }
-        currJournal = new Journal();
         parentBundle = pBundle;
+        currJournal =journals.get(parentBundle.currDay);
     }
 }
