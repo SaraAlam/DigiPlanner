@@ -16,7 +16,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.geometry.Pos;
-
+import javafx.scene.control.Button;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -96,7 +96,14 @@ public class DigiPlanner extends Application{
             currDayNum = selectedDate.get(Calendar.DAY_OF_MONTH);
             currDayName = selectedDate.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG, Locale.getDefault());
             
-            TabPane currTabPane = monthlyBundles.get(currMonthStr).displayPane;
+            SpreadBundle currBundle = monthlyBundles.get(currMonthStr);
+            currBundle.currDay = currDayNum;
+            currBundle.journalList.currJournal = currBundle.journalList.journals.get(currDayNum);
+            currBundle.tabs.get("Journal").setContent(currBundle.journalList.currJournal.bigCont);
+            ToDoMonth currToDoMonth = currBundle.aToDoMonth;
+            currToDoMonth.currDay = currDayNum - 1;
+            currToDoMonth.toDoTable.setItems(currToDoMonth.allToDoLists.get(currToDoMonth.currDay).listTasks);
+            TabPane currTabPane = currBundle.displayPane;
             BorderPane.setAlignment(currTabPane, Pos.TOP_LEFT);
             BorderPane.setMargin(currTabPane, new Insets(20,20,20,20));
             rightDisplay.setCenter(currTabPane);
@@ -198,15 +205,9 @@ public class DigiPlanner extends Application{
         col1.setPercentWidth(90);
         g.getColumnConstraints().addAll(col1);
 
-
-
-        //imageview of blueberry
-
         //save button
+        Button save_button = new Button("Save");
 
-        //quit button
-
-        //notes button (maybe not now)
 
         return g;
     }

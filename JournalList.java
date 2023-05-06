@@ -23,13 +23,15 @@ public class JournalList {
     HashMap<Integer, Journal> journals = new HashMap<Integer, Journal>();
     int numDays;
     Journal currJournal;
+    SpreadBundle parentBundle;
 
-    public JournalList(int nDays){
+    public JournalList(int nDays, SpreadBundle pBundle){
         numDays = nDays;
         for(int i = 1; i < nDays+1; i++){
             Journal j = new Journal();
             journals.put(i, j);
         }
         currJournal = new Journal();
+        parentBundle = pBundle;
     }
 }
