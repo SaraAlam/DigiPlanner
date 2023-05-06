@@ -22,8 +22,6 @@
     -fx-text-fill: #764203e9;
     -fx-text-shadow: 2px 2px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 7, 0.2, 0.0, 0.0);
-    -fx-z-index: 5;
-    z-index: 5;
 }
 
 #del-entry:hover{
@@ -85,12 +83,6 @@
     -fx-background-color: transparent;
     background-color: transparent;
 }
-
-#journal-background2{
-    -fx-background-color: transparent;
-    background-color: transparent;
-}
-
 
 
 #journal-book{

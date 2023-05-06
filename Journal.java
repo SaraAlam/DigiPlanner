@@ -34,7 +34,6 @@ import java.io.FileNotFoundException;
 public class Journal{
     ArrayList<JournalEntry> entries;
     GridPane container = new GridPane();
-    JournalEntry curEntry;
     TextArea page = new TextArea();
     GridPane book = new GridPane();
     int curIdx = -1;
@@ -42,7 +41,8 @@ public class Journal{
     private final TableView<JournalEntry> entryS = new TableView<>();
     private final ObservableList<JournalEntry> entriesT = 
         FXCollections.observableArrayList();
-    ScrollPane bigCont = new ScrollPane(container);
+    Button deleteEntry = new Button("X");
+    HBox del = new HBox(deleteEntry);
     
     public Journal(){
         entries = new ArrayList<JournalEntry>();
@@ -74,7 +74,7 @@ public class Journal{
             int cur = entryS.getSelectionModel().getSelectedIndex();
             if(cur != -1){
                 curIdx = cur;
-                pageNum.setText(Integer.toString(curIdx+1));
+                pageNum.setText("");
                 page.setVisible(false);
                 page = entries.get(curIdx).container;
                 page.setVisible(true);
@@ -86,7 +86,6 @@ public class Journal{
 
         page.setEditable(false);
         page.getStyleClass().add("book-page");
-        book.add(page, 1,0);
         
         container.setVgap(10);
         container.setPadding(new Insets(15));
@@ -97,10 +96,13 @@ public class Journal{
         Button arrRight = new Button(">");
         Button arrLeft = new Button("<");
 
+        arrRight.getStyleClass().add("journal-btn");
+        arrLeft.getStyleClass().add("journal-btn");
+
         arrRight.setOnAction(e -> {
             if(curIdx < this.getJournalSize()-1){
                 curIdx += 1;
-                pageNum.setText(Integer.toString(curIdx+1));
+                pageNum.setText(Integer.toString(curIdx+1) + "/" +Integer.toString(this.getJournalSize()));
                 page.setVisible(false);
                 page = entries.get(curIdx).container;
                 page.setVisible(true);
@@ -111,21 +113,40 @@ public class Journal{
         arrLeft.setOnAction(e -> {
             if(curIdx > 0){
                 curIdx -= 1;
-                pageNum.setText(Integer.toString(curIdx+1));
+                pageNum.setText(Integer.toString(curIdx+1) + "/" +Integer.toString(this.getJournalSize()));
                 page.setVisible(false);
                 page = entries.get(curIdx).container;
                 page.setVisible(true);
             }
         });
 
-        HBox right = new HBox(arrLeft, pageNum, arrRight);
+        HBox pageNumCont = new HBox(pageNum);
+        HBox right = new HBox(arrLeft, arrRight);
         right.setSpacing(10);
+        right.setPrefWidth(Integer.MAX_VALUE);
+        pageNumCont.setAlignment(Pos.BOTTOM_RIGHT);
+        pageNumCont.setPadding(new Insets(0, 10, 0 ,0));
         
         //right.setPrefHeight(Integer.MAX_VALUE);
         right.setAlignment(Pos.BOTTOM_CENTER);
         right.setPadding(new Insets(0, 15, 0, 0));
 
+        del.toFront();
+        deleteEntry.setId("del-entry");
+
+        book.add(del, 1, 0);
+        del.setVisible(false);
+
+        deleteEntry.setOnAction(e -> {
+            System.out.println(curIdx);
+        });
+        
+        del.setAlignment(Pos.TOP_RIGHT);
+        del.setPadding(new Insets(-10, 10, 0, 0));
+
+        book.add(pageNumCont, 1,1);
         book.add(right, 1,1);
+
 
         book.setAlignment(Pos.CENTER);
         book.setPadding(new Insets(8, 20, 8, 0));
@@ -144,11 +165,13 @@ public class Journal{
 
         RowConstraints row1 = new RowConstraints();
         row1.setPercentHeight(85);
-        row1.setVgrow(Priority.ALWAYS);
         RowConstraints row2 = new RowConstraints();
         row2.setPercentHeight(8);
-        //container.getRowConstraints().addAll(row1, row2);
+        
         book.getRowConstraints().addAll(row1, row2);
+
+
+        container.setGridLinesVisible(true);
 
 
         container.add(book, 0, 0);
@@ -156,11 +179,6 @@ public class Journal{
         //container.add(entryS, 0,2);
        
         container.setId("journal-background");
-
-        //bigCont.setFitToHeight(true);
-        bigCont.setId("journal-background2");
-        bigCont.setFitToWidth(true);
-        bigCont.setContent(container);
     }
 
     public void addEntries(JournalEntry[] entriesToAdd){
@@ -186,6 +204,12 @@ public class Journal{
         cont.setOnKeyPressed(e -> {
             if(e.getCode() == KeyCode.ENTER && !cont.getText().isEmpty()){
                 JournalEntry[] cur = new JournalEntry[1];
+                if(curIdx == -1){
+                    curIdx += 1;
+                }
+                else{
+                    curIdx = this.getJournalSize();
+                }
                 JournalEntry entry = new JournalEntry(cont.getText());
                 cur[0] = entry;
                 this.addEntries(cur);
@@ -193,14 +217,10 @@ public class Journal{
                 page.setVisible(false);
                 page = entry.container;
                 book.add(page, 1, 0);
+                del.setVisible(true);
+                del.toFront();
                 entriesT.add(this.getJournalSize()-1, entry);
-                if(curIdx == -1){
-                    curIdx += 1;
-                }
-                else{
-                    curIdx = this.getJournalSize()-1;
-                }
-                pageNum.setText(Integer.toString(curIdx+1));
+                pageNum.setText(Integer.toString(curIdx+1) + "/" +Integer.toString(this.getJournalSize()));
                 //container.add(page, 0, 2);
             }
         });
