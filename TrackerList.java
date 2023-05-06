@@ -24,12 +24,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Region;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import java.io.FileInputStream;
 
 public class TrackerList {
     String month;
     int numDays;
+    SpreadBundle parentBundle;
     public int first_day;
-    String[] trackerNames = {"Water", "Workout","Stress","Study","Sleep"};
+    String[] trackerNames = {"Water", "Workout","Mood","Study","Sleep"};
     HashMap<String,Tracker> trackers = new HashMap<String,Tracker>();
     public Tracker currTracker;
     public String[] colors = {"#CCCCFF","#C4C3D0", "#8C92AC", "#92A1CF",
@@ -42,9 +46,10 @@ public class TrackerList {
     public int currSelectedColorIdx;
     public GridPane trackerSpreadPane;
 
-    public TrackerList(String m, int nDays){
+    public TrackerList(String m, int nDays, SpreadBundle pBundle) throws Exception{
         month = m;
         numDays = nDays;
+        parentBundle = pBundle;
         first_day = get_month_first_day();
         for(int i = 0; i < trackerNames.length; i++){
             Tracker t = new Tracker(trackerNames[i], month, numDays, first_day, this);
@@ -57,7 +62,7 @@ public class TrackerList {
         set_up_view();
     }
 
-    public void set_up_view(){
+    public void set_up_view()throws Exception{
         create_header();
         create_drop_down();
         GridPane.setConstraints(currTracker.calendar_holder, 0, 3, 7, 8);
@@ -72,18 +77,22 @@ public class TrackerList {
         trackerSpreadPane.getChildren().addAll(year_and_month_label, spread_title);
     }
 
-    public void create_drop_down(){
+    public void create_drop_down() throws Exception{
         ObservableList<String> trackerNamesObs = FXCollections.observableArrayList(trackerNames);
         trackerMenu = new ComboBox<String>();
         trackerMenu.setItems(trackerNamesObs);
         trackerMenu.setValue(currTracker.name);
         trackerMenu.valueProperty().addListener(
-            new ChangeListener<String>() {
+            new ChangeListener<String>(){
                 @Override
                 public void changed(ObservableValue observable, String oldValue, String newValue) {
-                    trackerSpreadPane.getChildren().remove(currTracker.calendar_holder);
+                    trackerSpreadPane.getChildren().clear();
                     currTracker = trackers.get(newValue);
-                    set_up_view();
+                    try{
+                        set_up_view();
+                    }catch(Exception e){
+                        System.out.println("Could not find a file");
+                    }
                 }
         });
         GridPane.setConstraints(trackerMenu, 0, 2);
@@ -109,7 +118,7 @@ public class TrackerList {
     return 0;
     }
 
-    public void create_color_holder(){
+    public void create_color_holder() throws Exception{
         // create slider
         Slider slider = new Slider(0, 10, 1);
         slider.setShowTickMarks(true);
@@ -119,6 +128,7 @@ public class TrackerList {
         //slider.setBlockIncrement(0.125f);
         slider.setBlockIncrement(1);
         slider.setSnapToTicks(true);
+        slider.setShowTickLabels(false);
         slider.resize(60, 15);
         slider.setPrefWidth(350);
 
@@ -149,7 +159,24 @@ public class TrackerList {
 
         color_holder = new HBox();
         color_holder.getChildren().addAll(slider, colorLabelDesc, currSelectedColorLabel);
-        GridPane.setConstraints(color_holder, 0, 12, 7, 3);
-        trackerSpreadPane.getChildren().add(color_holder);
+
+        HBox color_holder_descriptor = new HBox();
+        FileInputStream input = new FileInputStream("Happy_transp.png");
+        Image image = new Image(input);
+        ImageView imageView1 = new ImageView(image);
+        input = new FileInputStream("Sad_transp.png");
+        image = new Image(input);
+        ImageView imageView2 = new ImageView(image);
+        imageView1.setFitHeight(40);
+        imageView1.setFitWidth(50);
+        imageView2.setFitHeight(40);
+        imageView2.setFitWidth(50); 
+        color_holder_descriptor.setSpacing(250);
+        color_holder_descriptor.getChildren().addAll(imageView2, imageView1);
+
+        VBox color_info_container = new VBox();
+        color_info_container.getChildren().addAll(color_holder, color_holder_descriptor);
+        GridPane.setConstraints(color_info_container, 0, 12, 7, 3);
+        trackerSpreadPane.getChildren().add(color_info_container);
     }
 }
