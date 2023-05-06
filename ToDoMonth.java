@@ -37,10 +37,13 @@ public class ToDoMonth {
     public int currMonth = 0;
     public int numDays;
     public int currDay = 0;
+    public SpreadBundle parentBundle;
 
     public HashMap<Integer, Double> dailyTaskCompletionRate = new HashMap<Integer, Double>();
 
-    public ToDoMonth(String name, int nDays){
+    public ToDoMonth(String name, int nDays, SpreadBundle pBundle){
+        parentBundle = pBundle;
+        currDay = pBundle.currDay - 1; // -1 because this currDay is the index of the arraylist
         numDays = nDays;
         toDoMonthGridPane = new GridPane();
         // toDoMonthGridPane.setPrefWidth(400);
