@@ -99,7 +99,7 @@ public class DigiPlanner extends Application{
             SpreadBundle currBundle = monthlyBundles.get(currMonthStr);
             currBundle.currDay = currDayNum;
             currBundle.journalList.currJournal = currBundle.journalList.journals.get(currDayNum);
-            currBundle.tabs.get("Journal").setContent(currBundle.journalList.currJournal.bigCont);
+            currBundle.tabs.get("Journal").setContent(currBundle.journalList.currJournal.container);
             ToDoMonth currToDoMonth = currBundle.aToDoMonth;
             currToDoMonth.currDay = currDayNum - 1;
             currToDoMonth.toDoTable.setItems(currToDoMonth.allToDoLists.get(currToDoMonth.currDay).listTasks);

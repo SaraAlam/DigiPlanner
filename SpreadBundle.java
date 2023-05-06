@@ -13,7 +13,7 @@ public class SpreadBundle {
     public String month = "January";
     public int numDays = 31;
     public int currDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-    public ToDoMonth aToDoMonth = new ToDoMonth(month, numDays);// new ToDoDays();
+    public ToDoMonth aToDoMonth = new ToDoMonth(month, numDays, this);// new ToDoDays();
     public TrackerList trackerList;
     public JournalList journalList = new JournalList(numDays, this);// new JournalList();
     public MonthlyHome monthlyHome;
