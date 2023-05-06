@@ -1,5 +1,5 @@
 .labels{
-    -fx-font-size: 14;
+    -fx-font-size: 24;
     -fx-text-fill: black;
     -fx-font-family: "Lucida Sans Unicode";
 }
@@ -17,9 +17,41 @@
 
 /* For Journal book*/
 
+#del-entry{
+    -fx-background-color: transparent;
+    -fx-text-fill: #764203e9;
+    -fx-text-shadow: 2px 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 7, 0.2, 0.0, 0.0);
+    -fx-z-index: 5;
+    z-index: 5;
+}
+
+#del-entry:hover{
+    -fx-text-fill: #a46211e9;
+    -fx-effect: dropshadow(gaussian, rgba(10, 10, 10, 0.4), 7, 0.2, 0.0, 0.0);
+}
+
+#del-entry:pressed{
+    -fx-text-fill: #633805e9;
+}
+
+.journal-btn{
+    -fx-background-color: transparent;
+    -fx-text-fill: #764203e9;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 7, 0.2, 0.0, 0.0);
+}
+
+.journal-btn:hover{
+    -fx-text-fill: #a46211e9;
+    -fx-effect: dropshadow(gaussian, rgba(10, 10, 10, 0.4), 7, 0.2, 0.0, 0.0);
+}
+
+.journal-btn:pressed{
+    -fx-text-fill: #633805e9;
+}
+
 .book-page{
     -fx-background-color: transparent;
-    
     background-color: transparent;
 }
 
@@ -80,64 +112,7 @@
     background-color: white;
 }
 
-/* Calendar selector */ 
-
-.date-picker-popup  {
-    -fx-border-color: #4f86f7;
-    -fx-background-color: #4f86f7;
-    background-color: #4f86f7;;
-    border-color: #4f86f7;
-}
-
-.date-picker-popup .spinner .button .left-arrow,
-.date-picker-popup .spinner .button .right-arrow {
-	-fx-background-color: white;
-    background-color: white;
-}
-
-.date-picker-popup .spinner .button,
-.date-picker-popup .spinner .button {
-	-fx-background-color: transparent;
-    background-color: transparent;
-}
-
-.calendar-grid {
-    -fx-background-color: #4f86f7;
-    background-color: #4f86f7;
-}
-
-.calendar-header {
-    -fx-background-color: #2257bf;
-    -fx-base: #2257bf;
-    background-color: #2257bf;
-}
-
-.date-picker-popup > .month-year-pane {
-    -fx-base: #2257bf;
-}
-
-.date-picker-popup .cell:hover {
-    -fx-background-color: #4f86f7;
-    background-color: #4f86f7;
-}
-
-
-.date-picker-popup .today{
-    -fx-background-color:rgba(103, 254, 80, 0.275);
-    background-color:rgba(103, 254, 80, 0.275);;
-}    
-
-
-.date-picker-popup .selected{
-    -fx-background-color:rgb(254, 190, 80);
-    background-color:rgb(254, 190, 80);
-}    
-
-.date-picker-popup > * > .previous-month,
-.date-picker-popup > * > .next-month {
-    -fx-background-color: #fae4a4a2;
-    background-color: #fae4a4a2;
-}
+/* Delete button */
 
 .trash{
     -fx-border-width: 1;
@@ -151,4 +126,8 @@
     background-image:url("trashCan.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: transparent;
 }
