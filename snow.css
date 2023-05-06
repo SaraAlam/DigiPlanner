@@ -20,3 +20,65 @@
     border-width: 1;
     background-color: #b6e2e8;
 }
+
+
+/* Tab pane background and tabs */ 
+.tab-pane .tab{
+    -fx-background-color: #b6e2e8;
+}
+
+.tab-pane .tab:selected{
+    -fx-background-color: #68a3ab;
+}
+
+/* Calendar selector */ 
+
+.date-picker-popup  {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.date-picker-popup .spinner .button .left-arrow,
+.date-picker-popup .spinner .button .right-arrow {
+	-fx-background-color: black;
+    background-color: black;
+}
+
+.date-picker-popup .spinner .button,
+.date-picker-popup .spinner .button {
+	-fx-background-color: transparent;
+    background-color: transparent;
+}
+
+.calendar-grid {
+    -fx-background-color: #c2824e;
+}
+
+.date-picker-popup > .month-year-pane {
+    -fx-base: #ad6b36;
+}
+
+.date-picker-popup > * > .day-cell{
+    -fx-background-color: white;
+}
+
+.calendar-grid .day-cell:hover {
+    -fx-text-fill: black;
+    -fx-border-color: black;
+}
+
+.date-picker-popup .today{
+    -fx-background-color: #b6c2e8;
+}    
+
+
+.date-picker-popup .selected{
+    -fx-background-color:#ad6b36;
+    -fx-text-fill: black;
+}    
+
+.date-picker-popup > * > .previous-month,
+.date-picker-popup > * > .next-month {
+    -fx-background-color: #cfcfcf;
+    background-color: #cfcfcf;
+}
