@@ -130,7 +130,7 @@ public class DigiPlanner extends Application{
             if(dayDigit > 4){
                 dayDigit = 4;
             }
-            viewing_label.setText("Viewing: \n" + currDayName + " " + currDayNum + numEnd[dayDigit] + ", " +  currMonthStr + ", " + + year);
+            viewing_label.setText(currDayName + " " + currDayNum + numEnd[dayDigit] + "," + "\n" +   currMonthStr + ", " + + year);
         });
 
         stage.setMinWidth(WIDTH);
@@ -175,7 +175,7 @@ public class DigiPlanner extends Application{
             dayDigit = 4;
         }
         viewing_label.getStyleClass().add("labels");
-        viewing_label.setText("Viewing: \n" + currDayName + " " + currDayNum + numEnd[dayDigit] + ", " +  currMonthStr + ", " + + year);
+        viewing_label.setText(currDayName + " " + currDayNum + numEnd[dayDigit] + ","+ "\n"  +  currMonthStr + ", " + + year);
         viewing_label.getStyleClass().add("labels");
 
         
