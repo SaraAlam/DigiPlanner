@@ -43,7 +43,7 @@ public class SpreadBundle {
                 tab.setContent(aToDoMonth.toDoMonthGridPane);
             }
             else if (tabName.equals("Journal")){
-                tab.setContent(journalList.currJournal.bigCont);
+                tab.setContent(journalList.currJournal.container);
             }
             else if (tabName.equals("Home")){
                 tab.setContent(monthlyHome.disp);
