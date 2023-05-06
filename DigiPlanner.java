@@ -31,7 +31,7 @@ public class DigiPlanner extends Application{
     private int WIDTH = 800;
     private int HEIGHT = 700;
     public static int year = Calendar.getInstance().get(Calendar.YEAR);;
-    public int currMonth = Calendar.getInstance().get(Calendar.MONTH);
+    public static int currMonth = Calendar.getInstance().get(Calendar.MONTH);
 
     public BorderPane rightDisplay = new BorderPane();
     public GridPane left_nav;
@@ -44,7 +44,7 @@ public class DigiPlanner extends Application{
     Calendar selectedDate = Calendar.getInstance();
     Date selDate;
     public String currMonthStr = months[currMonth]; //Calendar.getInstance().getDisplayName(Calendar.MONTH,Calendar.LONG, Locale.getDefault());
-    public int currDayNum = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+    public static int currDayNum = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
     public String currDayName = Calendar.getInstance().getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG, Locale.getDefault());
 
     // For navigator label
@@ -256,5 +256,10 @@ public class DigiPlanner extends Application{
         return 30;
     }
 
+    public static void printDate(){
+        System.out.println("THIS IS THE FREAKING YEAR: " + year);
+        System.out.println("THIS IS THE FRIGGIN MONTH I GUESS: " + currMonth);
+        System.out.println("THIS IS THE DAYYYYYYY: " + currDayNum);
+    }
 
 }
