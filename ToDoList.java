@@ -14,4 +14,10 @@ public class ToDoList {
     public ToDoList(){
         listTasks = FXCollections.observableArrayList();
     }
+
+    public void reorder(){
+        for (int i=0; i<this.listTasks.size(); i++){
+            
+        }
+    }
 }
