@@ -30,19 +30,26 @@ import javafx.scene.text.Text;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.io.FileNotFoundException;
+import javafx.scene.control.Tooltip;
 
 public class Journal{
     ArrayList<JournalEntry> entries;
     GridPane container = new GridPane();
     TextArea page = new TextArea();
     GridPane book = new GridPane();
+    
     int curIdx = -1;
     Label pageNum = new Label();
+    
     private final TableView<JournalEntry> entryS = new TableView<>();
     private final ObservableList<JournalEntry> entriesT = 
         FXCollections.observableArrayList();
-    Button deleteEntry = new Button("X");
-    HBox del = new HBox(deleteEntry);
+    
+    Button deleteEntry = new Button();
+    Button editEntry = new Button();
+    Boolean editing = false;
+    HBox del = new HBox(editEntry, deleteEntry);
+    
     Button arrRight = new Button(">");
     Button arrLeft = new Button("<");
     
@@ -107,6 +114,7 @@ public class Journal{
                 page.setVisible(false);
                 page = entries.get(curIdx).container;
                 page.setVisible(true);
+                editing = false;
                 if(curIdx == this.getJournalSize()-1){
                     arrRight.setVisible(false);
                 }
@@ -123,6 +131,7 @@ public class Journal{
                 page.setVisible(false);
                 page = entries.get(curIdx).container;
                 page.setVisible(true);
+                editing = false;
                 if(curIdx == 0){
                     arrLeft.setVisible(false);
                 }
@@ -141,14 +150,74 @@ public class Journal{
         right.setAlignment(Pos.BOTTOM_CENTER);
         right.setPadding(new Insets(0, 15, 0, 0));
 
-        del.toFront();
+        Tooltip delete = new Tooltip("Delete this entry");
+        Tooltip edit = new Tooltip("Edit this entry");
+
+        deleteEntry.setPrefWidth(30);
         deleteEntry.setId("del-entry");
+        deleteEntry.setTooltip(delete);
+
+        editEntry.setPrefWidth(30);
+        editEntry.setId("edit-entry");
+        editEntry.setTooltip(edit);
 
         book.add(del, 1, 0);
         del.setVisible(false);
 
         deleteEntry.setOnAction(e -> {
-            System.out.println(curIdx);
+            int pages = this.getJournalSize();
+            if(pages == 1){
+                page.setVisible(false);
+                entries.remove(this.getJournalSize()-1);
+                pageNum.setText("");
+                arrRight.setVisible(false);
+                arrLeft.setVisible(false);
+                del.setVisible(false);
+                curIdx = -1;
+                return;
+            }
+            for(int i = curIdx; i < pages-1; i++){
+                entries.set(i, entries.get(i+1));
+            }
+            if(curIdx == pages-1){
+                curIdx -= 1;
+            }
+            entries.remove(this.getJournalSize()-1);
+            page.setVisible(false);
+            page = entries.get(curIdx).container;
+            page.setVisible(true);
+            pageNum.setText(Integer.toString(curIdx+1) + "/" +Integer.toString(pages-1));
+            if(pages-1 == 1){
+                arrRight.setVisible(false);
+                arrLeft.setVisible(false);
+            }
+            editing = false;
+        });
+
+
+
+        editEntry.setOnAction(e -> {
+            
+            if(editing){
+                page.setVisible(false);
+                page = entries.get(curIdx).container;
+                page.setVisible(true);
+                addField.setText("");
+                editing = false;
+            }
+            else if(!editing){
+                JournalEntry[] cur = new JournalEntry[1];
+                String curEnt = entries.get(curIdx).getContent();
+                JournalEntry entry = new JournalEntry(curEnt);
+                page.setVisible(false);
+                page = entry.container;
+                book.add(page, 1, 0);
+                page.setVisible(true);
+                del.toFront();
+                page.setText("*******EDITING*******\n\n"+page.getText());
+                addField.setText(entries.get(curIdx).getContent());
+                editing = true;
+            }
         });
         
         del.setAlignment(Pos.TOP_RIGHT);
@@ -181,9 +250,6 @@ public class Journal{
         book.getRowConstraints().addAll(row1, row2);
 
 
-        container.setGridLinesVisible(true);
-
-
         container.add(book, 0, 0);
         container.add(addField, 0,1);
         //container.add(entryS, 0,2);
@@ -210,29 +276,41 @@ public class Journal{
         TextArea cont = new TextArea();
         cont.setWrapText(true);
         cont.setId("add-entry");
-        cont.setPromptText("Add a new entry!");
+        cont.setPromptText("Press Enter after writing a new entry!");
         cont.setOnKeyPressed(e -> {
             if(e.getCode() == KeyCode.ENTER && !cont.getText().isEmpty()){
                 JournalEntry[] cur = new JournalEntry[1];
-                if(curIdx == -1){
-                    curIdx += 1;
-                    
+                String curEnt = cont.getText();
+                curEnt = curEnt.substring(0, curEnt.length()-1); // Gets rid of newspace from pressing Enter
+                JournalEntry entry = new JournalEntry(curEnt);
+                if(editing){
+                    entry = new JournalEntry(curEnt, entries.get(curIdx).getEntryTime());
                 }
-                else{
-                    curIdx = this.getJournalSize();
-                    arrLeft.setVisible(true);
-                }
-                JournalEntry entry = new JournalEntry(cont.getText());
-                cur[0] = entry;
-                this.addEntries(cur);
                 cont.setText("");
                 page.setVisible(false);
                 page = entry.container;
                 book.add(page, 1, 0);
                 del.setVisible(true);
                 del.toFront();
-                entriesT.add(this.getJournalSize()-1, entry);
-                pageNum.setText(Integer.toString(curIdx+1) + "/" +Integer.toString(this.getJournalSize()));
+                if(editing){
+                    entries.set(curIdx, entry);
+                    editing = false;
+                }
+                else{
+                    cur[0] = entry;
+                    this.addEntries(cur);
+                    if(curIdx == -1){
+                        curIdx += 1;
+                        
+                    }
+                    else{
+                        curIdx = this.getJournalSize()-1;
+                        arrLeft.setVisible(true);
+                    }
+                    entriesT.add(entry);
+                    pageNum.setText(Integer.toString(curIdx+1) + "/" +Integer.toString(this.getJournalSize()));
+                    editing = false;
+                }
                 //container.add(page, 0, 2);
             }
         });
