@@ -43,6 +43,8 @@ public class Journal{
         FXCollections.observableArrayList();
     Button deleteEntry = new Button("X");
     HBox del = new HBox(deleteEntry);
+    Button arrRight = new Button(">");
+    Button arrLeft = new Button("<");
     
     public Journal(){
         entries = new ArrayList<JournalEntry>();
@@ -91,10 +93,9 @@ public class Journal{
         container.setPadding(new Insets(15));
 
         TextArea addField = toAdd();
-    
 
-        Button arrRight = new Button(">");
-        Button arrLeft = new Button("<");
+        arrRight.setVisible(false);
+        arrLeft.setVisible(false);
 
         arrRight.getStyleClass().add("journal-btn");
         arrLeft.getStyleClass().add("journal-btn");
@@ -106,6 +107,11 @@ public class Journal{
                 page.setVisible(false);
                 page = entries.get(curIdx).container;
                 page.setVisible(true);
+                if(curIdx == this.getJournalSize()-1){
+                    arrRight.setVisible(false);
+                }
+                arrLeft.setVisible(true);
+
                 
             }
         });
@@ -117,6 +123,10 @@ public class Journal{
                 page.setVisible(false);
                 page = entries.get(curIdx).container;
                 page.setVisible(true);
+                if(curIdx == 0){
+                    arrLeft.setVisible(false);
+                }
+                arrRight.setVisible(true);
             }
         });
 
@@ -206,9 +216,11 @@ public class Journal{
                 JournalEntry[] cur = new JournalEntry[1];
                 if(curIdx == -1){
                     curIdx += 1;
+                    
                 }
                 else{
                     curIdx = this.getJournalSize();
+                    arrLeft.setVisible(true);
                 }
                 JournalEntry entry = new JournalEntry(cont.getText());
                 cur[0] = entry;
