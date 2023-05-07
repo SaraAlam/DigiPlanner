@@ -19,33 +19,49 @@
 
 #del-entry{
     -fx-background-color: transparent;
-    -fx-text-fill: #764203e9;
-    -fx-text-shadow: 2px 2px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 7, 0.2, 0.0, 0.0);
+    -fx-background-image:url('trashCan.jpg'); 
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
 }
 
 #del-entry:hover{
-    -fx-text-fill: #a46211e9;
-    -fx-effect: dropshadow(gaussian, rgba(10, 10, 10, 0.4), 7, 0.2, 0.0, 0.0);
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 7, 0.8, 0.0, 0.0);
+    -fx-opacity: 0.8;
 }
 
 #del-entry:pressed{
-    -fx-text-fill: #633805e9;
+    -fx-effect: dropshadow(gaussian, rgba(10, 10, 10, 0.4), 7, 0.2, 0.0, 0.0);
+}
+
+#edit-entry{
+    -fx-background-color: transparent;
+    -fx-background-image:url('pencil.png'); 
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+}
+
+#edit-entry:hover{
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 7, 0.8, 0.0, 0.0);
+    -fx-opacity: 0.8;
+}
+
+#edit-entry:pressed{
+    -fx-effect: dropshadow(gaussian, rgba(10, 10, 10, 0.4), 7, 0.2, 0.0, 0.0);
 }
 
 .journal-btn{
     -fx-background-color: transparent;
     -fx-text-fill: #764203e9;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 7, 0.2, 0.0, 0.0);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 7, 0.3, 0.5, 0.0);
 }
 
 .journal-btn:hover{
     -fx-text-fill: #a46211e9;
-    -fx-effect: dropshadow(gaussian, rgba(10, 10, 10, 0.4), 7, 0.2, 0.0, 0.0);
+    -fx-effect: dropshadow(gaussian, rgba(10, 10, 10, 0.4), 7, 0.3, 0.0, 0.0);
 }
 
 .journal-btn:pressed{
-    -fx-text-fill: #633805e9;
+    -fx-text-fill: #422603e9;
 }
 
 .book-page{
