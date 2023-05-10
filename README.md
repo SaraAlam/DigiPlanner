@@ -94,9 +94,9 @@ The goal to add buttons for the other tabs was omitted since we use a tabpane. T
    * This task is still incomplete but we have made considerable progress on it. Four distinct leaves were created for the mascot, each representing a season. The background colors for these mascots were picked using color theory (see Aesthetic Elements section 2). The following are the four base mascots for Winter, Spring, Summer, and Fall respectively as well as their hand picked background colors.
 
 ![snowyAndBack](snowyLeaf.png)
-![yellowAndBack](https://user-images.githubusercontent.com/123586903/236309197-7e65a541-dc65-404a-af78-3deba7a212e3.png)
-![greenAndBack](https://user-images.githubusercontent.com/123586903/236309210-561935bf-4902-45aa-82b3-f1908a3e4317.png)
-![redAndback](https://user-images.githubusercontent.com/123586903/236309223-6b3a55e7-97a4-456f-8ae0-f7926b47c1ff.png)
+![yellowAndBack](yellowAndBack.png)
+![greenAndBack](greenAndBack.png)
+![redAndback](redAndBack.png)
 
 
 8. **Make images of a mascot to display for each end of the tracker color slider.** 
