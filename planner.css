@@ -139,7 +139,7 @@
 .tab-pane .tab-header-area .tab-header-background {
     -fx-background-color: transparent;
 }
-
+/*
 .to-do-table{
     -fx-background-color: #dad787;
 
@@ -151,5 +151,28 @@
     -fx-background-repeat: no-repeat;
     -fx-background-size: 100% 100%;
     -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-table-cell-border-color: transparent;
+    background-color: transparent;
+    border-color: black;
+ }
+
+ .table-row-cell .table-cell{ 
+    -fx-alignment: CENTER;
+ }
+
+
+ .table-row-cell:selected {
+    -fx-background-color: #e69a2999;
+    -fx-text-fill: #79200e;
+    -fx-background-insets: 0;
+    background-color: #e69a2999;
+ }
+
+ .table-row-cell:selected .table-cell{
+    -fx-text-fill: #79200e;
+ }
+
     border-width: 1;
 }
+

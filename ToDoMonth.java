@@ -157,7 +157,7 @@ public class ToDoMonth {
         clearCol.setCellFactory(cellFactory);
         // clearCol.prefWidthProperty().bind(toDoTable.widthProperty().divide(3));
         // clearCol.setPrefWidth(50 );
-        clearCol.prefWidthProperty().bind(toDoTable.widthProperty().multiply(0.111));
+        clearCol.prefWidthProperty().bind(toDoTable.widthProperty().multiply(0.106));
         clearCol.setResizable(false);
         toDoTable.getColumns().add(clearCol);
 
