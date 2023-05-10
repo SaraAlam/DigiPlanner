@@ -93,7 +93,7 @@ The goal to add buttons for the other tabs was omitted since we use a tabpane. T
 7. **Make images of a mascot corresponding to each of the five trackers** water, workout, stress, study and sleep. 
    * This task is still incomplete but we have made considerable progress on it. Four distinct leaves were created for the mascot, each representing a season. The background colors for these mascots were picked using color theory (see Aesthetic Elements section 2). The following are the four base mascots for Winter, Spring, Summer, and Fall respectively as well as their hand picked background colors.
 
-![snowyAndBack](snowyLeaf.png)
+![snowyAndBack](snowyAndBack.png)
 ![yellowAndBack](yellowAndBack.png)
 ![greenAndBack](greenAndBack.png)
 ![redAndback](redAndBack.png)
