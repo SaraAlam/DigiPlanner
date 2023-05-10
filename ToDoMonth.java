@@ -27,6 +27,8 @@ import java.util.HashMap;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.application.Platform;
+import javafx.scene.control.Tooltip;
+
 
 
 public class ToDoMonth {
@@ -52,12 +54,14 @@ public class ToDoMonth {
         // input new task
         TextField input = new TextField();
         input.setPrefWidth(Integer.MAX_VALUE);
+        input.setPromptText("Press Enter after writing a new entry!");
         // input.setPadding(new Insets(10));
         toDoMonthGridPane.setMargin(input, new Insets(0,0,10,0));
         toDoMonthGridPane.add(input, 0, 0);
 
 
         toDoTable = new TableView<ToDoTask>();
+        toDoTable.setId("to-do-table");
         toDoTable.setMinWidth(400);
 
         allToDoLists = new ArrayList<ToDoList>();
@@ -98,11 +102,11 @@ public class ToDoMonth {
 
         toDoMonthGridPane.add(toDoTable, 0, 1);
 
-        Button saveAndQuitButton = new Button("Save and Quit");
-        saveAndQuitButton.setMinWidth(100);
-        toDoMonthGridPane.setMargin(saveAndQuitButton, new Insets(0, 10, 10, 0));
-        toDoMonthGridPane.add(saveAndQuitButton, 0, 2);
-        saveAndQuitButton.setOnAction(evt -> saveAndQuitHandler(allToDoLists, numDays));
+        // Button saveAndQuitButton = new Button("Save and Quit");
+        // saveAndQuitButton.setMinWidth(100);
+        // toDoMonthGridPane.setMargin(saveAndQuitButton, new Insets(0, 10, 10, 0));
+        // toDoMonthGridPane.add(saveAndQuitButton, 0, 2);
+        // saveAndQuitButton.setOnAction(evt -> saveAndQuitHandler(allToDoLists, numDays));
 
 
         // Handlers
@@ -121,11 +125,13 @@ public class ToDoMonth {
         Callback<TableColumn<ToDoTask, Void>, TableCell<ToDoTask, Void>> cellFactory = new Callback<TableColumn<ToDoTask, Void>, TableCell<ToDoTask, Void>>() {
             @Override
             public TableCell<ToDoTask, Void> call(final TableColumn<ToDoTask, Void> param) {
-                final TableCell<ToDoTask, Void> cell = new TableCell<ToDoTask, Void>() {
+                final TableCell<ToDoTask, Void> cell = new TableCell<ToDoTask, Void>() {                    
                     Button btn = new Button("     ");
                     // btn.setWidth(50);
                     {
                         btn.getStyleClass().add("trash");
+                        Tooltip trash = new Tooltip("Delete this entry");
+                        btn.setTooltip(trash);
                         btn.setOnAction((ActionEvent event) -> {
                             ToDoTask taskToDelete = getTableView().getItems().get(getIndex());
                             allToDoLists.get(currDay).listTasks.remove(taskToDelete);
@@ -178,9 +184,9 @@ public class ToDoMonth {
         }
     }
 
-    private void saveAndQuitHandler(ArrayList<ToDoList> allToDoLists, int numDays) {
-        ToDoFileHandler.saveToDos(allToDoLists, "ToDoMonth.txt", numDays);
-        Platform.exit();
-    }
+    // private void saveAndQuitHandler(ArrayList<ToDoList> allToDoLists, int numDays) {
+    //     ToDoFileHandler.saveToDos(allToDoLists, "ToDoMonth.txt", numDays);
+    //     Platform.exit();
+    // }
 
 }
