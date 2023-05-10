@@ -261,6 +261,7 @@ public class DigiPlanner extends Application{
         System.out.println("THIS IS THE FREAKING YEAR: " + year);
         System.out.println("THIS IS THE FRIGGIN MONTH I GUESS: " + currMonth);
         System.out.println("THIS IS THE DAYYYYYYY: " + currDayNum);
+        // monthlyBundles.get(currMonth).aToDoMonth;
     }
 
 }
