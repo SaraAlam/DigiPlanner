@@ -143,9 +143,6 @@
 .to-do-table{
     -fx-background-color: #dad787;
 
-<<<<<<< HEAD
-}*/
-=======
 }
 
 /* Table View */
@@ -199,4 +196,3 @@
  .table-row-cell:selected .table-cell{
     -fx-text-fill: #79200e;
  }
->>>>>>> 4c9c8e2505092b4f92f5da6b93265a8be35aa0b0
