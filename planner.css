@@ -145,35 +145,11 @@
 
 }
 
-/* Table View */
+/* Tracker Icons */ 
 
-.table-view .column-header-background{
-    -fx-background-color: transparent;
-    background-color: transparent;
-}
-.table-view .column-header-background .label{
-    -fx-background-color: transparent;
-    background-color: transparent;
- }
-
-.table-view .column-header{
-    -fx-background-color: #E69B27;
-    background-color: #E69B27;
-    -fx-width: fit-content;
-    width: fit-content;
- }
-
- .table-view{
-    -fx-background-color: transparent;
-    -fx-font-size: 16px;
-    -fx-border-color: derive(black, -60%);
-    background-color: transparent;
-    font-size: 16px;
-    border-color: derive(black, -60%);
-}
-
-
-.table-row-cell{    
+#icon{
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
     -fx-background-color: transparent;
     -fx-border-color: black;
     -fx-table-cell-border-color: transparent;
@@ -196,3 +172,7 @@
  .table-row-cell:selected .table-cell{
     -fx-text-fill: #79200e;
  }
+
+    border-width: 1;
+}
+

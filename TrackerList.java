@@ -45,6 +45,7 @@ public class TrackerList {
     public Color currSelectedColor;
     public int currSelectedColorIdx;
     public GridPane trackerSpreadPane;
+    VBox icon = new VBox();
 
     public TrackerList(String m, int nDays, SpreadBundle pBundle) throws Exception{
         month = m;
@@ -74,12 +75,15 @@ public class TrackerList {
         Label spread_title = new Label("Trackers");
         GridPane.setConstraints(year_and_month_label, 0,0);
         GridPane.setConstraints(spread_title, 0, 1);
-        trackerSpreadPane.getChildren().addAll(year_and_month_label, spread_title);
+        //trackerSpreadPane.getChildren().addAll(year_and_month_label, spread_title);
     }
 
     public void create_drop_down() throws Exception{
         ObservableList<String> trackerNamesObs = FXCollections.observableArrayList(trackerNames);
         trackerMenu = new ComboBox<String>();
+        trackerMenu.setPrefSize(200, 40);
+        trackerMenu.setStyle("-fx-font-size: 18");
+        trackerMenu.setId("menu");
         trackerMenu.setItems(trackerNamesObs);
         trackerMenu.setValue(currTracker.name);
         trackerMenu.valueProperty().addListener(
@@ -95,8 +99,14 @@ public class TrackerList {
                     }
                 }
         });
-        GridPane.setConstraints(trackerMenu, 0, 2);
-        trackerSpreadPane.getChildren().addAll(trackerMenu);
+
+        icon.setId("icon");
+        icon.setStyle("-fx-background-image:url('" + trackerMenu.getValue() + ".png')");
+        icon.setPrefSize(40, 40);
+        HBox trackerInfo = new HBox(trackerMenu, icon);
+        trackerInfo.setSpacing(10);
+        GridPane.setConstraints(trackerInfo, 0, 2);
+        trackerSpreadPane.getChildren().addAll(trackerInfo);
     }
     public int get_month_first_day(){
         // month_num is 0 for January

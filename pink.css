@@ -144,3 +144,8 @@
  .table-row-cell:selected .table-cell{
     -fx-text-fill: #79200e;
  }
+
+#menu{
+    -fx-background-color: #c9e8a0;
+}
+
