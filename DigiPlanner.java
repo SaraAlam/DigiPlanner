@@ -17,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -205,8 +206,24 @@ public class DigiPlanner extends Application{
         col1.setPercentWidth(90);
         g.getColumnConstraints().addAll(col1);
 
+        VBox leaf = new VBox();
+        leaf.setId("leaf");
+        leaf.setPrefSize(200, 200);
+
+        VBox mascot = new VBox(leaf);
+        
+        
+        mascot.setAlignment(Pos.BOTTOM_CENTER);
+        mascot.setPrefSize(200, 450);
+
+        
+        mascot.setVisible(true);
+
+        GridPane.setConstraints(mascot, 0, 2, 2, 1);
+        g.getChildren().add(mascot);
+
         //save button
-        Button save_button = new Button("Save");
+        //Button save_button = new Button("Save");
 
 
         return g;

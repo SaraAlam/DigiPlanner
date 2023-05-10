@@ -82,3 +82,10 @@
     -fx-background-color: #cfcfcf;
     background-color: #cfcfcf;
 }
+
+#leaf{
+    -fx-background-color: transparent;
+    -fx-background-image:url('redLeaf.png'); 
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+}

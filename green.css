@@ -87,3 +87,12 @@
     -fx-background-color: #cfcfcf;
     background-color: #cfcfcf;
 }
+
+/* Mascot CSS */
+
+#leaf{
+    -fx-background-color: transparent;
+    -fx-background-image:url('greenLeaf.png'); 
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+}
