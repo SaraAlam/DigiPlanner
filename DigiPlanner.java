@@ -1,5 +1,6 @@
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.BorderPane;
@@ -18,6 +19,8 @@ import javafx.scene.control.skin.DatePickerSkin;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import java.util.ArrayList;
+import javax.swing.text.TableView;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -37,8 +40,8 @@ public class DigiPlanner extends Application{
     public BorderPane rightDisplay = new BorderPane();
     public GridPane left_nav;
     public GridPane root;
-    String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    public HashMap<String,SpreadBundle> monthlyBundles = new HashMap<String,SpreadBundle>();
+    public static String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    public static HashMap<String,SpreadBundle> monthlyBundles = new HashMap<String,SpreadBundle>();
     
     //create the calendar view
     DatePicker dp = new DatePicker();
@@ -274,11 +277,31 @@ public class DigiPlanner extends Application{
         return 30;
     }
 
-    public static void printDate(){
-        System.out.println("THIS IS THE FREAKING YEAR: " + year);
-        System.out.println("THIS IS THE FRIGGIN MONTH I GUESS: " + currMonth);
-        System.out.println("THIS IS THE DAYYYYYYY: " + currDayNum);
-        // monthlyBundles.get(currMonth).aToDoMonth;
+    // public static void printDate(){
+    //     System.out.println("THIS IS THE FREAKING YEAR: " + year);
+    //     System.out.println("THIS IS THE FRIGGIN MONTH I GUESS: " + currMonth);
+    //     System.out.println("THIS IS THE DAYYYYYYY: " + currDayNum);
+    //     // monthlyBundles.get(currMonth).aToDoMonth;
+        
+    // }
+    public static void updateToDos(){
+        int selectedDay = monthlyBundles.get(months[currMonth]).aToDoMonth.currDay;
+        //System.out.println(monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay));
+        TableView<ToDoTask> toDoTable = new TableView<ToDoTask>();
+        toDoTable = monthlyBundles.get(months[currMonth]).aToDoMonth.toDoTable;
+
+        ObservableList<ToDoTask> toOrganize = monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay).listTasks;
+        int size = toOrganize.size();
+        for (int i=0; i<size; i++){
+            if (toOrganize.get(i).fakeDone){
+                ToDoTask temp = toOrganize.get(i);
+                toOrganize.remove(i);
+                toOrganize.add(temp);
+            }
+        }
+        ObservableList<ToDoTask> lTasks = monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay).listTasks;
+        lTasks = toOrganize;
+        toDoTable.setItems(lTasks);
     }
 
 }
