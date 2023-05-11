@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class ToDoList {
 
     ObservableList<ToDoTask> listTasks;
+    ArrayList<ToDoTask> toWrite;
 
     public ToDoList(){
         listTasks = FXCollections.observableArrayList();

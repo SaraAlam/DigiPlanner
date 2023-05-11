@@ -17,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -26,6 +27,11 @@ import java.util.Locale;
 import java.util.Date;
 import java.time.Instant;
 import java.time.ZoneId;
+
+import java.io.*;
+import java.nio.file.*;
+
+
 
 public class DigiPlanner extends Application{
     private int WIDTH = 800;
@@ -154,6 +160,7 @@ public class DigiPlanner extends Application{
         
     }
 
+
     public GridPane create_root() throws Exception{
         GridPane g = new GridPane();
         ColumnConstraints col1 = new ColumnConstraints();
@@ -174,7 +181,7 @@ public class DigiPlanner extends Application{
         return g;
     }
 
-    public GridPane create_left_nav(){
+    public GridPane create_left_nav() throws Exception{
         GridPane g = new GridPane();
         g.setPrefHeight(Integer.MAX_VALUE);
         int dayDigit = currDayNum % 10;
@@ -207,7 +214,14 @@ public class DigiPlanner extends Application{
 
         //save button
         Button save_button = new Button("Save");
-
+        save_button.setOnAction( e -> {try{
+            save_button.setDisable(true);
+            save_info(save_button);}
+        catch(Exception exc){
+            System.out.println(exc);
+        }});
+        GridPane.setConstraints(save_button, 0, 2);
+        g.getChildren().add(save_button);
 
         return g;
     }
@@ -224,7 +238,7 @@ public class DigiPlanner extends Application{
      * Method to check if the current year is leap or not
      * @return boolean
      */
-    public boolean is_leap(){
+    public static boolean is_leap(){
         if (year % 400 == 0) {
             return true;
         } 
@@ -242,7 +256,7 @@ public class DigiPlanner extends Application{
      * Get the number of days in the month for this tracker
      * @return int
      */
-    public int get_num_days(String month){
+    public static int get_num_days(String month){
         String[] monthsWith31Days = {"January", "March", "May", "July", "August", "October","December"};
         for(String m: monthsWith31Days){
             if (month.equals(m)){
@@ -263,4 +277,41 @@ public class DigiPlanner extends Application{
         System.out.println("THIS IS THE DAYYYYYYY: " + currDayNum);
     }
 
+    public void save_info(Button save_button) throws Exception{
+        TabPane currTabPane = monthlyBundles.get(currMonthStr).displayPane;
+        BorderPane.clearConstraints(currTabPane);
+        rightDisplay.getChildren().clear();
+
+
+        Label saving_label = new Label("Saving...");
+        rightDisplay.setCenter(saving_label);
+        
+
+        String dirname = System. getProperty("user. dir") + "PlannerInfo";
+        Path d = Paths.get(dirname);
+        if (Files.notExists(d)){File f = new File("PlannerInfo"); f.mkdirs(); dirname = f.getPath();}
+        dirname = dirname + "/"+ Calendar.getInstance().get(Calendar.YEAR);
+        d = Paths.get(dirname);
+        File f = new File(dirname);
+        if (Files.notExists(d)){ f.mkdirs();}
+
+        //call function in file_handler
+        String monthDirname = "";
+        for(String m: months){
+            monthDirname = dirname + "/"+ m;
+            d = Paths.get(dirname);
+            File monthF = new File(monthDirname);
+            if (Files.notExists(d)){ monthF.mkdirs();}
+            SpreadBundle mBundle = monthlyBundles.get(m);
+            DPFileHandler.saveRecords(m, mBundle, dirname);
+        }
+
+        BorderPane.clearConstraints(saving_label);
+        rightDisplay.getChildren().clear();
+        rightDisplay.setCenter(currTabPane);
+
+        save_button.setDisable(false);
+
+        System.out.println("Save");
+    }
 }

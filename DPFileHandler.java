@@ -1,4 +1,4 @@
-package monthTitles;
+
 import java.io.*;
 import java.util.ArrayList;
 import javafx.scene.paint.Color;
@@ -7,8 +7,7 @@ import java.util.HashMap;
 import java.util.Calendar;
 import java.util.Scanner;
 
-import Tracker;
-import TrackerList;
+
 
 /**
 * Class for file i/o code of DigiPlanner
@@ -23,56 +22,65 @@ class DPFileHandler {
      * @param dirname: Name of the directory to create and store the text file in
      * @return void
      */
-    public static void saveRecords(TrackerList tList, String dirname) {
+    public static void saveRecords(String month, SpreadBundle mBundle, String dirname) {
         
         try {
-            String fpath = dirname+"/"+tList.name+"Tracker.txt";
-
-            File oldFile = new File(fpath);
-            if (Files.exists(Paths.get(fpath))){oldFile.delete();}
-            FileWriter trackerFile = new FileWriter(dirname+"/"+tList.name+"Tracker.txt");
-            //DataOutputStream trackerWriter = new DataOutputStream(trackerFile);
-            trackerFile.write(tList.name+","+tList.year+","+tList.mode+"\n\n");
-            if (tList.mode!=tList.DEFAULT){
-                String categories_str = "User Categories: ";
-                String[] categories = tList.categories;
-                for (int k = 0; k < categories.length ; k++){
-                    categories_str += categories[k];
-                    if(k!=categories.length-1){
-                        categories_str += ", ";
-                    }
-                    else{
-                        categories_str += "\n\n";
-                    }
-                }
-                trackerFile.write(categories_str);
-            }
-            
-            ArrayList<Tracker> monthly_trackers = tList.monthly_trackers;
-            for (int i=0; i < monthly_trackers.size(); i++) {
-                Tracker t = monthly_trackers.get(i);
-                trackerFile.write(t.month+"\n");
-                HashMap<Integer, String> dayCats = t.dayCats;
-                int num_days = t.get_num_days();
-                for(int j = 1; j <= num_days; j++){
-                    String start = "( ";
-                    if (j < 10){start = start + "0";}
-                    trackerFile.write(start+j+"-"+dayCats.get(j)+" )");
-                    if (j!=num_days){
-                        trackerFile.write(" , ");
-                    }
-                    else{
-                        trackerFile.write(". ");
-                    }
-                }
-                trackerFile.write("\n\n");
-            }
-            trackerFile.close();
+            saveTrackerInfo(month, mBundle, dirname);
         }
-        catch(IOException ioe) {
+        catch(Exception ioe) {
             System.out.println("Error writing file");
         }
         
+    }
+
+    public static void saveTrackerInfo(String month, SpreadBundle mBundle, String dirname) throws Exception{
+        HashMap<String,Tracker> tMap = mBundle.trackerList.trackers;
+        String[] trackerNames = {"Water", "Workout","Mood","Study","Sleep"};
+        String fpath = dirname+"/"+month+"Trackers.txt";
+
+        File oldFile = new File(fpath);
+        if (Files.exists(Paths.get(fpath))){oldFile.delete();}
+        FileWriter trackerFile = new FileWriter(fpath);
+        for (int k = 0; k < trackerNames.length ; k++){
+            HashMap<Integer, Integer> dayColorIndices = tMap.get(trackerNames[k]).dayColorIndices;
+            int nDays = DigiPlanner.get_num_days(month);
+            for (int i = 0; i < nDays; i++){
+                trackerFile.write(""+dayColorIndices.get(i+1));
+                if (i == nDays-1){
+                    trackerFile.write(" .");
+                }
+                else{
+                    trackerFile.write(" , ");
+                }
+            }
+            trackerFile.write("\n\n");
+        }
+        trackerFile.close();
+    }
+
+    public static void saveTodoInfo(String month, SpreadBundle mBundle, String dirname) throws Exception{
+        HashMap<String,Tracker> tMap = mBundle.trackerList.trackers;
+        String[] trackerNames = {"Water", "Workout","Mood","Study","Sleep"};
+        String fpath = dirname+"/"+month+"Trackers.txt";
+
+        File oldFile = new File(fpath);
+        if (Files.exists(Paths.get(fpath))){oldFile.delete();}
+        FileWriter trackerFile = new FileWriter(fpath);
+        for (int k = 0; k < trackerNames.length ; k++){
+            HashMap<Integer, Integer> dayColorIndices = tMap.get(trackerNames[k]).dayColorIndices;
+            int nDays = DigiPlanner.get_num_days(month);
+            for (int i = 0; i < nDays; i++){
+                trackerFile.write(""+dayColorIndices.get(i+1));
+                if (i == nDays-1){
+                    trackerFile.write(" .");
+                }
+                else{
+                    trackerFile.write(" , ");
+                }
+            }
+            trackerFile.write("\n\n");
+        }
+        trackerFile.close();
     }
 
     /**
@@ -128,7 +136,7 @@ class DPFileHandler {
             System.out.println("No records found");
         }
       return null;  
-    }
+    }*/
 
     /**
      * Helper method for reading saved tracker information
