@@ -264,7 +264,7 @@ public class DigiPlanner extends Application{
         catch(Exception exc){
             System.out.println(exc);
         }});
-        GridPane.setConstraints(save_button, 0, 2);
+        GridPane.setConstraints(save_button, 0, 4);
         g.getChildren().add(save_button);
 
         return g;

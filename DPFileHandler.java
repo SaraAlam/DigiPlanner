@@ -26,9 +26,11 @@ class DPFileHandler {
         
         try {
             saveTrackerInfo(month, mBundle, dirname);
+            saveToDoInfo(month, mBundle, dirname);
+            saveJournalInfo(month, mBundle, dirname);
         }
         catch(Exception ioe) {
-            System.out.println("Error writing file");
+            System.out.println(ioe);
         }
         
     }
@@ -58,29 +60,63 @@ class DPFileHandler {
         trackerFile.close();
     }
 
-    public static void saveTodoInfo(String month, SpreadBundle mBundle, String dirname) throws Exception{
-        HashMap<String,Tracker> tMap = mBundle.trackerList.trackers;
-        String[] trackerNames = {"Water", "Workout","Mood","Study","Sleep"};
-        String fpath = dirname+"/"+month+"Trackers.txt";
-
+    public static void saveToDoInfo(String month, SpreadBundle mBundle, String dirname) throws Exception{
+        ArrayList<ToDoList> allToDoLists = mBundle.aToDoMonth.allToDoLists;
+        int nDays = DigiPlanner.get_num_days(month);
+        String fpath = dirname+"/"+month+"Todos.txt";
         File oldFile = new File(fpath);
         if (Files.exists(Paths.get(fpath))){oldFile.delete();}
-        FileWriter trackerFile = new FileWriter(fpath);
-        for (int k = 0; k < trackerNames.length ; k++){
-            HashMap<Integer, Integer> dayColorIndices = tMap.get(trackerNames[k]).dayColorIndices;
-            int nDays = DigiPlanner.get_num_days(month);
-            for (int i = 0; i < nDays; i++){
-                trackerFile.write(""+dayColorIndices.get(i+1));
-                if (i == nDays-1){
-                    trackerFile.write(" .");
-                }
-                else{
-                    trackerFile.write(" , ");
+        FileWriter toDoFile = new FileWriter(fpath);
+        for (int k = 0; k < nDays ; k++){
+            toDoFile.write(""+(k+1)+"\n\n");
+            ArrayList<ToDoTask> toWrite = allToDoLists.get(k).toWrite;
+            if (toWrite!=null){
+                int nTasks = toWrite.size();
+                for (int i = 0; i < nTasks; i++){
+                    ToDoTask t = toWrite.get(i);
+                    String tDetails = t.getTaskDetails();
+                    Boolean tDone = t.getTheDoneVal();
+                    int intDone = 0;
+                    if (tDone==true){ intDone = 1;}
+                    toDoFile.write(""+tDetails+" , "+ intDone + "\n");
+                    if (i == nTasks-1){
+                        toDoFile.write(" \n\n");
+                    }
+                    else{
+                        toDoFile.write(",\n");
+                    }
                 }
             }
-            trackerFile.write("\n\n");
         }
-        trackerFile.close();
+        toDoFile.close();
+    }
+
+    public static void saveJournalInfo(String month, SpreadBundle mBundle, String dirname) throws Exception{
+        HashMap<Integer, Journal> journals = mBundle.journalList.journals;
+        int nDays = DigiPlanner.get_num_days(month);
+        String fpath = dirname+"/"+month+"Journal.txt";
+        File oldFile = new File(fpath);
+        if (Files.exists(Paths.get(fpath))){oldFile.delete();}
+        FileWriter journalFile = new FileWriter(fpath);
+        for (int k = 0; k < nDays ; k++){
+            journalFile.write(""+(k+1)+"\n\n");
+            Journal j = journals.get((k+1));
+            ArrayList<JournalEntry> entries = j.entries;
+            int nEntries = entries.size();
+            for (int i = 0; i < nEntries; i++){
+                JournalEntry e = entries.get(i);
+                String eDetails = e.getContent();
+                String eTime = e.getEntryTime();
+                journalFile.write(eTime+ " :\n"+"eDetails"+"\n\n");
+                if (i == nEntries-1){
+                    journalFile.write(" \n\n");
+                }
+                else{
+                    journalFile.write(",\n");
+                }
+            }
+        }
+        journalFile.close();
     }
 
     /**
