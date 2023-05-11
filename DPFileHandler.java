@@ -68,7 +68,7 @@ class DPFileHandler {
         if (Files.exists(Paths.get(fpath))){oldFile.delete();}
         FileWriter toDoFile = new FileWriter(fpath);
         for (int k = 0; k < nDays ; k++){
-            toDoFile.write(""+(k+1)+"\n\n");
+            toDoFile.write("Day: "+(k+1)+"\n\n");
             ArrayList<ToDoTask> toWrite = allToDoLists.get(k).toWrite;
             if (toWrite!=null){
                 int nTasks = toWrite.size();
@@ -99,7 +99,7 @@ class DPFileHandler {
         if (Files.exists(Paths.get(fpath))){oldFile.delete();}
         FileWriter journalFile = new FileWriter(fpath);
         for (int k = 0; k < nDays ; k++){
-            journalFile.write(""+(k+1)+"\n\n");
+            journalFile.write("Day: "+(k+1)+"\n\n");
             Journal j = journals.get((k+1));
             ArrayList<JournalEntry> entries = j.entries;
             int nEntries = entries.size();
@@ -107,7 +107,7 @@ class DPFileHandler {
                 JournalEntry e = entries.get(i);
                 String eDetails = e.getContent();
                 String eTime = e.getEntryTime();
-                journalFile.write(eTime+ " :\n"+"eDetails"+"\n\n");
+                journalFile.write(eTime+ " :\n"+eDetails+"\n\n");
                 if (i == nEntries-1){
                     journalFile.write(" \n\n");
                 }
