@@ -26,6 +26,7 @@ public class Tracker {
     TrackerList parentList;
     HashMap<Integer, Label> dayLabels = new HashMap<Integer, Label>();
     HashMap<Integer, Color> dayLabelColors = new HashMap<Integer, Color>();
+    HashMap<Integer, Integer> dayColorIndices = new HashMap<Integer, Integer>();
     int selectedDay = 0;
     GridPane calendar = new GridPane();
     public VBox calendar_holder = new VBox();
@@ -108,6 +109,7 @@ public class Tracker {
         day.setMinWidth(calendar_col_width);
         day.setMinHeight(calendar_col_width);
         day.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0), new Insets(0))));
+        if (i!= -1){dayColorIndices.put(i, 11);}
         day.setBorder(new Border(new BorderStroke(Color.BLACK,
         BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
         day.setAlignment(Pos.CENTER);
@@ -122,6 +124,7 @@ public class Tracker {
                 selectedDay = i;
                 currSelectedDayLabel = dayLabels.get(selectedDay);
                 currSelectedDayLabel.setBackground(new Background(new BackgroundFill(parentList.currSelectedColor, new CornerRadii(0), new Insets(0))));
+                dayColorIndices.put(i, parentList.currSelectedColorIdx);
                 currSelectedDayLabel.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
                 if (parentList.currSelectedColorIdx >= (0.5*parentList.colors.length)){
