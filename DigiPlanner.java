@@ -57,7 +57,7 @@ public class DigiPlanner extends Application{
     Label viewing_label = new Label();
     String[] numEnd = {"th", "st", "nd", "rd", "th"};
     
-    TextArea msgCont = new TextArea();
+    public static TextArea msgCont = new TextArea();
 
     public void start(Stage stage) throws Exception{
         GridPane root = create_root();
@@ -227,6 +227,7 @@ public class DigiPlanner extends Application{
         msgCont.setEditable(false);
         msgCont.setText("Welcome!");
         msgCont.setPrefSize(75, 100);
+        msgCont.setWrapText(true);
 
         msg.setPadding(new Insets(-17, 15, 0, 20));
         msg.setAlignment(Pos.CENTER);
@@ -302,17 +303,20 @@ public class DigiPlanner extends Application{
     //     // monthlyBundles.get(currMonth).aToDoMonth;
         
     // }
+
+    public static void updateMsg(String m){
+        msgCont.setText(m);
+    }
+
     public static void updateToDos(){
         int selectedDay = monthlyBundles.get(months[currMonth]).aToDoMonth.currDay;
         //System.out.println(monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay));
         //TableView toDoTable = new TableView<ToDoTask>();
         //toDoTable = monthlyBundles.get(months[currMonth]).aToDoMonth.toDoTable;
-        System.out.println("We got a hit sir");
         ObservableList<ToDoTask> toOrganize = monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay).listTasks;
         int size = toOrganize.size();
         int changeAt = 0;
         for (int i=0; i<size; i++){
-            System.out.println(toOrganize.get(i).getTheDoneVal());
             if (toOrganize.get(i).getTheDoneVal()){
                 for(int j = size-1; j>i; j--){
                     if(!toOrganize.get(j).getTheDoneVal()){

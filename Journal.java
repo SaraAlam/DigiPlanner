@@ -164,6 +164,7 @@ public class Journal{
         del.setVisible(false);
 
         deleteEntry.setOnAction(e -> {
+            DigiPlanner.updateMsg("Entry deleted!");
             int pages = this.getJournalSize();
             if(pages == 1){
                 page.setVisible(false);
@@ -196,7 +197,7 @@ public class Journal{
 
 
         editEntry.setOnAction(e -> {
-            
+            DigiPlanner.updateMsg("Edit the text below your book! Press Enter when you are done editing.");
             if(editing){
                 page.setVisible(false);
                 page = entries.get(curIdx).container;
@@ -278,6 +279,7 @@ public class Journal{
         cont.setPromptText("Press Enter after writing a new entry!");
         cont.setOnKeyPressed(e -> {
             if(e.getCode() == KeyCode.ENTER && !cont.getText().isEmpty()){
+                DigiPlanner.updateMsg("New entry created!");
                 JournalEntry[] cur = new JournalEntry[1];
                 String curEnt = cont.getText();
                 curEnt = curEnt.substring(0, curEnt.length()-1); // Gets rid of newspace from pressing Enter
@@ -292,6 +294,7 @@ public class Journal{
                 del.setVisible(true);
                 del.toFront();
                 if(editing){
+                    DigiPlanner.updateMsg("Entry updated!");
                     entries.set(curIdx, entry);
                     editing = false;
                 }

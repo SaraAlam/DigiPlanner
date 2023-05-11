@@ -186,10 +186,10 @@
 }
 
 #speech{
+    -fx-font-size: 16;
     -fx-background-color: transparent;
 }
 
 #speech .scroll-pane .content{
-    -fx-text-fill: 16;
     -fx-background-color: transparent;
 }
