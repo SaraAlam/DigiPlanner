@@ -139,6 +139,7 @@ public class ToDoMonth {
                             DigiPlanner.updateMsg("Task deleted!");
                             ToDoTask taskToDelete = getTableView().getItems().get(getIndex());
                             allToDoLists.get(currDay).listTasks.remove(taskToDelete);
+                            allToDoLists.get(currDay).toWrite.remove(taskToDelete);
                             toDoTable.setItems(allToDoLists.get(currDay).listTasks);
                             toDoTable.getSelectionModel().clearSelection();
                         });
