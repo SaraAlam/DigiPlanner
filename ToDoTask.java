@@ -22,20 +22,16 @@ public class ToDoTask{
         return this.done;
     }
 
+    public java.lang.Boolean getTheDoneVal(){
+        return this.done.get();
+    }
+
     public java.lang.Boolean getDone() {
         return this.doneProperty().get();
     }
 
-    public boolean getPrimDone(){
-        if (getDone()){
-            return true;
-        }
-        return false;
-    }
-
-    public static void setDone(final java.lang.Boolean done) {
+    public void setDone(final java.lang.Boolean done) {
         this.doneProperty().set(done);
-        fakeDone = getDone();
     }
 
 

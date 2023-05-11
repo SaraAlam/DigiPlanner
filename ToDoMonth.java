@@ -184,9 +184,9 @@ public class ToDoMonth {
         }
     }
 
-    public void updateTable(ObservableList<ToDoTask> toOrganize){
-        allToDoLists.get(currDay).listTasks = toOrganize;
-    }
+    // public void updateTable(ObservableList<ToDoTask> toOrganize){
+    //     allToDoLists.get(currDay).listTasks = toOrganize;
+    // }
     // private void saveAndQuitHandler(ArrayList<ToDoList> allToDoLists, int numDays) {
     //     ToDoFileHandler.saveToDos(allToDoLists, "ToDoMonth.txt", numDays);
     //     Platform.exit();

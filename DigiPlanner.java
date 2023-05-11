@@ -287,13 +287,14 @@ public class DigiPlanner extends Application{
     public static void updateToDos(){
         int selectedDay = monthlyBundles.get(months[currMonth]).aToDoMonth.currDay;
         //System.out.println(monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay));
-        TableView<ToDoTask> toDoTable = new TableView<ToDoTask>();
-        toDoTable = monthlyBundles.get(months[currMonth]).aToDoMonth.toDoTable;
-
+        //TableView toDoTable = new TableView<ToDoTask>();
+        //toDoTable = monthlyBundles.get(months[currMonth]).aToDoMonth.toDoTable;
+        System.out.println("We got a hit sir");
         ObservableList<ToDoTask> toOrganize = monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay).listTasks;
         int size = toOrganize.size();
         for (int i=0; i<size; i++){
-            if (toOrganize.get(i).fakeDone){
+            System.out.println(toOrganize.get(i).getTheDoneVal());
+            if (toOrganize.get(i).getTheDoneVal()){
                 ToDoTask temp = toOrganize.get(i);
                 toOrganize.remove(i);
                 toOrganize.add(temp);
@@ -301,7 +302,8 @@ public class DigiPlanner extends Application{
         }
         ObservableList<ToDoTask> lTasks = monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay).listTasks;
         lTasks = toOrganize;
-        toDoTable.setItems(lTasks);
+        //toDoTable.setItems(lTasks);
+        monthlyBundles.get(months[currMonth]).aToDoMonth.toDoTable.setItems(lTasks);
     }
 
 }
