@@ -178,7 +178,9 @@ public class ToDoMonth {
     public void enterKeypressed(KeyCode keyCode, ToDoList thisList, TextField input){
         if (keyCode == KeyCode.ENTER ){
             String add = input.getText();
-            thisList.listTasks.add(new ToDoTask(add));
+            ToDoTask newToDoTask = new ToDoTask(add);
+            thisList.listTasks.add(newToDoTask);
+            thisList.toWrite.add(newToDoTask);
             input.setText("");
             toDoTable.getSelectionModel().clearSelection();
         }
