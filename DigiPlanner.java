@@ -1,5 +1,6 @@
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.BorderPane;
@@ -18,6 +19,11 @@ import javafx.scene.control.skin.DatePickerSkin;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
+import java.util.ArrayList;
+import javax.swing.text.TableView;
+
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -42,8 +48,8 @@ public class DigiPlanner extends Application{
     public BorderPane rightDisplay = new BorderPane();
     public GridPane left_nav;
     public GridPane root;
-    String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    public HashMap<String,SpreadBundle> monthlyBundles = new HashMap<String,SpreadBundle>();
+    public static String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    public static HashMap<String,SpreadBundle> monthlyBundles = new HashMap<String,SpreadBundle>();
     
     //create the calendar view
     DatePicker dp = new DatePicker();
@@ -57,6 +63,8 @@ public class DigiPlanner extends Application{
     Label viewing_label = new Label();
     String[] numEnd = {"th", "st", "nd", "rd", "th"};
     
+    TextArea msgCont = new TextArea();
+
     public void start(Stage stage) throws Exception{
         GridPane root = create_root();
         left_nav = create_left_nav();
@@ -205,12 +213,42 @@ public class DigiPlanner extends Application{
         Node newdp = test.getPopupContent();
 
 
-        GridPane.setConstraints(newdp, 0, 1, 2, 1);
+        GridPane.setConstraints(newdp, 0, 2, 2, 1);
         g.getChildren().add(newdp);
 
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(90);
         g.getColumnConstraints().addAll(col1);
+
+        VBox leaf = new VBox();
+        leaf.setId("leaf");
+        leaf.setPrefSize(200, 200);
+
+        VBox msg = new VBox(msgCont);
+
+        
+        msg.setId("speech-bub");
+        msg.setPrefSize(200, 150);
+
+        msgCont.setId("speech");
+        msgCont.setEditable(false);
+        msgCont.setText("Welcome!");
+        msgCont.setPrefSize(75, 100);
+
+        msg.setPadding(new Insets(-17, 15, 0, 20));
+        msg.setAlignment(Pos.CENTER);
+
+        VBox mascot = new VBox(msg, leaf);
+        
+        
+        mascot.setAlignment(Pos.BOTTOM_CENTER);
+        mascot.setPrefSize(200, 375);
+
+        
+        mascot.setVisible(true);
+
+        GridPane.setConstraints(mascot, 0, 3, 2, 1);
+        g.getChildren().add(mascot);
 
         //save button
         Button save_button = new Button("Save");
@@ -271,10 +309,40 @@ public class DigiPlanner extends Application{
         return 30;
     }
 
-    public static void printDate(){
-        System.out.println("THIS IS THE FREAKING YEAR: " + year);
-        System.out.println("THIS IS THE FRIGGIN MONTH I GUESS: " + currMonth);
-        System.out.println("THIS IS THE DAYYYYYYY: " + currDayNum);
+    // public static void printDate(){
+    //     System.out.println("THIS IS THE FREAKING YEAR: " + year);
+    //     System.out.println("THIS IS THE FRIGGIN MONTH I GUESS: " + currMonth);
+    //     System.out.println("THIS IS THE DAYYYYYYY: " + currDayNum);
+    //     // monthlyBundles.get(currMonth).aToDoMonth;
+        
+    // }
+    public static void updateToDos(){
+        int selectedDay = monthlyBundles.get(months[currMonth]).aToDoMonth.currDay;
+        //System.out.println(monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay));
+        //TableView toDoTable = new TableView<ToDoTask>();
+        //toDoTable = monthlyBundles.get(months[currMonth]).aToDoMonth.toDoTable;
+        System.out.println("We got a hit sir");
+        ObservableList<ToDoTask> toOrganize = monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay).listTasks;
+        int size = toOrganize.size();
+        int changeAt = 0;
+        for (int i=0; i<size; i++){
+            System.out.println(toOrganize.get(i).getTheDoneVal());
+            if (toOrganize.get(i).getTheDoneVal()){
+                for(int j = size-1; j>i; j--){
+                    if(!toOrganize.get(j).getTheDoneVal()){
+                        ToDoTask temp = toOrganize.get(i);
+                        toOrganize.set(i, toOrganize.get(j));
+                        toOrganize.set(j, temp);
+                    }
+                    //changeAt-=1;
+                }
+            }
+            //changeAt += 1;
+        }
+        ObservableList<ToDoTask> lTasks = monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay).listTasks;
+        lTasks = toOrganize;
+        //toDoTable.setItems(lTasks);
+        monthlyBundles.get(months[currMonth]).aToDoMonth.toDoTable.setItems(lTasks);
     }
 
     public void save_info(Button save_button) throws Exception{

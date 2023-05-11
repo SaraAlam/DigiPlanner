@@ -16,9 +16,15 @@ public class ToDoList {
         listTasks = FXCollections.observableArrayList();
     }
 
-    public void reorder(){
-        for (int i=0; i<this.listTasks.size(); i++){
-            
-        }
-    }
+    // public static void reorder(ObservableList<ToDoTask> toOrganize){
+    //     int size = toOrganize.size();
+    //     for (int i=0; i<size; i++){
+    //         if (toOrganize.get(i).fakeDone){
+    //             ToDoTask temp = toOrganize.get(i);
+    //             toOrganize.remove(i);
+    //             toOrganize.add(temp);
+    //         }
+    //     }
+
+    // }
 }

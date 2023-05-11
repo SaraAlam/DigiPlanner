@@ -19,33 +19,49 @@
 
 #del-entry{
     -fx-background-color: transparent;
-    -fx-text-fill: #764203e9;
-    -fx-text-shadow: 2px 2px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 7, 0.2, 0.0, 0.0);
+    -fx-background-image:url('trashCan.jpg'); 
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
 }
 
 #del-entry:hover{
-    -fx-text-fill: #a46211e9;
-    -fx-effect: dropshadow(gaussian, rgba(10, 10, 10, 0.4), 7, 0.2, 0.0, 0.0);
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 7, 0.8, 0.0, 0.0);
+    -fx-opacity: 0.8;
 }
 
 #del-entry:pressed{
-    -fx-text-fill: #633805e9;
+    -fx-effect: dropshadow(gaussian, rgba(10, 10, 10, 0.4), 7, 0.2, 0.0, 0.0);
+}
+
+#edit-entry{
+    -fx-background-color: transparent;
+    -fx-background-image:url('pencil.png'); 
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+}
+
+#edit-entry:hover{
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 7, 0.8, 0.0, 0.0);
+    -fx-opacity: 0.8;
+}
+
+#edit-entry:pressed{
+    -fx-effect: dropshadow(gaussian, rgba(10, 10, 10, 0.4), 7, 0.2, 0.0, 0.0);
 }
 
 .journal-btn{
     -fx-background-color: transparent;
     -fx-text-fill: #764203e9;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 7, 0.2, 0.0, 0.0);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 7, 0.3, 0.5, 0.0);
 }
 
 .journal-btn:hover{
     -fx-text-fill: #a46211e9;
-    -fx-effect: dropshadow(gaussian, rgba(10, 10, 10, 0.4), 7, 0.2, 0.0, 0.0);
+    -fx-effect: dropshadow(gaussian, rgba(10, 10, 10, 0.4), 7, 0.3, 0.0, 0.0);
 }
 
 .journal-btn:pressed{
-    -fx-text-fill: #633805e9;
+    -fx-text-fill: #422603e9;
 }
 
 .book-page{
@@ -121,5 +137,59 @@
 }
 
 .tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: transparent;
+}
+/*
+.to-do-table{
+    -fx-background-color: #dad787;
+
+}
+
+/* Tracker Icons */ 
+
+#icon{
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-table-cell-border-color: transparent;
+    background-color: transparent;
+    border-color: black;
+ }
+
+ .table-row-cell .table-cell{ 
+    -fx-alignment: CENTER;
+ }
+
+
+ .table-row-cell:selected {
+    -fx-background-color: #e69a2999;
+    -fx-text-fill: #79200e;
+    -fx-background-insets: 0;
+    background-color: #e69a2999;
+ }
+
+ .table-row-cell:selected .table-cell{
+    -fx-text-fill: #79200e;
+ }
+
+ /* Mascot speech */ 
+
+#speech-bub{
+    -fx-background-image: url('speech.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 105%;
+}
+
+#speech .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+#speech{
+    -fx-background-color: transparent;
+}
+
+#speech .scroll-pane .content{
+    -fx-text-fill: 16;
     -fx-background-color: transparent;
 }

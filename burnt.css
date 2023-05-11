@@ -82,3 +82,64 @@
     -fx-background-color: #cfcfcf;
     background-color: #cfcfcf;
 }
+
+#leaf{
+    -fx-background-color: transparent;
+    -fx-background-image:url('redLeaf.png'); 
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+}
+
+.table-view .column-header-background{
+    -fx-background-color: transparent;
+    background-color: transparent;
+}
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    background-color: transparent;
+ }
+
+.table-view .column-header{
+    -fx-background-color: #E69B27;
+    background-color: #E69B27;
+    -fx-width: fit-content;
+    width: fit-content;
+ }
+
+ .table-view{
+    -fx-background-color: #eeb15d;
+    -fx-font-size: 16px;
+    -fx-border-color: derive(black, -60%);
+    background-color: transparent;
+    font-size: 16px;
+    border-color: derive(black, -60%);
+}
+
+
+.table-row-cell{    
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-table-cell-border-color: transparent;
+    background-color: transparent;
+    border-color: black;
+ }
+
+ .table-row-cell .table-cell{ 
+    -fx-alignment: CENTER;
+ }
+
+
+ .table-row-cell:selected {
+    -fx-background-color: #e69a2999;
+    -fx-text-fill: #79200e;
+    -fx-background-insets: 0;
+    background-color: #e69a2999;
+ }
+
+ .table-row-cell:selected .table-cell{
+    -fx-text-fill: #79200e;
+ }
+
+#menu{
+    -fx-background-color: #eeb15d;
+}
