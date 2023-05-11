@@ -151,3 +151,13 @@
     -fx-background-color: #cce88b;
 }
 
+#today{
+    -fx-background-color: #f6cb79;
+    -fx-border-width: 1;
+    -fx-border-color: #69c387;
+    -fx-effect: dropshadow(gaussian, rgba(10, 10, 10, 0.4), 7, 0.2, 0.0, 0.0);
+}
+
+#today:pressed{
+    -fx-background-color: rgb(192, 146, 60);
+}
