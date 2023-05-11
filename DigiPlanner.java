@@ -221,7 +221,7 @@ public class DigiPlanner extends Application{
 
         msgCont.setId("speech");
         msgCont.setEditable(false);
-        msgCont.setText("Test");
+        msgCont.setText("Welcome!");
         msgCont.setPrefSize(75, 100);
 
         msg.setPadding(new Insets(-17, 15, 0, 20));
