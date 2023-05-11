@@ -350,7 +350,6 @@ public class DigiPlanner extends Application{
         monthlyBundles.get(months[currMonth]).aToDoMonth.toDoTable.setItems(lTasks);
     }
 
-<<<<<<< HEAD
     public void toDayPressed(){
         int year = Calendar.getInstance().get(Calendar.YEAR);
         int currMonth = Calendar.getInstance().get(Calendar.MONTH);
@@ -361,7 +360,6 @@ public class DigiPlanner extends Application{
         dp.setValue(localDate);
     }
 
-=======
     public void save_info(Button save_button) throws Exception{
         TabPane currTabPane = monthlyBundles.get(currMonthStr).displayPane;
         BorderPane.clearConstraints(currTabPane);
@@ -399,5 +397,4 @@ public class DigiPlanner extends Application{
 
         System.out.println("Save");
     }
->>>>>>> c80cc5bc2619c05f88a303c6df1a0ef94b9b3177
 }
