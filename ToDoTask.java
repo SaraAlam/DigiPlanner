@@ -5,6 +5,7 @@ public class ToDoTask{
     //private final StringProperty taskDetails = new SimpleStringProperty();
     private final SimpleBooleanProperty done = new SimpleBooleanProperty();
     private String taskDetails;
+    public boolean fakeDone = false;
     
     public ToDoTask(String details){
         taskDetails = details;
@@ -17,8 +18,12 @@ public class ToDoTask{
     
     // done binding
     public SimpleBooleanProperty doneProperty(){
-        DigiPlanner.printDate();
+        DigiPlanner.updateToDos();
         return this.done;
+    }
+
+    public java.lang.Boolean getTheDoneVal(){
+        return this.done.get();
     }
 
     public java.lang.Boolean getDone() {
