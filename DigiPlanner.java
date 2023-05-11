@@ -18,6 +18,7 @@ import javafx.scene.control.skin.DatePickerSkin;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -52,6 +53,8 @@ public class DigiPlanner extends Application{
     Label viewing_label = new Label();
     String[] numEnd = {"th", "st", "nd", "rd", "th"};
     
+    TextArea msgCont = new TextArea();
+
     public void start(Stage stage) throws Exception{
         GridPane root = create_root();
         left_nav = create_left_nav();
@@ -199,7 +202,7 @@ public class DigiPlanner extends Application{
         Node newdp = test.getPopupContent();
 
 
-        GridPane.setConstraints(newdp, 0, 1, 2, 1);
+        GridPane.setConstraints(newdp, 0, 2, 2, 1);
         g.getChildren().add(newdp);
 
         ColumnConstraints col1 = new ColumnConstraints();
@@ -210,16 +213,30 @@ public class DigiPlanner extends Application{
         leaf.setId("leaf");
         leaf.setPrefSize(200, 200);
 
-        VBox mascot = new VBox(leaf);
+        VBox msg = new VBox(msgCont);
+
+        
+        msg.setId("speech-bub");
+        msg.setPrefSize(200, 150);
+
+        msgCont.setId("speech");
+        msgCont.setEditable(false);
+        msgCont.setText("Test");
+        msgCont.setPrefSize(75, 100);
+
+        msg.setPadding(new Insets(-17, 15, 0, 20));
+        msg.setAlignment(Pos.CENTER);
+
+        VBox mascot = new VBox(msg, leaf);
         
         
         mascot.setAlignment(Pos.BOTTOM_CENTER);
-        mascot.setPrefSize(200, 450);
+        mascot.setPrefSize(200, 375);
 
         
         mascot.setVisible(true);
 
-        GridPane.setConstraints(mascot, 0, 2, 2, 1);
+        GridPane.setConstraints(mascot, 0, 3, 2, 1);
         g.getChildren().add(mascot);
 
         //save button
