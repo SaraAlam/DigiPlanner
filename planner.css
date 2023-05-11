@@ -151,7 +151,7 @@
     -fx-background-repeat: no-repeat;
     -fx-background-size: 100% 100%;
     -fx-background-color: transparent;
-    -fx-border-color: black;
+    -fx-border-width: 0;
     -fx-table-cell-border-color: transparent;
     background-color: transparent;
     border-color: black;
@@ -173,6 +173,23 @@
     -fx-text-fill: #79200e;
  }
 
-    border-width: 1;
+ /* Mascot speech */ 
+
+#speech-bub{
+    -fx-background-image: url('speech.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 105%;
 }
 
+#speech .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+#speech{
+    -fx-background-color: transparent;
+}
+
+#speech .scroll-pane .content{
+    -fx-text-fill: 16;
+    -fx-background-color: transparent;
+}
