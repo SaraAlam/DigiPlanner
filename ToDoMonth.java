@@ -110,7 +110,10 @@ public class ToDoMonth {
 
 
         // Handlers
-        input.setOnAction(evt -> enterKeypressed(KeyCode.ENTER, allToDoLists.get(currDay), input));
+        input.setOnAction(evt -> {
+            enterKeypressed(KeyCode.ENTER, allToDoLists.get(currDay), input);
+            DigiPlanner.updateMsg("New task created!");
+        });
 
         
 
@@ -133,6 +136,7 @@ public class ToDoMonth {
                         Tooltip trash = new Tooltip("Delete this entry");
                         btn.setTooltip(trash);
                         btn.setOnAction((ActionEvent event) -> {
+                            DigiPlanner.updateMsg("Task deleted!");
                             ToDoTask taskToDelete = getTableView().getItems().get(getIndex());
                             allToDoLists.get(currDay).listTasks.remove(taskToDelete);
                             toDoTable.setItems(allToDoLists.get(currDay).listTasks);
