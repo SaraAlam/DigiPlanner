@@ -159,3 +159,14 @@
 #today:pressed{
     -fx-background-color: #c98f89;
 }
+
+#save{
+    -fx-background-color: #ebbcb8;
+    -fx-border-width: 1;
+    -fx-border-color: #dad787;
+    -fx-effect: dropshadow(gaussian, rgba(10, 10, 10, 0.4), 7, 0.2, 0.0, 0.0);
+}
+
+#save:pressed{
+    -fx-background-color: #c98f89;
+}

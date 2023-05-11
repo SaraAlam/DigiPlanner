@@ -14,6 +14,7 @@ public class ToDoList {
 
     public ToDoList(){
         listTasks = FXCollections.observableArrayList();
+        toWrite = new ArrayList<ToDoTask>();
     }
 
     // public static void reorder(ObservableList<ToDoTask> toOrganize){
