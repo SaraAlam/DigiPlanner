@@ -292,13 +292,20 @@ public class DigiPlanner extends Application{
         System.out.println("We got a hit sir");
         ObservableList<ToDoTask> toOrganize = monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay).listTasks;
         int size = toOrganize.size();
+        int changeAt = 0;
         for (int i=0; i<size; i++){
             System.out.println(toOrganize.get(i).getTheDoneVal());
             if (toOrganize.get(i).getTheDoneVal()){
-                ToDoTask temp = toOrganize.get(i);
-                toOrganize.remove(i);
-                toOrganize.add(temp);
+                for(int j = size-1; j>i; j--){
+                    if(!toOrganize.get(j).getTheDoneVal()){
+                        ToDoTask temp = toOrganize.get(i);
+                        toOrganize.set(i, toOrganize.get(j));
+                        toOrganize.set(j, temp);
+                    }
+                    //changeAt-=1;
+                }
             }
+            //changeAt += 1;
         }
         ObservableList<ToDoTask> lTasks = monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay).listTasks;
         lTasks = toOrganize;
