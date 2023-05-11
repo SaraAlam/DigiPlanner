@@ -209,10 +209,21 @@ public class DigiPlanner extends Application{
         g.getChildren().add(viewing_label);
 
         Button toDay = new Button("Take me to Today!");
+        //save button
+        Button save_button = new Button("Save");
+        save_button.setId("save");
+        save_button.setOnAction( e -> {try{
+            save_button.setDisable(true);
+            save_info(save_button);}
+        catch(Exception exc){
+            System.out.println(exc);
+        }});
+        HBox topCalendar = new HBox(toDay, save_button);
+        topCalendar.setSpacing(45);
         //create the calendar view
         DatePickerSkin test = new DatePickerSkin(dp);
         Node newdp = test.getPopupContent();
-        VBox calendar = new VBox(toDay, newdp);
+        VBox calendar = new VBox(topCalendar, newdp);
         calendar.setPadding(new Insets(0, 0, -18 ,0));
         
         toDay.setId("today");
@@ -239,10 +250,10 @@ public class DigiPlanner extends Application{
         msgCont.setId("speech");
         msgCont.setEditable(false);
         msgCont.setText("Welcome!");
-        msgCont.setPrefSize(75, 100);
+        msgCont.setPrefSize(75, 125);
         msgCont.setWrapText(true);
 
-        msg.setPadding(new Insets(-17, 15, 0, 20));
+        msg.setPadding(new Insets(-4, 15, 0, 20));
         msg.setAlignment(Pos.CENTER);
 
         VBox mascot = new VBox(msg, leaf);
@@ -256,16 +267,8 @@ public class DigiPlanner extends Application{
         GridPane.setConstraints(mascot, 0, 3, 2, 1);
         g.getChildren().add(mascot);
 
-        //save button
-        Button save_button = new Button("Save");
-        save_button.setOnAction( e -> {try{
-            save_button.setDisable(true);
-            save_info(save_button);}
-        catch(Exception exc){
-            System.out.println(exc);
-        }});
-        GridPane.setConstraints(save_button, 0, 4);
-        g.getChildren().add(save_button);
+        // GridPane.setConstraints(save_button, 0, 4);
+        // g.getChildren().add(save_button);
 
         return g;
     }
