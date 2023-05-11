@@ -60,6 +60,7 @@ public class Tracker {
             Label dayLabel = new Label(""+(i+1));
             make_day((i+1), dayLabel);
             dayLabel.setOnMouseClicked( e -> {
+                DigiPlanner.updateMsg("Great job! Use the slider below, then select a day to change the colors in your tracker.");
                 if (selectedDay!=0){
                     Label currSelectedDay = dayLabels.get(selectedDay);
                     currSelectedDay.setBorder(new Border(new BorderStroke(Color.BLACK,
@@ -95,7 +96,7 @@ public class Tracker {
             wdl.setBorder(new Border(new BorderStroke(Color.BLACK,
             BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
             GridPane.setConstraints(wdl,i, 0);
-            weekly_day_row.getChildren().add(wdl);
+            //weekly_day_row.getChildren().add(wdl);
         }
         return weekly_day_row;
     }

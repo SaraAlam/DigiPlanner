@@ -19,6 +19,9 @@ public class ToDoTask{
     // done binding
     public SimpleBooleanProperty doneProperty(){
         DigiPlanner.updateToDos();
+        if(this.getTheDoneVal()){
+            DigiPlanner.updateMsg("Good job! Use the checkboxes to keep track of your completed tasks.");
+        }
         return this.done;
     }
 

@@ -143,3 +143,14 @@
 #menu{
     -fx-background-color: #eeb15d;
 }
+
+#today{
+    -fx-background-color: #f6cb79;
+    -fx-border-width: 1;
+    -fx-border-color: #f1665d;
+    -fx-effect: dropshadow(gaussian, rgba(10, 10, 10, 0.4), 7, 0.2, 0.0, 0.0);
+}
+
+#today:pressed{
+    -fx-background-color: #dbb05f;
+}

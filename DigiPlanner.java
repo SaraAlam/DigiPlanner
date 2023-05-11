@@ -23,8 +23,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import java.util.ArrayList;
 import javax.swing.text.TableView;
-
-
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HexFormat;
@@ -63,7 +63,7 @@ public class DigiPlanner extends Application{
     Label viewing_label = new Label();
     String[] numEnd = {"th", "st", "nd", "rd", "th"};
     
-    TextArea msgCont = new TextArea();
+    public static TextArea msgCont = new TextArea();
 
     public void start(Stage stage) throws Exception{
         GridPane root = create_root();
@@ -208,13 +208,19 @@ public class DigiPlanner extends Application{
         GridPane.setConstraints(viewing_label, 0,0, 2, 1);
         g.getChildren().add(viewing_label);
 
+        Button toDay = new Button("Take me to Today!");
         //create the calendar view
         DatePickerSkin test = new DatePickerSkin(dp);
         Node newdp = test.getPopupContent();
+        VBox calendar = new VBox(toDay, newdp);
+        calendar.setPadding(new Insets(0, 0, -18 ,0));
+        
+        toDay.setId("today");
+        toDay.setOnAction(evt -> toDayPressed());
 
+        GridPane.setConstraints(calendar, 0, 2, 2, 1);
+        g.getChildren().add(calendar);
 
-        GridPane.setConstraints(newdp, 0, 2, 2, 1);
-        g.getChildren().add(newdp);
 
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(90);
@@ -222,7 +228,7 @@ public class DigiPlanner extends Application{
 
         VBox leaf = new VBox();
         leaf.setId("leaf");
-        leaf.setPrefSize(200, 200);
+        leaf.setPrefSize(200, 180);
 
         VBox msg = new VBox(msgCont);
 
@@ -234,12 +240,12 @@ public class DigiPlanner extends Application{
         msgCont.setEditable(false);
         msgCont.setText("Welcome!");
         msgCont.setPrefSize(75, 100);
+        msgCont.setWrapText(true);
 
         msg.setPadding(new Insets(-17, 15, 0, 20));
         msg.setAlignment(Pos.CENTER);
 
         VBox mascot = new VBox(msg, leaf);
-        
         
         mascot.setAlignment(Pos.BOTTOM_CENTER);
         mascot.setPrefSize(200, 375);
@@ -316,17 +322,20 @@ public class DigiPlanner extends Application{
     //     // monthlyBundles.get(currMonth).aToDoMonth;
         
     // }
+
+    public static void updateMsg(String m){
+        msgCont.setText(m);
+    }
+
     public static void updateToDos(){
         int selectedDay = monthlyBundles.get(months[currMonth]).aToDoMonth.currDay;
         //System.out.println(monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay));
         //TableView toDoTable = new TableView<ToDoTask>();
         //toDoTable = monthlyBundles.get(months[currMonth]).aToDoMonth.toDoTable;
-        System.out.println("We got a hit sir");
         ObservableList<ToDoTask> toOrganize = monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay).listTasks;
         int size = toOrganize.size();
         int changeAt = 0;
         for (int i=0; i<size; i++){
-            System.out.println(toOrganize.get(i).getTheDoneVal());
             if (toOrganize.get(i).getTheDoneVal()){
                 for(int j = size-1; j>i; j--){
                     if(!toOrganize.get(j).getTheDoneVal()){
@@ -343,6 +352,16 @@ public class DigiPlanner extends Application{
         lTasks = toOrganize;
         //toDoTable.setItems(lTasks);
         monthlyBundles.get(months[currMonth]).aToDoMonth.toDoTable.setItems(lTasks);
+    }
+
+    public void toDayPressed(){
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        int currMonth = Calendar.getInstance().get(Calendar.MONTH);
+        int currDayNum = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        // dp.setValue(Calendar.getInstance().get(Calendar.YEAR));
+        Calendar calendar = Calendar.getInstance();
+        LocalDate localDate = LocalDateTime.ofInstant(calendar.toInstant(), calendar.getTimeZone().toZoneId()).toLocalDate();
+        dp.setValue(localDate);
     }
 
     public void save_info(Button save_button) throws Exception{
