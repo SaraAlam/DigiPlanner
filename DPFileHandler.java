@@ -222,12 +222,10 @@ class DPFileHandler {
                         Journal j = jList.journals.get(nDay);
                         ArrayList<JournalEntry> entries = j.entries;
                         System.out.println(entries.get(entries.size()-1).getContent());
-                        if (j.get)
                     }
                 }
             }
             reader.close();
         }
     }
-
 }

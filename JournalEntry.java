@@ -46,6 +46,14 @@ public class JournalEntry {
         entryTime = originalEntry;
 
     }
+    public JournalEntry(String entry, boolean noTime){
+        //Font font = Font.loadFont("file:scriptina/SCRIPALT.ttf", 16);
+        container.setEditable(false);
+        container.setWrapText(true);
+        container.getStyleClass().add("book-page");
+        content = entry;        
+        //container.setFont(font);
+    }
 
 
     public String getContent(){

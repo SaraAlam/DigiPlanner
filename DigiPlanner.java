@@ -322,18 +322,14 @@ public class DigiPlanner extends Application{
         return 30;
     }
 
-    // public static void printDate(){
-    //     System.out.println("THIS IS THE FREAKING YEAR: " + year);
-    //     System.out.println("THIS IS THE FRIGGIN MONTH I GUESS: " + currMonth);
-    //     System.out.println("THIS IS THE DAYYYYYYY: " + currDayNum);
-    //     // monthlyBundles.get(currMonth).aToDoMonth;
-        
-    // }
-
     public static void updateMsg(String m){
         msgCont.setText(m);
     }
 
+    /*
+     * Reorders the todo spread tab so that completed tasks appear at the bottom
+     * This method is called every time a change occurs inside of the todo spread tab
+     */
     public static void updateToDos(){
         int selectedDay = monthlyBundles.get(months[currMonth]).aToDoMonth.currDay;
         ObservableList<ToDoTask> toOrganize = monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay).listTasks;
@@ -347,19 +343,19 @@ public class DigiPlanner extends Application{
                         toOrganize.set(i, toOrganize.get(j));
                         toOrganize.set(j, temp);
                     }
-                    //changeAt-=1;
                 }
             }
-            //changeAt += 1;
         }
         ObservableList<ToDoTask> lTasks = monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay).listTasks;
         lTasks = toOrganize;
-        //toDoTable.setItems(lTasks);
         monthlyBundles.get(months[currMonth]).aToDoMonth.toDoTable.setItems(lTasks);
     }
 
+    /*
+     * Updates the graph in the home page
+     * This method is called every time a change occurs inside of the todo spread tab
+     */
     public static void getCompletionRates(){
-        System.out.println("updating graph");
         int selectedDay = monthlyBundles.get(months[currMonth]).aToDoMonth.currDay;
         int numDays = monthlyBundles.get(months[currMonth]).numDays;
         ArrayList<ToDoTask> toView = monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay).toWrite;
@@ -374,7 +370,6 @@ public class DigiPlanner extends Application{
             }
             denom ++;
         }
-        System.out.println(numer/denom);
         monthlyBundles.get(months[currMonth]).aToDoMonth.rates[selectedDay] = numer/denom;
         ToDoMonth aToDoMonth = monthlyBundles.get(months[currMonth]).aToDoMonth;
         
@@ -393,11 +388,13 @@ public class DigiPlanner extends Application{
         lineChart.getData().add(series);
     }
 
+    /*
+     * Brings the user to today in the navigator
+     */
     public void toDayPressed(){
         int year = Calendar.getInstance().get(Calendar.YEAR);
         int currMonth = Calendar.getInstance().get(Calendar.MONTH);
         int currDayNum = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        // dp.setValue(Calendar.getInstance().get(Calendar.YEAR));
         Calendar calendar = Calendar.getInstance();
         LocalDate localDate = LocalDateTime.ofInstant(calendar.toInstant(), calendar.getTimeZone().toZoneId()).toLocalDate();
         dp.setValue(localDate);
