@@ -7,6 +7,7 @@ public class ToDoTask{
     private String taskDetails;
     public boolean fakeDone = false;
     
+    
     public ToDoTask(String details){
         taskDetails = details;
     }
