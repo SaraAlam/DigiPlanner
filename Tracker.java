@@ -96,7 +96,7 @@ public class Tracker {
             wdl.setBorder(new Border(new BorderStroke(Color.BLACK,
             BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
             GridPane.setConstraints(wdl,i, 0);
-            //weekly_day_row.getChildren().add(wdl);
+            weekly_day_row.getChildren().add(wdl);
         }
         return weekly_day_row;
     }
