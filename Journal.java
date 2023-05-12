@@ -25,8 +25,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.*;
 import javafx.beans.binding.Bindings;
 import javafx.scene.text.Font;
-// import javafx.scene.media.Media;
-// import javafx.scene.media.MediaPlayer;
+//import javafx.scene.media.Media;
+//import javafx.scene.media.MediaPlayer;
 import java.io.File;
 
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ public class Journal{
 
     String musicFile = "page.mp3";
 
-    // Media sound = new Media(new File(musicFile).toURI().toString());
+    //Media sound = new Media(new File(musicFile).toURI().toString());
     
     public Journal(){
         entries = new ArrayList<JournalEntry>();
