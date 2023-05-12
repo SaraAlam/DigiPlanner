@@ -49,7 +49,7 @@ Part of the remaining tasks for the project include adding a save button to the 
 1. **CSS**
 The program uses one main css file that affects every different spread within the planner. Specific widgets or sections are given a unique style to fulfill the aesthetic and practical needs (e.g. transparent text-area for journal pages, gradient for tracker slider, trash can image for to-do list buttons).
 
-  * There are 4 additional css files that set the background color and gif based on the season (see Gifs below):
+  * There are 4 additional css files that set the background color, background gif and additional widgets (calendar, buttons, to-do table view) based on the season (see Gifs below):
 ```
 snow.css - Winter (December-February)
 pink.css - Spring (March-May)
@@ -78,14 +78,14 @@ Line charts for the task completion rate obtained from the todolists of the mont
    * Objectives 2-4 refer to tabs in the tabpane of every SpreadBundle object (there will be one per month).
 
 2. Have a **tab called journal** that displays entries on the image of a book.
-   * The goal for making it look like a page is flipped was ommitted due to difficulty. Instead, a task we have yet to complete is to play an audio of a page flipping when the user moves between journal entries for a day. The entries will also be removable and editable for the final version. There has been challenges with loading a handwritten font for the journal pages, but it will be solved through the use of built-in javafx methods instead of css.
+   * The goal for making it look like a page is flipped was ommitted due to difficulty. Instead, a task we have yet to complete is to play an audio of a page flipping when the user moves between journal entries for a day (page.mp3). The entries are removable and editable (a pencil and a trashcan icons), and any updated entry will include the date it was originally added and its most recent edit. Due to the interaction between two classes to handle journal entries, loading a custom font proved more difficult than expected. The goal of the handwritten font was discarded for this reason, given that the default font for the entire document was clean enough on its own.
    
 3. Have a **tab called tracker**, with the calendar view of labels that the user can recolor to rate their day based on 5 different metrics: water, workout, sleep, stress, and study.
 
 4. Have a **tab called toDo** which allows the user to have a to do list running for each day. This list allows the user to check off certain tasks as well as be deleted with a trash can shaped button.
 
 5. **Make the color picker a gradient** formed using different hues of the same color. Allow the user to pick from many different hues.
-This was done using a slider.
+This was done using a slider. The numbers in the slider were replaced with happy and sad faces to indicate which end of the slider is positive and which is unsatisfactory.
 
 6. **Have a tab called home**, which allows the user to view a summary of a certain month’s status in the form of a graph.
 The goal to add buttons for the other tabs was omitted since we use a tabpane. The tabpane sufficiently achieves the goal for navigating between views of the journal, tracker and todolist sections of the month.
@@ -100,7 +100,7 @@ The goal to add buttons for the other tabs was omitted since we use a tabpane. T
 
 
 8. **Make images of a mascot to display for each end of the tracker color slider.** 
-   * Also create images of the mascot speaking, for display when the program displays text to the user like errors, response to checking off tasks on the todo-list etc. NB: This task is still incomplete but we have made considerable progress on it. See previous section
+   * There are 4 versions of the leaf mascot that match their respective season. The images of the mascot look as if they were speaking with the use of a text dialogue image above it. The program displays text to the user after succesful actions such as checking off tasks on the todo-list, adding a new value to tracker, adding new journal entries, etc.
 
 9. Make 12 **background gifs** that are displayed based on which month it is. The TabPane for each month will sit on top of this gif background.
 We reduced the number of background gifs we used from 12 to 4, 1 for each season.
@@ -125,10 +125,11 @@ using javafx - Stack Overflow](https://stackoverflow.com/questions/33281588/crea
 8. [Part II: Using JavaFX UI Controls (Release 8) (oracle.com)](https://docs.oracle.com/javase/8/javafx/user-interface-tutorial/ui_controls.htm) (general widgets that may be useful)
 9. [Resizing images to fit the parent node - Stack Overflow](https://stackoverflow.com/questions/12630296/resizing-images-to-fit-the-parent-node) (To bind the gif to the window and assist with resizing)
 10. [Resizing Font with main window in Java - Stack Overflow](https://stackoverflow.com/questions/51661941/resizing-font-with-main-window-in-javahttps://stackoverflow.com/questions/51661941/resizing-font-with-main-window-in-java) (For the journal entries as the book is resized)
-11. [How to add an image to a button (and position it) in JavaFX](https://edencoding.com/how-to-add-an-image-to-a-button/) (For delete button column in To-do)
-12. [How to add a button to a TableView in JavaFX](https://riptutorial.com/javafx/example/27946/add-button-to-tableview)
-13. [Trash can image inspiration](https://www.reddit.com/r/PixelArt/comments/e9eqsn/trash_bin_i_made_for_fun_im_learning_shading/)
-14. [Color Theory](https://careerfoundry.com/en/blog/ui-design/introduction-to-color-theory-and-color-palettes/#:~:text=How%20to%20choose%20a%20color%20palette%201%20Research,the%20psychology%20behind%20your%20potential%20brand%20colors.%20)
-15. [Color Wheel- Color Palette Picker](https://www.canva.com/colors/color-wheel/)
+11. [Playing sound in JavaFX - Stack Overflow] https://stackoverflow.com/questions/23202272/how-to-play-sounds-with-javafx
+12. [How to add an image to a button (and position it) in JavaFX](https://edencoding.com/how-to-add-an-image-to-a-button/) (For delete button column in To-do)
+13. [How to add a button to a TableView in JavaFX](https://riptutorial.com/javafx/example/27946/add-button-to-tableview)
+14. [Trash can image inspiration](https://www.reddit.com/r/PixelArt/comments/e9eqsn/trash_bin_i_made_for_fun_im_learning_shading/)
+15. [Color Theory](https://careerfoundry.com/en/blog/ui-design/introduction-to-color-theory-and-color-palettes/#:~:text=How%20to%20choose%20a%20color%20palette%201%20Research,the%20psychology%20behind%20your%20potential%20brand%20colors.%20)
+16. [Color Wheel- Color Palette Picker](https://www.canva.com/colors/color-wheel/)
 
 
