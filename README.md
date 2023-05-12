@@ -106,7 +106,7 @@ The goal to add buttons for the other tabs was omitted since we use a tabpane. T
 We reduced the number of background gifs we used from 12 to 4, 1 for each season.
    
 10.  **Create a file IO hierarchy** of all text files to read and write to. 
-   * The largest folder will be that for each year (due to the scope of this project, we plan to only create this for the current year for the current version of the application). It will contain a folder for each month. Each month’s folder will contain text files to store journal entries, tracker information and daily todo-lists for the month. Each of these files will be created using specific naming conventions and formats, to aid the process of retrieving the information when the application is started in the future. Saving is handled by the user clicking a "save" button. The file input task is yet to be completed for the Journal spread tab, but works for the trackers and todo spread tab.
+   * The largest folder will be that for each year (due to the scope of this project, we plan to only create this for the current year for the current version of the application). It will contain a folder for each month. Each month’s folder will contain text files to store journal entries, tracker information and daily todo-lists for the month. Each of these files will be created using specific naming conventions and formats, to aid the process of retrieving the information when the application is started in the future. Saving is handled by the user clicking a "save" button. The program also uses a file directory to write back the information to the program at startup.
 
 
 
