@@ -12,6 +12,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
 
 /**
@@ -220,8 +221,7 @@ class DPFileHandler {
                         je.setEntryTime(entryTime);
                         Journal j = jList.journals.get(nDay);
                         j.entries.add(je);
-                        j.page = je.container;
-
+                        diegoMethod(j, je);
                     }
                 }
             }
@@ -229,4 +229,32 @@ class DPFileHandler {
         }
     }
 
+    public static void diegoMethod(Journal j, JournalEntry entry){
+        TextArea page = j.page;
+        page.setVisible(false);
+        page = entry.container;
+        //page.setFont(font);
+        j.book.add(page, 1, 0);
+        j.del.setVisible(true);
+        j.del.toFront();
+        j.arrRight.setVisible(false);
+        if(j.editing){
+            DigiPlanner.updateMsg("Entry updated!");
+            j.entries.set(j.curIdx, entry);
+            j.editing = false;
+        }
+        else{
+            if(j.curIdx == -1){
+                j.curIdx += 1;
+                
+            }
+            else{
+                j.curIdx = j.getJournalSize()-1;
+                j.arrLeft.setVisible(true);
+            }
+            j.entriesT.add(entry);
+            j.pageNum.setText(Integer.toString(j.curIdx+1) + "/" +Integer.toString(j.getJournalSize()));
+            j.editing = false;
+        }
+    }
 }

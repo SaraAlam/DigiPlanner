@@ -46,7 +46,7 @@ public class Journal{
     Label pageNum = new Label();
     
     private final TableView<JournalEntry> entryS = new TableView<>();
-    private final ObservableList<JournalEntry> entriesT = 
+    public final ObservableList<JournalEntry> entriesT = 
         FXCollections.observableArrayList();
     
     Button deleteEntry = new Button();
