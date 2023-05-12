@@ -4,6 +4,9 @@ import javafx.scene.paint.Color;
 import java.nio.file.*;
 import java.util.HashMap;
 import java.util.Scanner;
+
+import javax.swing.text.TableView;
+
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -41,7 +44,7 @@ class DPFileHandler {
         
         try {
             readTrackerInfo(month, mBundle, dirname);
-            //readToDoInfo(month, mBundle, dirname);
+            readToDoInfo(month, mBundle, dirname);
             readJournalInfo(month, mBundle, dirname);
         }
         catch(Exception ioe) {
@@ -173,9 +176,23 @@ class DPFileHandler {
         Scanner reader = new Scanner(fpath);
         int dayNum=-1;
         while (reader.hasNextLine()){
-
-           System.out.println(reader.nextLine());
+            String s = reader.nextLine();
+            if(!s.isEmpty()){
+                String[] tokens = s.split(" , ",0);
+                if (tokens[0] == "Day:"){
+                    dayNum ++;
+                    continue;
+                }
+                ToDoTask newToDoTask = new ToDoTask(tokens[0]);
+                if (tokens[1] == "1"){
+                    newToDoTask.setDone(true);
+                }
+                allToDoLists.get(dayNum).listTasks.add(newToDoTask);
+                allToDoLists.get(dayNum).toWrite.add(newToDoTask);
+            }
+            System.out.println(reader.nextLine());
         }
+        mBundle.aToDoMonth.allToDoLists = allToDoLists;
         reader.close();
     }
 
