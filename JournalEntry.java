@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.time.Instant;  
 import java.text.DateFormat; 
 import java.text.SimpleDateFormat; 
+import javafx.scene.text.Font;
 
 
 import java.text.DateFormat;  
@@ -17,6 +18,7 @@ public class JournalEntry {
     TextArea container = new TextArea();
 
     public JournalEntry(String entry){
+        //Font font = Font.loadFont("file:scriptina/SCRIPALT.ttf", 16);
         container.setEditable(false);
         container.setWrapText(true);
         container.getStyleClass().add("book-page");
@@ -25,7 +27,7 @@ public class JournalEntry {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd hh:mm:ss");  
         entryTime = dateFormat.format(timeOfEntry);
         
-        
+        //container.setFont(font);
         container.setText(entryTime + "\n\n" + content);
 
     }
