@@ -285,6 +285,7 @@ public class Journal{
                 DigiPlanner.updateMsg("New entry created!");
                 JournalEntry[] cur = new JournalEntry[1];
                 String curEnt = cont.getText();
+                curEnt = curEnt.replace("\n", "");
                 JournalEntry entry = new JournalEntry(curEnt);
                 if(editing){
                     entry = new JournalEntry(curEnt, entries.get(curIdx).getEntryTime());
