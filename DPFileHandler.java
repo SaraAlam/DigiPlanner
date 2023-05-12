@@ -1,12 +1,14 @@
-
 import java.io.*;
 import java.util.ArrayList;
 import javafx.scene.paint.Color;
 import java.nio.file.*;
 import java.util.HashMap;
-import java.util.Calendar;
 import java.util.Scanner;
-
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 
 
 /**
@@ -35,10 +37,23 @@ class DPFileHandler {
         
     }
 
+    public static void readRecords(String month, SpreadBundle mBundle, String dirname) {
+        
+        try {
+            readTrackerInfo(month, mBundle, dirname);
+            //readToDoInfo(month, mBundle, dirname);
+            readJournalInfo(month, mBundle, dirname);
+        }
+        catch(Exception ioe) {
+            System.out.println(ioe);
+        }
+        
+    }
+
     public static void saveTrackerInfo(String month, SpreadBundle mBundle, String dirname) throws Exception{
         HashMap<String,Tracker> tMap = mBundle.trackerList.trackers;
         String[] trackerNames = {"Water", "Workout","Mood","Study","Sleep"};
-        String fpath = dirname+"/"+month+"Trackers.txt";
+        String fpath = ""+Paths.get(dirname,"Trackers.txt");
 
         File oldFile = new File(fpath);
         if (Files.exists(Paths.get(fpath))){oldFile.delete();}
@@ -48,10 +63,7 @@ class DPFileHandler {
             int nDays = DigiPlanner.get_num_days(month);
             for (int i = 0; i < nDays; i++){
                 trackerFile.write(""+dayColorIndices.get(i+1));
-                if (i == nDays-1){
-                    trackerFile.write(" .");
-                }
-                else{
+                if (i != nDays-1){
                     trackerFile.write(" , ");
                 }
             }
@@ -63,7 +75,7 @@ class DPFileHandler {
     public static void saveToDoInfo(String month, SpreadBundle mBundle, String dirname) throws Exception{
         ArrayList<ToDoList> allToDoLists = mBundle.aToDoMonth.allToDoLists;
         int nDays = DigiPlanner.get_num_days(month);
-        String fpath = dirname+"/"+month+"Todos.txt";
+        String fpath = ""+Paths.get(dirname,"Todos.txt");
         File oldFile = new File(fpath);
         if (Files.exists(Paths.get(fpath))){oldFile.delete();}
         FileWriter toDoFile = new FileWriter(fpath);
@@ -80,10 +92,7 @@ class DPFileHandler {
                     if (tDone==true){ intDone = 1;}
                     toDoFile.write(""+tDetails+" , "+ intDone + "\n");
                     if (i == nTasks-1){
-                        toDoFile.write(" \n\n");
-                    }
-                    else{
-                        toDoFile.write(",\n");
+                        toDoFile.write("end\n\n");
                     }
                 }
             }
@@ -94,7 +103,7 @@ class DPFileHandler {
     public static void saveJournalInfo(String month, SpreadBundle mBundle, String dirname) throws Exception{
         HashMap<Integer, Journal> journals = mBundle.journalList.journals;
         int nDays = DigiPlanner.get_num_days(month);
-        String fpath = dirname+"/"+month+"Journal.txt";
+        String fpath = ""+Paths.get(dirname,"Journal.txt");
         File oldFile = new File(fpath);
         if (Files.exists(Paths.get(fpath))){oldFile.delete();}
         FileWriter journalFile = new FileWriter(fpath);
@@ -107,16 +116,80 @@ class DPFileHandler {
                 JournalEntry e = entries.get(i);
                 String eDetails = e.getContent();
                 String eTime = e.getEntryTime();
-                journalFile.write(eTime+ " :\n"+eDetails+"\n\n");
+                journalFile.write(eTime+ " \n"+eDetails+"\n\n");
                 if (i == nEntries-1){
                     journalFile.write(" \n\n");
-                }
-                else{
-                    journalFile.write(",\n");
                 }
             }
         }
         journalFile.close();
+    }
+
+    public static void readTrackerInfo(String month, SpreadBundle mBundle, String dirname) throws Exception{
+        HashMap<String,Tracker> tMap = mBundle.trackerList.trackers;
+        String[] trackerNames = {"Water", "Workout","Mood","Study","Sleep"};
+        String fpath = ""+Paths.get(dirname,"Trackers.txt");
+        File f = new File(fpath);
+        if (Files.exists(Paths.get(fpath))){
+            Scanner reader = new Scanner(f);
+            int trackerIdx = -1;
+            String trackerName;
+            while (reader.hasNextLine()){
+                String s = reader.nextLine();
+                if(!s.isEmpty()){
+                    trackerIdx += 1;
+                    trackerName = trackerNames[trackerIdx];
+                    String[] tokens = s.split(" , ",0);
+                    int colorIdx = 0;
+                    for (int i=0; i < tokens.length; i++){
+                        String colorIdxStr = tokens[i];
+                        colorIdx = Integer.parseInt(colorIdxStr);
+                        if (colorIdx != 11){
+                            Tracker t = tMap.get(trackerName);
+                            t.dayColorIndices.put(i+1, colorIdx);
+                            Color c = Color.web(t.parentList.colors[colorIdx]);
+                            t.dayLabelColors.put(i+1, c);
+                            Label dayLabel = t.dayLabels.get(i+1);
+                            dayLabel.setBackground(new Background(new BackgroundFill(c, new CornerRadii(0), new Insets(0))));
+                            if (colorIdx >= (0.5*t.parentList.colors.length)){
+                                dayLabel.setTextFill(Color.WHITE);
+                            }else{
+                                dayLabel.setTextFill(Color.BLACK);
+                            }
+                        }
+                    }
+                }
+
+            }
+            reader.close();
+        }
+    }
+
+    public static void readToDoInfo(String month, SpreadBundle mBundle, String dirname) throws Exception{
+        ArrayList<ToDoList> allToDoLists = mBundle.aToDoMonth.allToDoLists;
+        int nDays = DigiPlanner.get_num_days(month);
+        String fpath = ""+Paths.get(dirname,"Todos.txt");
+
+        Scanner reader = new Scanner(fpath);
+        int dayNum=-1;
+        while (reader.hasNextLine()){
+
+           System.out.println(reader.nextLine());
+        }
+        reader.close();
+    }
+
+    public static void readJournalInfo(String month, SpreadBundle mBundle, String dirname) throws Exception{
+        HashMap<Integer, Journal> journals = mBundle.journalList.journals;
+        int nDays = DigiPlanner.get_num_days(month);
+        String fpath = ""+Paths.get(dirname,"Journal.txt");
+        
+        Scanner reader = new Scanner(fpath);
+        while (reader.hasNextLine()){
+            String s = reader.nextLine();
+            System.out.println(s);
+        }
+        reader.close();
     }
 
     /**
@@ -174,33 +247,4 @@ class DPFileHandler {
       return null;  
     }*/
 
-    /**
-     * Helper method for reading saved tracker information
-     * Creates a HashMap of (day,category) pairs for a particular month
-     * @param tokens: String array storing each (day,category) pair
-     * @return HashMap<Integer,String>
-     */
-
-  /*  private static HashMap<Integer,String> get_dayCats(String[] tokens){
-        HashMap<Integer,String> dayCats = new HashMap<Integer,String>();
-        String token = "";
-        for(int i = 0; i < tokens.length; i++){
-            token = tokens[i];
-            String day_and_cat="";
-            if (i==0){day_and_cat = token.substring(2, token.length()-3);}
-            else if (i==tokens.length-1){day_and_cat = token.substring(3, token.length()-4);}
-            else{day_and_cat = token.substring(3, token.length()-3);}
-            //if(i==tokens.length-1){System.out.println(day_and_cat.substring(0,day_and_cat.length()-1));}
-            //System.out.println(day_and_cat);
-            String[] day_and_cat_arr = day_and_cat.split("-");
-            if (day_and_cat_arr.length>1){
-                int day = Integer.parseInt(day_and_cat_arr[0]);
-                String cat = day_and_cat_arr[1];
-                dayCats.put(day, cat);
-            }
-        }
-
-        return dayCats;
-
-    }*/
 }
