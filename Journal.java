@@ -25,6 +25,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.*;
 import javafx.beans.binding.Bindings;
 import javafx.scene.text.Font;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,6 +56,10 @@ public class Journal{
     
     Button arrRight = new Button(">");
     Button arrLeft = new Button("<");
+
+    String musicFile = "page.mp3";
+
+    Media sound = new Media(new File(musicFile).toURI().toString());
     
     public Journal(){
         entries = new ArrayList<JournalEntry>();
@@ -110,6 +117,8 @@ public class Journal{
 
         arrRight.setOnAction(e -> {
             if(curIdx < this.getJournalSize()-1){
+                MediaPlayer mediaPlayer = new MediaPlayer(sound);
+                mediaPlayer.play();
                 curIdx += 1;
                 pageNum.setText(Integer.toString(curIdx+1) + "/" +Integer.toString(this.getJournalSize()));
                 page.setVisible(false);
@@ -127,6 +136,8 @@ public class Journal{
 
         arrLeft.setOnAction(e -> {
             if(curIdx > 0){
+                MediaPlayer mediaPlayer = new MediaPlayer(sound);
+                mediaPlayer.play();
                 curIdx -= 1;
                 pageNum.setText(Integer.toString(curIdx+1) + "/" +Integer.toString(this.getJournalSize()));
                 page.setVisible(false);
@@ -285,6 +296,7 @@ public class Journal{
                 DigiPlanner.updateMsg("New entry created!");
                 JournalEntry[] cur = new JournalEntry[1];
                 String curEnt = cont.getText();
+                curEnt = curEnt.replace("\n", "");
                 JournalEntry entry = new JournalEntry(curEnt);
                 if(editing){
                     entry = new JournalEntry(curEnt, entries.get(curIdx).getEntryTime());
@@ -296,6 +308,7 @@ public class Journal{
                 book.add(page, 1, 0);
                 del.setVisible(true);
                 del.toFront();
+                arrRight.setVisible(false);
                 if(editing){
                     DigiPlanner.updateMsg("Entry updated!");
                     entries.set(curIdx, entry);
