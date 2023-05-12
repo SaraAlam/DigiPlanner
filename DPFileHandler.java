@@ -12,6 +12,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
 
 /**
@@ -205,7 +206,7 @@ class DPFileHandler {
         File f = new File(fpath);
         if (Files.exists(Paths.get(fpath))){
             Scanner reader = new Scanner(f);
-            int nDay = -1;
+            int nDay = 0;
             while (reader.hasNextLine()){
                 String s = reader.nextLine();
                 if(!s.isEmpty()){
@@ -218,14 +219,42 @@ class DPFileHandler {
                         String entry = reader.nextLine();
                         JournalEntry je = new JournalEntry(entry);
                         je.setEntryTime(entryTime);
-                        jList.journals.get(nDay).entries.add(je);
                         Journal j = jList.journals.get(nDay);
-                        ArrayList<JournalEntry> entries = j.entries;
-                        System.out.println(entries.get(entries.size()-1).getContent());
+                        j.entries.add(je);
+                        diegoMethod(j, je);
                     }
                 }
             }
             reader.close();
+        }
+    }
+
+    public static void diegoMethod(Journal j, JournalEntry entry){
+        TextArea page = j.page;
+        page.setVisible(false);
+        page = entry.container;
+        //page.setFont(font);
+        j.book.add(page, 1, 0);
+        j.del.setVisible(true);
+        j.del.toFront();
+        j.arrRight.setVisible(false);
+        if(j.editing){
+            DigiPlanner.updateMsg("Entry updated!");
+            j.entries.set(j.curIdx, entry);
+            j.editing = false;
+        }
+        else{
+            if(j.curIdx == -1){
+                j.curIdx += 1;
+                
+            }
+            else{
+                j.curIdx = j.getJournalSize()-1;
+                j.arrLeft.setVisible(true);
+            }
+            j.entriesT.add(entry);
+            j.pageNum.setText(Integer.toString(j.curIdx+1) + "/" +Integer.toString(j.getJournalSize()));
+            j.editing = false;
         }
     }
 }
