@@ -172,3 +172,7 @@
 #save:pressed{
     -fx-background-color: rgb(192, 146, 60);
 }
+
+#chart {
+    CHART_COLOR_1: rgb(118, 181, 206);
+}

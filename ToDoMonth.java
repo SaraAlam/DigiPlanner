@@ -48,7 +48,7 @@ public class ToDoMonth {
         numDays = nDays;
         rates = new double[numDays];
         for (int i=0; i<numDays; i++){
-            rates[i] = 0.5;
+            rates[i] = 0.0;
         }
         for (int j = 0; j < numDays; j++){
             dailyTaskCompletionRate.put(j,rates[j]);

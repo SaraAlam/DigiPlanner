@@ -8,6 +8,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
@@ -357,6 +359,7 @@ public class DigiPlanner extends Application{
     }
 
     public static void getCompletionRates(){
+        System.out.println("updating graph");
         int selectedDay = monthlyBundles.get(months[currMonth]).aToDoMonth.currDay;
         int numDays = monthlyBundles.get(months[currMonth]).numDays;
         ArrayList<ToDoTask> toView = monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay).toWrite;
@@ -371,12 +374,23 @@ public class DigiPlanner extends Application{
             }
             denom ++;
         }
+        System.out.println(numer/denom);
         monthlyBundles.get(months[currMonth]).aToDoMonth.rates[selectedDay] = numer/denom;
         ToDoMonth aToDoMonth = monthlyBundles.get(months[currMonth]).aToDoMonth;
         
         for (int j = 0; j < numDays; j++){
             aToDoMonth.dailyTaskCompletionRate.put(j,aToDoMonth.rates[j]);
         }
+        LineChart<Number,Number> lineChart = monthlyBundles.get(months[currMonth]).monthlyHome.lineChart;
+        XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();
+        for (int i = 0; i < numDays; i ++){
+            if (aToDoMonth.dailyTaskCompletionRate.containsKey(i)){
+                Number rate = aToDoMonth.dailyTaskCompletionRate.get(i);
+                series.getData().add(new XYChart.Data<Number, Number>(i,rate));
+            }
+        }
+        lineChart.getData().clear();
+        lineChart.getData().add(series);
     }
 
     public void toDayPressed(){
