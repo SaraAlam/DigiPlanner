@@ -40,13 +40,21 @@ public class ToDoMonth {
     public int numDays;
     public int currDay = 0;
     public SpreadBundle parentBundle;
+    public double[] rates;
 
     public HashMap<Integer, Double> dailyTaskCompletionRate = new HashMap<Integer, Double>();
 
     public ToDoMonth(String name, int nDays, SpreadBundle pBundle){
+        numDays = nDays;
+        rates = new double[numDays];
+        for (int i=0; i<numDays; i++){
+            rates[i] = 0.5;
+        }
+        for (int j = 0; j < numDays; j++){
+            dailyTaskCompletionRate.put(j,rates[j]);
+        }
         parentBundle = pBundle;
         currDay = pBundle.currDay - 1; // -1 because this currDay is the index of the arraylist
-        numDays = nDays;
         toDoMonthGridPane = new GridPane();
         // toDoMonthGridPane.setPrefWidth(400);
         toDoMonthGridPane.setPadding(new Insets(10));
@@ -119,7 +127,7 @@ public class ToDoMonth {
 
         //toDoMonthGridPane.add(toDoTable, 0, 0);
 
-        hardCodeCompletionRates();
+        // hardCodeCompletionRates();
     }
 
     private void addButtonToTable() {
@@ -166,18 +174,6 @@ public class ToDoMonth {
         clearCol.setResizable(false);
         toDoTable.getColumns().add(clearCol);
 
-    }
-
-    public void hardCodeCompletionRates(){
-        double[] random_rates = {0.75, 0.7, 0.8, 0.6, 0.5, 1.0, 0.25, 0.3, 0.2, 0.1, 0.15, 0.3};
-        int j = 0;
-        for (int i = 0; i < numDays; i++){
-            if (i%3==0){
-                dailyTaskCompletionRate.put(i,random_rates[j]);
-                j++;
-            }
-
-        }
     }
 
     public void enterKeypressed(KeyCode keyCode, ToDoList thisList, TextField input){

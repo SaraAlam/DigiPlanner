@@ -334,9 +334,6 @@ public class DigiPlanner extends Application{
 
     public static void updateToDos(){
         int selectedDay = monthlyBundles.get(months[currMonth]).aToDoMonth.currDay;
-        //System.out.println(monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay));
-        //TableView toDoTable = new TableView<ToDoTask>();
-        //toDoTable = monthlyBundles.get(months[currMonth]).aToDoMonth.toDoTable;
         ObservableList<ToDoTask> toOrganize = monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay).listTasks;
         int size = toOrganize.size();
         int changeAt = 0;
@@ -357,6 +354,29 @@ public class DigiPlanner extends Application{
         lTasks = toOrganize;
         //toDoTable.setItems(lTasks);
         monthlyBundles.get(months[currMonth]).aToDoMonth.toDoTable.setItems(lTasks);
+    }
+
+    public static void getCompletionRates(){
+        int selectedDay = monthlyBundles.get(months[currMonth]).aToDoMonth.currDay;
+        int numDays = monthlyBundles.get(months[currMonth]).numDays;
+        ArrayList<ToDoTask> toView = monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay).toWrite;
+        if (toView.size() == 0){
+            return;
+        }
+        double numer = 0;
+        double denom = 0;
+        for (int i = 0; i<toView.size(); i++){
+            if (toView.get(i).getTheDoneVal()){
+                numer += 1;
+            }
+            denom ++;
+        }
+        monthlyBundles.get(months[currMonth]).aToDoMonth.rates[selectedDay] = numer/denom;
+        ToDoMonth aToDoMonth = monthlyBundles.get(months[currMonth]).aToDoMonth;
+        
+        for (int j = 0; j < numDays; j++){
+            aToDoMonth.dailyTaskCompletionRate.put(j,aToDoMonth.rates[j]);
+        }
     }
 
     public void toDayPressed(){
