@@ -56,6 +56,10 @@ public class JournalEntry {
         return entryTime;
     }
 
+    public void setEntryTime(String etime){
+        this.entryTime = etime;
+    }
+
     public TextArea getContainer(){
         return container;
     }

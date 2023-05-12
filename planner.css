@@ -193,3 +193,7 @@
 #speech .scroll-pane .content{
     -fx-background-color: transparent;
 }
+
+#chart {
+    CHART_COLOR_1: rgb(118, 181, 206);
+}

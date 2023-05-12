@@ -4,6 +4,9 @@ import javafx.scene.paint.Color;
 import java.nio.file.*;
 import java.util.HashMap;
 import java.util.Scanner;
+
+import javax.swing.text.TableView;
+
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -41,7 +44,7 @@ class DPFileHandler {
         
         try {
             readTrackerInfo(month, mBundle, dirname);
-            //readToDoInfo(month, mBundle, dirname);
+            readToDoInfo(month, mBundle, dirname);
             readJournalInfo(month, mBundle, dirname);
         }
         catch(Exception ioe) {
@@ -168,83 +171,63 @@ class DPFileHandler {
     public static void readToDoInfo(String month, SpreadBundle mBundle, String dirname) throws Exception{
         ArrayList<ToDoList> allToDoLists = mBundle.aToDoMonth.allToDoLists;
         int nDays = DigiPlanner.get_num_days(month);
+
         String fpath = ""+Paths.get(dirname,"Todos.txt");
-
-        Scanner reader = new Scanner(fpath);
-        int dayNum=-1;
-        while (reader.hasNextLine()){
-
-           System.out.println(reader.nextLine());
+        File f = new File(fpath);
+        if (Files.exists(Paths.get(fpath))){
+            Scanner reader = new Scanner(f);
+            int nDay = -1;
+            while (reader.hasNextLine()){
+                String s = reader.nextLine();
+                if(!s.isEmpty()){
+                    String[] tokens = s.split(" , ",0);
+                    if (tokens[0].contains("Day: ")){
+                        nDay++;
+                    }
+                    else if (tokens.length == 2){
+                        String taskDets = tokens[0];
+                        int done = Integer.parseInt(tokens[1]);
+                        ToDoTask t = new ToDoTask(taskDets);
+                        if (done==0){t.setDone(false);}
+                        else{t.setDone(true);}
+                        allToDoLists.get(nDay).listTasks.add(t);
+                        allToDoLists.get(nDay).toWrite.add(t);
+                    }
+                }
+            }
+            reader.close();
         }
-        reader.close();
     }
 
     public static void readJournalInfo(String month, SpreadBundle mBundle, String dirname) throws Exception{
-        HashMap<Integer, Journal> journals = mBundle.journalList.journals;
-        int nDays = DigiPlanner.get_num_days(month);
+        JournalList jList = mBundle.journalList;
         String fpath = ""+Paths.get(dirname,"Journal.txt");
-        
-        Scanner reader = new Scanner(fpath);
-        while (reader.hasNextLine()){
-            String s = reader.nextLine();
-            System.out.println(s);
-        }
-        reader.close();
-    }
-
-    /**
-     * Method to read a trackerList object's information from a text file
-     * Returns a HashMap of HashMaps, where the keys are month names and
-     * the values are HashMaps storing (day, category) pairs
-     * @param f: File to read from
-     * @return HashMap<String,HashMap<Integer,String>>
-     */
-    
-/*    public static HashMap<String,HashMap<Integer,String>> readRecords(File f) {
-        try {
-            String tname="";
-            int mode= 0;
-            String[] custom_tracker_key = null;
-            HashMap<String,HashMap<Integer, String>> dayCatsMap = new HashMap<String,HashMap<Integer, String>>();
+        File f = new File(fpath);
+        if (Files.exists(Paths.get(fpath))){
             Scanner reader = new Scanner(f);
-            String month="";
-            while (reader.hasNextLine()) {
-                String data = reader.nextLine();
-                if (!data.isEmpty()){
-                    String[] tokens = data.split("[,]", 0);
-                    int num_tokens = tokens.length;
-                    if(num_tokens==3){
-                        tname = tokens[0];
-                        mode = Integer.parseInt(tokens[2]);
+            int nDay = -1;
+            while (reader.hasNextLine()){
+                String s = reader.nextLine();
+                if(!s.isEmpty()){
+                    String[] tokens = s.split(" , ",0);
+                    if (tokens[0].contains("Day: ")){
+                        nDay++;
                     }
-                    else if(num_tokens==1){month = tokens[0];}
-                    else if(num_tokens==5){
-                        custom_tracker_key = new String[5];
-                        custom_tracker_key[0]="reset";
-                        for(int i=1; i < 5; i++){
-                            custom_tracker_key[i] = tokens[i].substring(1,tokens[i].length());
-                        }
+                    else{
+                        String entryTime = s;
+                        String entry = reader.nextLine();
+                        JournalEntry je = new JournalEntry(entry);
+                        je.setEntryTime(entryTime);
+                        jList.journals.get(nDay).entries.add(je);
+                        Journal j = jList.journals.get(nDay);
+                        ArrayList<JournalEntry> entries = j.entries;
+                        System.out.println(entries.get(entries.size()-1).getContent());
+                        if (j.get)
                     }
-                    else if (num_tokens>5){
-                        HashMap<Integer, String> dayCats = get_dayCats(tokens);
-                        dayCatsMap.put(month, dayCats);
-                    }
-                    
                 }
+            }
+            reader.close();
         }
-        MiscTrackerApp.temp_tracker_name = tname;
-        MiscTrackerApp.temp_typ_of_tracker = mode;
-        MiscTrackerApp.temp_key = custom_tracker_key;
-
-        reader.close();
-        return dayCatsMap;
-        }
-
-        
-        catch(IOException ioe) {
-            System.out.println("No records found");
-        }
-      return null;  
-    }*/
+    }
 
 }

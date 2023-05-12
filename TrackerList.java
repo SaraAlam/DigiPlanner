@@ -141,7 +141,7 @@ public class TrackerList {
         slider.setSnapToTicks(true);
         slider.setShowTickLabels(false);
         slider.resize(60, 15);
-        slider.setPrefWidth(300);
+        // slider.setPrefWidth(300);
 
         //slider listener and handler
         slider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -161,7 +161,7 @@ public class TrackerList {
 
         currSelectedColor = Color.web(colors[1]);
 
-        slider.setPrefWidth(400);
+        slider.setPrefWidth(350);
          
         // current selected color label
         currSelectedColorLabel = new Label("        ");
@@ -184,7 +184,7 @@ public class TrackerList {
         imageView1.setFitWidth(50);
         imageView2.setFitHeight(40);
         imageView2.setFitWidth(50); 
-        color_holder_descriptor.setSpacing(300);
+        color_holder_descriptor.setSpacing(250);
         color_holder_descriptor.getChildren().addAll(imageView2, imageView1);
 
         VBox color_info_container = new VBox();

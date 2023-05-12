@@ -77,21 +77,21 @@ Line charts for the task completion rate obtained from the todolists of the mont
 
    * Objectives 2-4 refer to tabs in the tabpane of every SpreadBundle object (there will be one per month).
 
-2. Have a **tab called journal** that displays entries on the image of a book.
+2. Have a **spread tab called journal** that displays entries on the image of a book.
    * The goal for making it look like a page is flipped was ommitted due to difficulty. Instead, a task we have yet to complete is to play an audio of a page flipping when the user moves between journal entries for a day (page.mp3). The entries are removable and editable (a pencil and a trashcan icons), and any updated entry will include the date it was originally added and its most recent edit. Due to the interaction between two classes to handle journal entries, loading a custom font proved more difficult than expected. The goal of the handwritten font was discarded for this reason, given that the default font for the entire document was clean enough on its own.
    
-3. Have a **tab called tracker**, with the calendar view of labels that the user can recolor to rate their day based on 5 different metrics: water, workout, sleep, stress, and study.
+3. Have a **spread tab called tracker**, with the calendar view of labels that the user can recolor to rate their day based on 5 different metrics: water, workout, sleep, stress, and study.
 
-4. Have a **tab called toDo** which allows the user to have a to do list running for each day. This list allows the user to check off certain tasks as well as be deleted with a trash can shaped button.
+4. Have a **spread tab called toDo** which allows the user to have a to do list running for each day. This list allows the user to check off certain tasks as well as be deleted with a trash can shaped button.
 
 5. **Make the color picker a gradient** formed using different hues of the same color. Allow the user to pick from many different hues.
 This was done using a slider. The numbers in the slider were replaced with happy and sad faces to indicate which end of the slider is positive and which is unsatisfactory.
 
-6. **Have a tab called home**, which allows the user to view a summary of a certain month’s status in the form of a graph.
+6. Have a **spread tab called home**, which allows the user to view a summary of a certain month’s status in the form of a graph.
 The goal to add buttons for the other tabs was omitted since we use a tabpane. The tabpane sufficiently achieves the goal for navigating between views of the journal, tracker and todolist sections of the month.
    
-7. **Make images of a mascot corresponding to each of the five trackers** water, workout, stress, study and sleep. 
-   * This task is still incomplete but we have made considerable progress on it. Four distinct leaves were created for the mascot, each representing a season. The background colors for these mascots were picked using color theory (see Aesthetic Elements section 2). The following are the four base mascots for Winter, Spring, Summer, and Fall respectively as well as their hand picked background colors.
+7. **Make images of a mascot corresponding to each of the four seasons** Winter, Spring, Summer, and Fall
+   * Four distinct leaves were created for the mascot, each representing a season. The background colors for these mascots were picked using color theory (see Aesthetic Elements section 2). The following are the four base mascots for Winter, Spring, Summer, and Fall respectively as well as their hand picked background colors that were used for the widgets, backgrounds, and gifs:
 
 ![snowyAndBack](snowyAndBack.png)
 ![yellowAndBack](yellowAndBack.png)
@@ -106,9 +106,7 @@ The goal to add buttons for the other tabs was omitted since we use a tabpane. T
 We reduced the number of background gifs we used from 12 to 4, 1 for each season.
    
 10.  **Create a file IO hierarchy** of all text files to read and write to. 
-   * The largest folder will be that for each year (due to the scope of this project, we plan to only create this for the current year for the current version of the application). It will contain a folder for each month. Each month’s folder will contain text files to store journal entries, tracker information and daily todo-lists for the month.Each of these files will be created using specific naming conventions and formats, to aid the process of retrieving the information when the application is started in the future. This task is yet to be completed.
-    
-11. **Implement delete and save button handlers to different keypress events like Ctrl+S and Delete**, so that the user can perform those actions in multiple ways, regardless of the tab of the tabpane that is being displayed currently. This task is yet to be completed.
+   * The largest folder will be that for each year (due to the scope of this project, we plan to only create this for the current year for the current version of the application). It will contain a folder for each month. Each month’s folder will contain text files to store journal entries, tracker information and daily todo-lists for the month. Each of these files will be created using specific naming conventions and formats, to aid the process of retrieving the information when the application is started in the future. Saving is handled by the user clicking a "save" button. The file input task is yet to be completed for the Journal spread tab, but works for the trackers and todo spread tab.
 
 
 
