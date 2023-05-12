@@ -154,6 +154,8 @@ public class DigiPlanner extends Application{
             viewing_label.setText(currDayName + " " + currDayNum + numEnd[dayDigit] + "," + "\n" +   currMonthStr + ", " + + year);
         });
 
+        reload();
+
         stage.setMinWidth(WIDTH);
         stage.setMinHeight(HEIGHT);
 
@@ -161,9 +163,9 @@ public class DigiPlanner extends Application{
         stage.setTitle("DigiPlanner");
         stage.show(); 
         
-        stage.setScene(scene);
+        /*stage.setScene(scene);
         stage.setTitle("DigiPlanner");
-        stage.show(); 
+        stage.show(); */
 
         
     }
@@ -377,10 +379,11 @@ public class DigiPlanner extends Application{
         rightDisplay.setCenter(saving_label);
         
 
-        String dirname = System. getProperty("user. dir") + "PlannerInfo";
+        String dirname = ""+Paths.get(System.getProperty("user.dir"),"PlannerInfo");
         Path d = Paths.get(dirname);
-        if (Files.notExists(d)){File f = new File("PlannerInfo"); f.mkdirs(); dirname = f.getPath();}
-        dirname = dirname + "/"+ Calendar.getInstance().get(Calendar.YEAR);
+        if (Files.notExists(d)){File f = new File(dirname); f.mkdirs(); dirname = f.getPath();}
+        dirname = ""+Paths.get(dirname,""+year);
+        if (Files.notExists(d)){File f = new File(dirname); f.mkdirs(); dirname = f.getPath();}
         d = Paths.get(dirname);
         File f = new File(dirname);
         if (Files.notExists(d)){ f.mkdirs();}
@@ -389,11 +392,11 @@ public class DigiPlanner extends Application{
         String monthDirname = "";
         for(String m: months){
             monthDirname = dirname + "/"+ m;
-            d = Paths.get(dirname);
+            d = Paths.get(monthDirname);
             File monthF = new File(monthDirname);
             if (Files.notExists(d)){ monthF.mkdirs();}
             SpreadBundle mBundle = monthlyBundles.get(m);
-            DPFileHandler.saveRecords(m, mBundle, dirname);
+            DPFileHandler.saveRecords(m, mBundle, monthDirname);
         }
 
         BorderPane.clearConstraints(saving_label);
@@ -403,5 +406,19 @@ public class DigiPlanner extends Application{
         save_button.setDisable(false);
 
         System.out.println("Save");
+    }
+
+    public void reload(){
+        String dirname = ""+Paths.get(System.getProperty("user.dir"),"PlannerInfo",""+year);
+        String monthDirname;
+        Path d;
+        for(String m: months){
+            monthDirname = ""+Paths.get(dirname,m);
+            d = Paths.get(monthDirname);
+            if (Files.exists(d)){
+                SpreadBundle mBundle = monthlyBundles.get(m);
+                DPFileHandler.readRecords(m, mBundle, monthDirname);
+            }
+        }
     }
 }
