@@ -41,7 +41,7 @@ class DPFileHandler {
         
         try {
             readTrackerInfo(month, mBundle, dirname);
-            //readToDoInfo(month, mBundle, dirname);
+            readToDoInfo(month, mBundle, dirname);
             readJournalInfo(month, mBundle, dirname);
         }
         catch(Exception ioe) {
@@ -166,6 +166,7 @@ class DPFileHandler {
     }
 
     public static void readToDoInfo(String month, SpreadBundle mBundle, String dirname) throws Exception{
+        System.out.println("Here we gooooooo");
         ArrayList<ToDoList> allToDoLists = mBundle.aToDoMonth.allToDoLists;
         int nDays = DigiPlanner.get_num_days(month);
         String fpath = ""+Paths.get(dirname,"Todos.txt");
