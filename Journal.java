@@ -36,6 +36,8 @@ public class Journal{
     GridPane container = new GridPane();
     TextArea page = new TextArea();
     GridPane book = new GridPane();
+
+    
     
     int curIdx = -1;
     Label pageNum = new Label();
@@ -277,12 +279,12 @@ public class Journal{
         cont.setWrapText(true);
         cont.setId("add-entry");
         cont.setPromptText("Press Enter after writing a new entry!");
+        Font font = Font.loadFont("file:scriptina/SCRIPALT.ttf", 16);
         cont.setOnKeyPressed(e -> {
             if(e.getCode() == KeyCode.ENTER && !cont.getText().isEmpty()){
                 DigiPlanner.updateMsg("New entry created!");
                 JournalEntry[] cur = new JournalEntry[1];
                 String curEnt = cont.getText();
-                curEnt = curEnt.substring(0, curEnt.length()-1); // Gets rid of newspace from pressing Enter
                 JournalEntry entry = new JournalEntry(curEnt);
                 if(editing){
                     entry = new JournalEntry(curEnt, entries.get(curIdx).getEntryTime());
@@ -290,6 +292,7 @@ public class Journal{
                 cont.setText("");
                 page.setVisible(false);
                 page = entry.container;
+                //page.setFont(font);
                 book.add(page, 1, 0);
                 del.setVisible(true);
                 del.toFront();
