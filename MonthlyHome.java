@@ -14,6 +14,8 @@ public class MonthlyHome {
     public String month;
     public int numDays;
     public BorderPane disp = new BorderPane();
+    public LineChart<Number,Number> lineChart;
+
     
     public MonthlyHome(String m, int nDays, SpreadBundle pBundle) throws Exception{
         parentBundle = pBundle;
@@ -25,14 +27,14 @@ public class MonthlyHome {
 
     public void create_task_completion_plot(){
         //defining the axes
-        final NumberAxis xAxis = new NumberAxis();
-        final NumberAxis yAxis = new NumberAxis();
+        NumberAxis xAxis = new NumberAxis();
+        NumberAxis yAxis = new NumberAxis();
         xAxis.setLabel("Days");
         //creating the chart
-        final LineChart<Number,Number> lineChart = 
+        lineChart = 
                 new LineChart<Number,Number>(xAxis,yAxis);
                 
-        lineChart.setTitle(month + " task completion rates");
+        lineChart.setTitle("Task completion rates for each day");
         //defining a series
         XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();
         series.setName("Rates");
@@ -45,8 +47,9 @@ public class MonthlyHome {
                 series.getData().add(new XYChart.Data<Number, Number>(i,rate));
             }
         }
-        
+        lineChart.setId("chart");
         lineChart.getData().add(series);
+        lineChart.setLegendVisible(false);
         GridPane.setConstraints(lineChart, 1,1);
         disp.setBottom(lineChart);
     }

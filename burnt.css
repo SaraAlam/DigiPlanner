@@ -165,3 +165,7 @@
 #save:pressed{
     -fx-background-color: #dbb05f;
 }
+
+#chart {
+    CHART_COLOR_1: #ee7269;
+}
