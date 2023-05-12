@@ -25,8 +25,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.*;
 import javafx.beans.binding.Bindings;
 import javafx.scene.text.Font;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+// import javafx.scene.media.Media;
+// import javafx.scene.media.MediaPlayer;
 import java.io.File;
 
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ public class Journal{
 
     String musicFile = "page.mp3";
 
-    Media sound = new Media(new File(musicFile).toURI().toString());
+    // Media sound = new Media(new File(musicFile).toURI().toString());
     
     public Journal(){
         entries = new ArrayList<JournalEntry>();
@@ -117,8 +117,8 @@ public class Journal{
 
         arrRight.setOnAction(e -> {
             if(curIdx < this.getJournalSize()-1){
-                MediaPlayer mediaPlayer = new MediaPlayer(sound);
-                mediaPlayer.play();
+                // MediaPlayer mediaPlayer = new MediaPlayer(sound);
+                // mediaPlayer.play();
                 curIdx += 1;
                 pageNum.setText(Integer.toString(curIdx+1) + "/" +Integer.toString(this.getJournalSize()));
                 page.setVisible(false);
@@ -136,8 +136,8 @@ public class Journal{
 
         arrLeft.setOnAction(e -> {
             if(curIdx > 0){
-                MediaPlayer mediaPlayer = new MediaPlayer(sound);
-                mediaPlayer.play();
+                // MediaPlayer mediaPlayer = new MediaPlayer(sound);
+                // mediaPlayer.play();
                 curIdx -= 1;
                 pageNum.setText(Integer.toString(curIdx+1) + "/" +Integer.toString(this.getJournalSize()));
                 page.setVisible(false);
