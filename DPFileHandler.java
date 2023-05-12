@@ -205,7 +205,7 @@ class DPFileHandler {
         File f = new File(fpath);
         if (Files.exists(Paths.get(fpath))){
             Scanner reader = new Scanner(f);
-            int nDay = -1;
+            int nDay = 0;
             while (reader.hasNextLine()){
                 String s = reader.nextLine();
                 if(!s.isEmpty()){
@@ -218,11 +218,10 @@ class DPFileHandler {
                         String entry = reader.nextLine();
                         JournalEntry je = new JournalEntry(entry);
                         je.setEntryTime(entryTime);
-                        jList.journals.get(nDay).entries.add(je);
                         Journal j = jList.journals.get(nDay);
-                        ArrayList<JournalEntry> entries = j.entries;
-                        System.out.println(entries.get(entries.size()-1).getContent());
-                        if (j.get)
+                        j.entries.add(je);
+                        j.page = je.container;
+
                     }
                 }
             }

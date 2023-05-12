@@ -359,7 +359,6 @@ public class DigiPlanner extends Application{
     }
 
     public static void getCompletionRates(){
-        System.out.println("updating graph");
         int selectedDay = monthlyBundles.get(months[currMonth]).aToDoMonth.currDay;
         int numDays = monthlyBundles.get(months[currMonth]).numDays;
         ArrayList<ToDoTask> toView = monthlyBundles.get(months[currMonth]).aToDoMonth.allToDoLists.get(selectedDay).toWrite;
@@ -374,7 +373,7 @@ public class DigiPlanner extends Application{
             }
             denom ++;
         }
-        System.out.println(numer/denom);
+
         monthlyBundles.get(months[currMonth]).aToDoMonth.rates[selectedDay] = numer/denom;
         ToDoMonth aToDoMonth = monthlyBundles.get(months[currMonth]).aToDoMonth;
         

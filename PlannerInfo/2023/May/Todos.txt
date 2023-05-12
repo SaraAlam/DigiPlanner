@@ -1,8 +1,5 @@
 Day: 1
 
-testing testing , 0
-end
-
 Day: 2
 
 Day: 3
@@ -25,7 +22,8 @@ Day: 11
 
 Day: 12
 
-testing testing , 0
+t1 , 0
+t2 , 1
 end
 
 Day: 13
